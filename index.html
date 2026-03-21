@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PASTED — Studio Series</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Film Grain -->
+    <div class="grain"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <img src="images/logo.png" alt="Pasted" class="nav-logo-img">
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#films">Films</a></li>
+            <li><a href="#shorts">Shorts</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#founders">Founders</a></li>
+            <li><a href="#membership">Membership</a></li>
+        </ul>
+        <a href="#contact" class="nav-contact">Contact</a>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+        <button class="nav-mobile-close" aria-label="Close menu">
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-mobile-menu">
+            <li><a href="#films">Films</a></li>
+            <li><a href="#shorts">Shorts</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#founders">Founders</a></li>
+            <li><a href="#membership">Membership</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="hero">
+        <div class="hero-left">
+            <h1 class="hero-title reveal">
+                PASTED<br>
+                <span class="hero-title-outline">STUDIO SERIES</span>
+            </h1>
+            <div class="hero-meta reveal">
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Status</span>
+                    <span class="hero-meta-value">Now Showing</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Location</span>
+                    <span class="hero-meta-value">Global</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Films</span>
+                    <span class="hero-meta-value">12 Releases</span>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <div class="hero-scroll-line"></div>
+                <span class="hero-scroll-text">Scroll</span>
+            </div>
+        </div>
+        <div class="hero-right">
+            <img src="images/hero-bg.jpg" alt="Pasted Studio Series" class="hero-image">
+            <div class="hero-play">
+                <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         INTRO
+    ═══════════════════════════════════════════ -->
+    <section class="intro">
+        <div class="intro-left reveal">
+            <span class="intro-label">About The Studio</span>
+            <h2 class="intro-title">CINEMATIC<br>PRECISION.<br>VISION IN<br>MOTION.</h2>
+        </div>
+        <div class="intro-right reveal">
+            <p class="intro-text">TRANSLATING IDEAS INTO CINEMATIC NARRATIVES. VISUAL STORYTELLING AND CREATIVE DIRECTION THAT LEAVES A LASTING MARK.</p>
+            <div class="intro-stats">
+                <div class="stat">
+                    <div class="stat-number">340+</div>
+                    <div class="stat-label">Films Created</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">168</div>
+                    <div class="stat-label">Clients</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         BENTO GRID — FILMS
+    ═══════════════════════════════════════════ -->
+    <section class="bento" id="films">
+        <div class="bento-header reveal">
+            <h2 class="bento-title">THE LIBRARY</h2>
+            <span class="bento-count">12 Films</span>
+        </div>
+        <div class="bento-grid">
+            <article class="bento-item large reveal">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=675&fit=crop&q=80" alt="Film" class="bento-img">
+                <div class="bento-play">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+                <div class="bento-lock">
+                    <svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="bento-overlay">
+                    <span class="bento-category">Founder Story</span>
+                    <h3 class="bento-name">THE PURSUIT OF PERFECTION</h3>
+                    <span class="bento-duration">Documentary — 22 min</span>
+                </div>
+            </article>
+
+            <article class="bento-item tall reveal">
+                <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=900&fit=crop&q=80" alt="Film" class="bento-img">
+                <div class="bento-play">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+                <div class="bento-lock">
+                    <svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="bento-overlay">
+                    <span class="bento-category">Clinical Mastery</span>
+                    <h3 class="bento-name">THE ART OF RESTRAINT — DR. MARSHALL HANSON</h3>
+                    <span class="bento-duration">Portrait — 18 min</span>
+                </div>
+            </article>
+
+            <article class="bento-item wide reveal">
+                <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=900&h=500&fit=crop&q=80" alt="Film" class="bento-img">
+                <div class="bento-play">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+                <div class="bento-lock">
+                    <svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="bento-overlay">
+                    <span class="bento-category">Behind The Craft</span>
+                    <h3 class="bento-name">BUILT BY DESIGN — DR. JON MARASHI</h3>
+                    <span class="bento-duration">Process — 24 min</span>
+                </div>
+            </article>
+
+            <article class="bento-item wide reveal">
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&h=500&fit=crop&q=80" alt="Film" class="bento-img">
+                <div class="bento-play">
+                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                </div>
+                <div class="bento-lock">
+                    <svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="bento-overlay">
+                    <span class="bento-category">City Series</span>
+                    <h3 class="bento-name">LOS ANGELES</h3>
+                    <span class="bento-duration">Documentary — 32 min</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         STATEMENT
+    ═══════════════════════════════════════════ -->
+    <section class="statement">
+        <h2 class="statement-text reveal">
+            NOT EVERYONE<br>
+            GETS <span>DOCUMENTED</span>
+        </h2>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         STUDIO
+    ═══════════════════════════════════════════ -->
+    <section class="studio" id="studio">
+        <div class="studio-grid">
+            <div class="studio-content reveal">
+                <span class="studio-label">The Studio</span>
+                <h2 class="studio-title">PASTED IS A<br>PRODUCTION<br>STUDIO</h2>
+                <p class="studio-text">DOCUMENTING THE PEOPLE REDEFINING MODERN DENTISTRY. WE CREATE CINEMATIC NARRATIVES THAT POSITION YOU AS THE AUTHORITY IN YOUR FIELD.</p>
+                <div class="studio-locations">
+                    <span class="studio-location">Los Angeles</span>
+                    <span class="studio-location">London</span>
+                    <span class="studio-location">New York</span>
+                    <span class="studio-location">Sydney</span>
+                </div>
+            </div>
+            <div class="studio-images reveal">
+                <div class="studio-img">
+                    <div class="studio-img-placeholder"></div>
+                </div>
+                <div class="studio-img">
+                    <div class="studio-img-placeholder"></div>
+                </div>
+                <div class="studio-img">
+                    <div class="studio-img-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FOUNDERS
+    ═══════════════════════════════════════════ -->
+    <section class="founders" id="founders">
+        <div class="founders-header reveal">
+            <span class="founders-label">The Vision</span>
+            <h2 class="founders-title">FOUNDERS</h2>
+        </div>
+        <div class="founders-grid">
+            <article class="founder-card reveal">
+                <div class="founder-portrait">
+                    <div class="founder-portrait-placeholder">
+                        <span>Image</span>
+                    </div>
+                </div>
+                <div class="founder-info">
+                    <span class="founder-role">Co-Founder & Creative Director</span>
+                    <h3 class="founder-name">ZAC ORENDER</h3>
+                    <p class="founder-bio">THE ARCHITECT BEHIND PASTED'S VISUAL LANGUAGE. BUILDING BRANDS THAT DON'T JUST LOOK DIFFERENT — THEY FEEL DIFFERENT.</p>
+                    <p class="founder-quote">"We don't make content. We make signals."</p>
+                </div>
+            </article>
+            <article class="founder-card reveal">
+                <div class="founder-portrait">
+                    <div class="founder-portrait-placeholder">
+                        <span>Image</span>
+                    </div>
+                </div>
+                <div class="founder-info">
+                    <span class="founder-role">Co-Founder & The Cultural Authority</span>
+                    <h3 class="founder-name">DR. ALAN CLARKE</h3>
+                    <p class="founder-bio">FROM BURNOUT IN BELFAST TO GLOBAL STAGES. THE ORIGINAL CASE STUDY. STORY OVER STRATEGY. ALWAYS.</p>
+                    <p class="founder-quote">"Before the logo. Before the practice. This is the real work."</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         BE FEATURED
+    ═══════════════════════════════════════════ -->
+    <section class="featured-cta" id="contact">
+        <div class="featured-cta-bg"></div>
+        <div class="featured-cta-content reveal">
+            <span class="featured-cta-label">Work With Pasted</span>
+            <h2 class="featured-cta-title">BE<br>FEATURED</h2>
+            <p class="featured-cta-text">WE WORK WITH A SMALL NUMBER OF DENTISTS SHAPING THE FUTURE OF THE PROFESSION. PATIENTS DON'T JUST CHOOSE YOU — THEY ALREADY KNOW WHO YOU ARE.</p>
+            <a href="#" class="featured-cta-btn" data-modal="contact">
+                Request Consideration
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         MEMBERSHIP
+    ═══════════════════════════════════════════ -->
+    <section class="membership" id="membership">
+        <div class="membership-grid">
+            <div class="membership-content reveal">
+                <span class="membership-label">Private Access</span>
+                <h2 class="membership-title">THE<br>LIBRARY</h2>
+                <p class="membership-text">A PRIVATE FILM LIBRARY FOR DENTISTS SHAPING THE FUTURE OF THE PROFESSION. FULL ACCESS. EARLY RELEASES. PRIVATE DROPS.</p>
+            </div>
+            <div class="membership-card reveal">
+                <span class="membership-card-label">Full Membership</span>
+                <h3 class="membership-card-title">UNLIMITED</h3>
+                <p class="membership-card-price"><span>$219</span> / month</p>
+                <ul class="membership-card-features">
+                    <li>Access all films</li>
+                    <li>Early releases</li>
+                    <li>Private content drops</li>
+                    <li>Event invitations</li>
+                    <li>Clinical insight</li>
+                    <li>80 hours verifiable CE</li>
+                    <li>Begin your pathway to Pasted Professional</li>
+                </ul>
+                <button class="membership-card-btn" data-modal="membership">Request Access</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         INVESTORS
+    ═══════════════════════════════════════════ -->
+    <section class="investors" id="investors">
+        <div class="investors-grid">
+            <div class="investors-content reveal">
+                <span class="investors-label">Investors</span>
+                <h2 class="investors-title">INVEST IN<br>THE FUTURE</h2>
+                <p class="investors-text">PASTED IS REDEFINING HOW PREMIUM PROFESSIONALS BUILD AUTHORITY. WE'RE LOOKING FOR STRATEGIC PARTNERS WHO UNDERSTAND CULTURAL CAPITAL.</p>
+                <a href="#" class="investors-cta" data-modal="investors">Request Deck</a>
+            </div>
+            <div class="investors-stats reveal">
+                <div class="investor-stat">
+                    <div class="investor-stat-value">340+</div>
+                    <div class="investor-stat-label">Films Produced</div>
+                </div>
+                <div class="investor-stat">
+                    <div class="investor-stat-value">$2.4M</div>
+                    <div class="investor-stat-label">ARR</div>
+                </div>
+                <div class="investor-stat">
+                    <div class="investor-stat-value">168</div>
+                    <div class="investor-stat-label">Active Members</div>
+                </div>
+                <div class="investor-stat">
+                    <div class="investor-stat-value">94%</div>
+                    <div class="investor-stat-label">Retention Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CORPORATE PARTNERSHIPS
+    ═══════════════════════════════════════════ -->
+    <section class="partnerships" id="partnerships">
+        <div class="partnerships-header reveal">
+            <span class="partnerships-label">Corporate Partnerships</span>
+            <h2 class="partnerships-title">PARTNER WITH<br>PASTED</h2>
+            <p class="partnerships-text">ALIGN YOUR BRAND WITH THE CULTURAL AUTHORITY IN DENTISTRY. STRATEGIC PARTNERSHIPS FOR COMPANIES WHO UNDERSTAND THE VALUE OF PREMIUM POSITIONING.</p>
+        </div>
+        <div class="partnerships-grid">
+            <div class="partnership-card reveal">
+                <div class="partnership-icon">
+                    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3 class="partnership-name">BRAND INTEGRATION</h3>
+                <p class="partnership-desc">Seamless product placement within our documentary content</p>
+            </div>
+            <div class="partnership-card reveal">
+                <div class="partnership-icon">
+                    <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3 class="partnership-name">EVENT SPONSORSHIP</h3>
+                <p class="partnership-desc">Exclusive access to Pasted Presents and private screenings</p>
+            </div>
+            <div class="partnership-card reveal">
+                <div class="partnership-icon">
+                    <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3 class="partnership-name">CO-PRODUCTION</h3>
+                <p class="partnership-desc">Joint content creation with the Pasted Studio team</p>
+            </div>
+        </div>
+        <div class="partnerships-cta reveal">
+            <a href="#" data-modal="partnerships">Discuss Partnership</a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">PASTED</span>
+                <p>A PRODUCTION STUDIO DOCUMENTING THE FUTURE OF DENTISTRY.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#films">Films</a></li>
+                    <li><a href="#membership">Membership</a></li>
+                    <li><a href="#contact">Work With Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Studio</h4>
+                <ul>
+                    <li><a href="#">Coming Soon</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-legal">© 2026 Pasted. All rights reserved.</p>
+            <span class="footer-coords">54°35'N 5°56'W</span>
+            <div class="footer-social">
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════
+         MODAL
+    ═══════════════════════════════════════════ -->
+    <div class="modal" id="modal">
+        <button class="modal-close">×</button>
+        <div class="modal-content">
+            <h3>REQUEST ACCESS</h3>
+            <p>ENTER YOUR EMAIL TO UNLOCK THE FULL LIBRARY AND RECEIVE EARLY ACCESS TO NEW RELEASES.</p>
+            <form>
+                <input type="email" placeholder="Email address" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/nav.js"></script>
+    <script>
+        // Reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '-30px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Modal
+        const modal = document.getElementById('modal');
+        document.querySelectorAll('[data-modal]').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('active');
+            });
+        });
+
+        document.querySelector('.modal-close').addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
