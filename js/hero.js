@@ -9,22 +9,33 @@ window.addEventListener('load', function () {
   const ticker = document.getElementById('heroTicker');
 
   if (ticker) {
-    // Duplicate content so GSAP's xPercent: -50 loops seamlessly
+    // Duplicate content so the loop point is seamless
     ticker.innerHTML += ticker.innerHTML;
 
-    gsap.to(ticker, {
-      xPercent : -50,
-      duration  : 28,
-      ease      : 'linear',
-      repeat    : -1,
-    });
+    // Pin start position before measuring
+    gsap.set(ticker, { x: 0 });
 
-    // Slow down on hover for a premium feel
+    const halfWidth    = ticker.scrollWidth / 2;
+    const pxPerSecond  = window.innerWidth < 640 ? 35 : 60;
+
+    // fromTo makes the repeat boundary explicit: jumps from -halfWidth → 0
+    // Both halves are identical so the jump is invisible
+    const tween = gsap.fromTo(ticker,
+      { x: 0 },
+      {
+        x        : -halfWidth,
+        duration : halfWidth / pxPerSecond,
+        ease     : 'linear',
+        repeat   : -1,
+      }
+    );
+
+    // Slow down on hover — target the tween, not the element
     ticker.parentElement.addEventListener('mouseenter', () =>
-      gsap.to(ticker, { timeScale: 0.35, duration: 0.8, ease: 'power2.out', overwrite: false })
+      gsap.to(tween, { timeScale: 0.35, duration: 0.8, ease: 'power2.out' })
     );
     ticker.parentElement.addEventListener('mouseleave', () =>
-      gsap.to(ticker, { timeScale: 1, duration: 0.8, ease: 'power2.out', overwrite: false })
+      gsap.to(tween, { timeScale: 1, duration: 0.8, ease: 'power2.out' })
     );
   }
 
