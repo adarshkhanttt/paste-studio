@@ -11,6 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 </head>
 
@@ -22,7 +23,8 @@
     <div class="preloader" id="preloader">
         <div class="preloader-content">
             <div class="preloader-rule"></div>
-            <p class="preloader-label">A Pasted Studio Production</p>
+            <p class="preloader-lab
+            el">A Pasted Studio Production</p>
             <h2 class="preloader-title">PASTED STUDIO</h2>
             <p class="preloader-presents">PRESENTS</p>
             <div class="preloader-rule"></div>
@@ -81,9 +83,9 @@
     ═══════════════════════════════════════════ -->
     <section class="hero">
 
-        <!-- Full-bleed background (replace div with Wistia iframe when ready) -->
+        <!-- Full-bleed Wistia background video -->
         <div class="hero-video-wrap">
-            <img src="images/hero-bg.jpg" alt="Pasted Studio Series" class="hero-bg-img">
+            <div class="wistia_embed wistia_async_10yzaffive fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false" style="height:100%;width:100%;"></div>
         </div>
 
         <!-- Cinematic vignette overlay -->
@@ -498,6 +500,21 @@
     </footer>
 
     <!-- ═══════════════════════════════════════════
+         FULL VIDEO PLAYER OVERLAY
+    ═══════════════════════════════════════════ -->
+    <div class="hero-player-overlay" id="heroPlayerOverlay" aria-hidden="true">
+        <button class="hero-player-close" id="heroPlayerClose" aria-label="Close player">&#x2715;</button>
+        <div class="hero-player-letterbox"></div>
+        <div class="hero-player-inner" id="heroPlayerInner">
+            <div class="hero-player-meta">
+                <span class="hero-player-meta-label">Now Playing</span>
+                <span class="hero-player-meta-title">Pasted Studio Series</span>
+            </div>
+        </div>
+        <div class="hero-player-letterbox"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
          MODAL
     ═══════════════════════════════════════════ -->
     <div class="modal" id="modal">
@@ -557,6 +574,58 @@
             el.textContent = '0';
             counterObserver.observe(el);
         });
+
+        // Background video: start at 2:07 and loop from there
+        window._wq = window._wq || [];
+        _wq.push({
+            id: '10yzaffive',
+            onReady: function (v) {
+                var START = 127;
+                v.time(START);
+                v.play();
+                v.bind('end', function () {
+                    v.time(START);
+                    v.play();
+                });
+            }
+        });
+
+        // Full video player overlay
+        (function () {
+            var overlay  = document.getElementById('heroPlayerOverlay');
+            var inner    = document.getElementById('heroPlayerInner');
+            var closeBtn = document.getElementById('heroPlayerClose');
+            var hero     = document.querySelector('.hero');
+
+            function openPlayer() {
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+
+                // Inject a plain iframe — avoids async embed conflicts, gives all native controls
+                var iframe = document.createElement('iframe');
+                iframe.src = 'https://fast.wistia.net/embed/iframe/10yzaffive?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false';
+                iframe.setAttribute('allowtransparency', 'true');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('allow', 'autoplay; fullscreen');
+                iframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;inset:0;';
+                inner.appendChild(iframe);
+            }
+
+            function closePlayer() {
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                // Remove iframe to stop audio; re-injected fresh on next open
+                var iframe = inner.querySelector('iframe');
+                if (iframe) iframe.remove();
+            }
+
+            hero.addEventListener('click', openPlayer);
+            closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePlayer(); });
+            overlay.addEventListener('click', function (e) { if (e.target === overlay) closePlayer(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePlayer(); });
+        })();
 
         // Modal
         const modal = document.getElementById('modal');
