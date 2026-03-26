@@ -5,6 +5,10 @@
  */
 
 (function () {
+  // Always start at the top on refresh
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
