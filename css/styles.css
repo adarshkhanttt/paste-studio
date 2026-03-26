@@ -1377,6 +1377,7 @@ body.loaded .hero-meta {
     font-size: clamp(1rem, 1.6vw, 1.35rem);
     font-weight: 400;
     line-height: 1.1;
+    text-transform: uppercase;
     color: var(--white);
     margin: 0;
 }
@@ -1549,7 +1550,7 @@ body.loaded .hero-meta {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: var(--gutter);
+    left: calc(var(--gutter) + max(0px, (100vw - 2 * var(--gutter) - var(--max-w)) / 2));
     right: 3rem;
     z-index: 2;
     max-width: 420px;
@@ -1610,6 +1611,7 @@ body.loaded .hero-meta {
 .library-price-period {
     font-family: var(--sans);
     font-size: 0.85rem;
+    text-transform: uppercase;
     color: var(--ash);
     letter-spacing: 0.05em;
 }
@@ -1626,6 +1628,7 @@ body.loaded .hero-meta {
     font-family: var(--sans);
     font-size: 0.9rem;
     font-weight: 400;
+    text-transform: uppercase;
     color: var(--stone);
     padding: 0.85rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
@@ -1964,6 +1967,7 @@ footer {
     font-family: var(--sans);
     font-size: 0.72rem;
     font-weight: 400;
+    text-transform: uppercase;
     color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
     letter-spacing: 0.03em;
@@ -1975,28 +1979,30 @@ footer {
 }
 
 .footer-divider {
-    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto 2rem;
     height: 1px;
     background: rgba(255, 255, 255, 0.08);
-    margin-bottom: 2rem;
 }
 
 .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: var(--max-w);
+    margin: 0 auto;
 }
 
 .footer-legal {
     font-family: var(--sans);
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     color: var(--ash);
     letter-spacing: 0.1em;
 }
 
 .footer-coords {
     font-family: monospace;
-    font-size: 0.55rem;
+    font-size: 0.7rem;
     letter-spacing: 0.15em;
     color: var(--ash);
 }
@@ -2384,7 +2390,7 @@ footer {
     .partnerships { padding: 5rem 1.5rem; }
 
     .footer-bottom { flex-direction: column; gap: 1rem; }
-    .footer-coords { display: none; }
+    .footer-coords { display: block; }
 
     /* Films lock overlay — prevent "UNLOCK FULL ACCESS" from overlapping title */
     .film-card-lock-overlay {
