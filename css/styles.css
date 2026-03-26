@@ -626,7 +626,7 @@ body.loaded .hero-meta {
     width: 100%;
     height: 100%;
     border-radius: 0 !important;
-    transform: scale(1.07);
+    transform: scale(1.22);
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -642,7 +642,7 @@ body.loaded .hero-meta {
 }
 
 .film-card:not(.locked):hover .film-card-player {
-    transform: scale(1.11);
+    transform: scale(1.27);
 }
 
 /* Bottom gradient + metadata */
@@ -1003,7 +1003,6 @@ body.loaded .hero-meta {
 .shorts-track {
     display: flex;
     gap: 1rem;
-    cursor: default;
     user-select: none;
     will-change: transform;
 }
@@ -1018,6 +1017,7 @@ body.loaded .hero-meta {
     aspect-ratio: 9 / 16;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
     background: var(--charcoal);
 }
 
@@ -1030,6 +1030,7 @@ body.loaded .hero-meta {
     border-radius: 0 !important;
     transform: scale(1.07);
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
 /* Strip Wistia border radius */
@@ -1050,9 +1051,9 @@ body.loaded .hero-meta {
     transform: scale(1.12);
 }
 
-/* Overlay must NOT block clicks on unlocked cards so Wistia can receive them */
+/* Overlay intercepts cursor (shows pointer) — clicks bubble up to card's openShort handler */
 .short-card:not(.locked) .short-card-overlay {
-    pointer-events: none;
+    cursor: pointer;
 }
 
 .short-card-overlay {
@@ -2377,9 +2378,24 @@ footer {
 
     .investors { padding: 5rem 1.5rem; }
     .investor-stat { padding: 1.25rem 1.25rem; }
+    .investor-stat-value { font-size: clamp(1.5rem, 7vw, 2.25rem); }
+    .investor-stat-label { font-size: clamp(1rem, 5vw, 1.5rem); text-align: right; }
 
     .partnerships { padding: 5rem 1.5rem; }
 
     .footer-bottom { flex-direction: column; gap: 1rem; }
     .footer-coords { display: none; }
+
+    /* Films lock overlay — prevent "UNLOCK FULL ACCESS" from overlapping title */
+    .film-card-lock-overlay {
+        justify-content: flex-start;
+        padding-top: 2.75rem;
+    }
+
+    .film-card-title { line-height: 1.35; }
+
+    /* Short cards — disable hover scale transition on mobile for smoother rendering */
+    .short-card-player {
+        transition: none;
+    }
 }
