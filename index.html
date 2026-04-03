@@ -841,7 +841,14 @@
             var inner = document.getElementById('filmsPlayerInner');
             var closeBtn = document.getElementById('filmsPlayerClose');
 
-            function openFilm(mediaId) {
+            var activeCardPlayer = null;
+
+            function openFilm(mediaId, cardPlayer) {
+                // Pause the card's embedded player immediately so it never plays in the background
+                activeCardPlayer = cardPlayer || null;
+                if (activeCardPlayer && typeof activeCardPlayer.pause === 'function') {
+                    activeCardPlayer.pause();
+                }
                 overlay.classList.add('active');
                 overlay.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
@@ -860,12 +867,18 @@
                 document.body.style.overflow = '';
                 var iframe = inner.querySelector('iframe');
                 if (iframe) iframe.remove();
+                // Ensure the card's embedded player is paused after overlay closes
+                if (activeCardPlayer && typeof activeCardPlayer.pause === 'function') {
+                    activeCardPlayer.pause();
+                }
+                activeCardPlayer = null;
             }
 
             // Title fetch + click handler for each film card with data-media-id
             document.querySelectorAll('.film-card[data-media-id]').forEach(function (card) {
                 var mediaId = card.dataset.mediaId;
                 var titleEl = card.querySelector('.film-card-title');
+                var cardPlayer = card.querySelector('.film-card-player');
 
                 // Fetch title from Wistia oEmbed
                 if (titleEl) {
@@ -875,8 +888,8 @@
                         .catch(function () { });
                 }
 
-                // Click to open
-                card.addEventListener('click', function () { openFilm(mediaId); });
+                // Click to open — pass the card's embedded player so it can be paused
+                card.addEventListener('click', function () { openFilm(mediaId, cardPlayer); });
             });
 
             closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeFilm(); });
