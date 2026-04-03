@@ -86,7 +86,7 @@
 
         <!-- Full-bleed Wistia background video -->
         <div class="hero-video-wrap">
-            <div class="wistia_embed wistia_async_10yzaffive fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false"
+            <div class="wistia_embed wistia_async_8kirf86p7j fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false"
                 style="height:100%;width:100%;"></div>
         </div>
 
@@ -911,16 +911,14 @@
                 .catch(function () { });
         });
 
-        // Background video: start at 2:07 and loop from there
+        // Background video: loop from the beginning
         window._wq = window._wq || [];
         _wq.push({
-            id: '10yzaffive',
+            id: '8kirf86p7j',
             onReady: function (v) {
-                var START = 127;
-                v.time(START);
                 v.play();
                 v.bind('end', function () {
-                    v.time(START);
+                    v.time(0);
                     v.play();
                 });
             }
@@ -940,7 +938,7 @@
 
                 // Inject a plain iframe — avoids async embed conflicts, gives all native controls
                 var iframe = document.createElement('iframe');
-                iframe.src = 'https://fast.wistia.net/embed/iframe/10yzaffive?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false';
+                iframe.src = 'https://fast.wistia.net/embed/iframe/8kirf86p7j?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false';
                 iframe.setAttribute('allowtransparency', 'true');
                 iframe.setAttribute('allowfullscreen', '');
                 iframe.setAttribute('allow', 'autoplay; fullscreen');
