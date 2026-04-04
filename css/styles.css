@@ -713,7 +713,7 @@ body.loaded .hero-meta {
 
 /* ── Portrait grid — index.html #films section only ── */
 #films .films-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     justify-content: start;
     gap: 1rem;
 }
@@ -2608,7 +2608,7 @@ footer {
 
 /* ── Large tablets / small desktops (≤1200px) ── */
 @media (max-width: 1200px) {
-    #films .films-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #films .films-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
     .bento-grid { grid-template-columns: repeat(6, 1fr); }
     .bento-item.large  { grid-column: span 6; grid-row: span 1; }
@@ -2665,12 +2665,12 @@ footer {
     .library-video-text { bottom: 2rem; left: 2rem; }
     .library-pricing-col { flex: none; padding: 4rem 2rem; }
 
-    .investors { padding: 6rem 2rem; }
+    .investors { padding: 6rem 2rem 3rem; }
     .investors-header { grid-template-columns: 1fr; gap: 1.5rem; }
     .investors-title { margin-bottom: 0; }
     .investors-text { text-align: left; }
 
-    .partnerships { padding: 6rem 2rem; }
+    .partnerships { padding: 3rem 2rem 6rem; }
     .partnerships-header { grid-template-columns: 1fr; gap: 1.5rem; }
     .partnerships-title { margin-bottom: 0; }
     .partnerships-text { text-align: left; }
@@ -2698,7 +2698,7 @@ footer {
 
     .films { padding: 4rem 1.5rem 3rem; }
     .films-grid { grid-template-columns: 1fr; }
-    #films .films-grid { grid-template-columns: repeat(2, 1fr); }
+    #films .films-grid { grid-template-columns: 1fr; }
     .films-explore-btn { padding: 1.1rem 2rem; }
 
     .shorts { padding: 0 1.5rem 4rem; }
@@ -2721,12 +2721,12 @@ footer {
 
     .library-pricing-col { padding: 3rem 1.5rem; }
 
-    .investors { padding: 5rem 1.5rem; }
+    .investors { padding: 5rem 1.5rem 2.5rem; }
     .investor-stat { padding: 1.25rem 1.25rem; }
     .investor-stat-value { font-size: clamp(1.5rem, 7vw, 2.25rem); }
     .investor-stat-label { font-size: clamp(1rem, 5vw, 1.5rem); text-align: right; }
 
-    .partnerships { padding: 5rem 1.5rem; }
+    .partnerships { padding: 2.5rem 1.5rem 5rem; }
 
     .footer-bottom { flex-direction: column; gap: 1rem; }
     .footer-coords { display: block; }
