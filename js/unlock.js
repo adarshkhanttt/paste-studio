@@ -1,50 +1,43 @@
 (function () {
-    var STORAGE_KEY = 'dps_gated_unlocked';
+    var UNLOCK_KEY = 'dps_gated_unlocked';
 
-    var modal      = document.getElementById('modal');
-    var emailInput = modal ? modal.querySelector('input[type="email"]') : null;
-    var submitBtn  = modal ? modal.querySelector('button[type="submit"]') : null;
+    // ── Open the contact modal, setting the hidden source field ──────────────
+    function openContactModal(source) {
+        var cm = document.getElementById('contact-modal');
+        if (!cm || cm.classList.contains('active')) return;
 
-    // ── Modal helpers ─────────────────────────────────────────────────────────
+        var sourceInput = document.getElementById('cf-source');
+        if (sourceInput) sourceInput.value = source || 'Unknown';
 
-    function openModal() {
-        if (modal && !modal.classList.contains('active')) {
-            modal.classList.add('active');
-            if (emailInput) emailInput.focus();
-        }
+        var cmTitle = document.getElementById('contact-modal-title');
+        var cmSub   = document.getElementById('contact-modal-sub');
+        if (cmTitle) { cmTitle.textContent = 'UNLOCK FULL ACCESS'; cmTitle.hidden = false; }
+        if (cmSub)   { cmSub.textContent   = 'FILL IN YOUR DETAILS TO UNLOCK THE FULL LIBRARY.'; cmSub.hidden = false; }
+
+        cm.classList.add('active');
     }
 
-    function closeModal() {
-        if (!modal) return;
-        modal.classList.remove('active');
-        if (emailInput) {
-            emailInput.value = '';
-            emailInput.classList.remove('error');
-        }
-    }
-
-    // ── Lock: disable Wistia pointer events inside blurred cards ─────────────
-
+    // ── Lock: disable pointer events on blurred Wistia embeds in locked cards ─
     function lockAll() {
         document.querySelectorAll('.short-card.locked .short-card-player').forEach(function (p) {
             p.style.pointerEvents = 'none';
         });
+        // Film card players are gated via the capture-phase click listener below
     }
 
-    // ── Wire locked cards: store handler ref so we can remove it on unlock ────
-
+    // ── Wire locked cards — capture phase so nothing leaks through ────────────
     document.querySelectorAll('.film-card.locked, .short-card.locked').forEach(function (card) {
+        var source = card.classList.contains('film-card') ? 'Films' : 'Shorts';
         function gateHandler(e) {
             e.stopImmediatePropagation();
             e.preventDefault();
-            openModal();
+            openContactModal(source);
         }
         card._gateHandler = gateHandler;
         card.addEventListener('click', gateHandler, true /* capture */);
     });
 
-    // ── Unlock: remove gate listener THEN remove .locked ─────────────────────
-
+    // ── Unlock: remove gate listeners and .locked class ──────────────────────
     function unlockAll() {
         document.querySelectorAll('.film-card.locked, .short-card.locked').forEach(function (card) {
             if (card._gateHandler) {
@@ -55,48 +48,12 @@
         });
     }
 
-    // ── Email submission ──────────────────────────────────────────────────────
-
-    function handleSubmit() {
-        if (!emailInput) return;
-        var email = emailInput.value.trim();
-        var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-        if (!valid) {
-            emailInput.classList.add('error');
-            return;
-        }
-        emailInput.classList.remove('error');
-
-        // TODO: Replace with your CRM / API call (e.g. HubSpot form submission)
-        console.log('[Pasted Studio] Unlock email submitted:', email);
-
-        try { localStorage.setItem(STORAGE_KEY, 'true'); } catch (_) {}
-
-        unlockAll();
-        closeModal();
-    }
-
-    if (submitBtn) {
-        submitBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            handleSubmit();
-        });
-    }
-
-    if (emailInput) {
-        emailInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') { e.preventDefault(); handleSubmit(); }
-        });
-        emailInput.addEventListener('input', function () {
-            emailInput.classList.remove('error');
-        });
-    }
+    // Expose globally so hubspot.js can trigger unlock after successful submission
+    window.dpsUnlockAll = unlockAll;
 
     // ── Init: check localStorage on every page load ───────────────────────────
-
     var alreadyUnlocked = false;
-    try { alreadyUnlocked = localStorage.getItem(STORAGE_KEY) === 'true'; } catch (_) {}
+    try { alreadyUnlocked = localStorage.getItem(UNLOCK_KEY) === 'true'; } catch (_) {}
 
     if (alreadyUnlocked) {
         unlockAll();

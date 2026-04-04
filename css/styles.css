@@ -99,6 +99,10 @@ nav {
     opacity: 1;
 }
 
+.nav-contact-wrap {
+    position: relative;
+}
+
 .nav-contact {
     font-size: 0.65rem;
     letter-spacing: 0.15em;
@@ -107,10 +111,118 @@ nav {
     text-decoration: none;
     opacity: 1;
     transition: opacity 0.3s;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .nav-contact:hover {
+    opacity: 0.75;
+}
+
+/* ── Dropdown panel ── */
+.nav-contact-dropdown {
+    position: absolute;
+    top: calc(100% + 0.85rem);
+    right: 0;
+    list-style: none;
+    background: rgba(5, 5, 5, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 130px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    z-index: 10;
+}
+
+.nav-contact-wrap:hover .nav-contact-dropdown,
+.nav-contact-wrap.open .nav-contact-dropdown {
     opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.nav-contact-dropdown li + li {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav-contact-dropdown a {
+    display: block;
+    padding: 0.7rem 1.1rem;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+.nav-contact-dropdown a:hover {
+    opacity: 1;
+}
+
+/* ── Mobile contact group ── */
+.nav-mobile-contact-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-mobile-contact-label {
+    font-family: var(--sans);
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(250, 248, 245, 0.35);
+    display: block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-mobile.active .nav-mobile-contact-label {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.33s;
+}
+
+.nav-mobile-contact-items {
+    display: flex;
+    gap: clamp(1rem, 5vw, 2.5rem);
+    justify-content: center;
+}
+
+.nav-mobile-contact-items a {
+    font-family: var(--display);
+    font-size: clamp(1rem, 6vw, 2.5rem);
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transform: translateY(28px);
+    display: block;
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.3s;
+    transition-delay: 0.38s;
+}
+
+.nav-mobile.active .nav-mobile-contact-items a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-mobile-contact-items a:hover {
+    color: var(--stone);
 }
 
 /* ═══════════════════════════════════════════
@@ -599,6 +711,11 @@ body.loaded .hero-meta {
     gap: 1rem;
 }
 
+/* ── Portrait 4-up grid — index.html #films section only ── */
+#films .films-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
 /* ── Film card ── */
 .film-card {
     position: relative;
@@ -606,6 +723,11 @@ body.loaded .hero-meta {
     aspect-ratio: 16 / 9;
     cursor: pointer;
     background: var(--charcoal);
+}
+
+/* Portrait orientation — index.html #films section only */
+#films .film-card {
+    aspect-ratio: 9 / 16;
 }
 
 .film-card-img {
@@ -656,6 +778,11 @@ body.loaded .hero-meta {
     padding: 1.75rem;
 }
 
+/* Stronger overlay for portrait cards — titles need more contrast */
+#films .film-card-overlay {
+    background: linear-gradient(to top, rgba(5,5,5,0.97) 0%, rgba(5,5,5,0.55) 50%, rgba(5,5,5,0.15) 100%);
+}
+
 .film-card-category {
     font-size: 0.5rem;
     letter-spacing: 0.4em;
@@ -670,6 +797,12 @@ body.loaded .hero-meta {
     letter-spacing: 0.04em;
     line-height: 1.1;
     color: var(--white);
+}
+
+/* Smaller title for portrait cards on index.html */
+#films .film-card-title {
+    font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+    line-height: 1.2;
 }
 
 .film-card-duration {
@@ -1680,7 +1813,7 @@ body.loaded .hero-meta {
    INVESTORS
 ═══════════════════════════════════════════ */
 .investors {
-    padding: 10rem var(--gutter);
+    padding: 10rem var(--gutter) 5rem;
     background: var(--void);
 }
 
@@ -1810,7 +1943,7 @@ body.loaded .hero-meta {
    CORPORATE PARTNERSHIPS
 ═══════════════════════════════════════════ */
 .partnerships {
-    padding: 10rem var(--gutter);
+    padding: 5rem var(--gutter) 10rem;
     background: var(--void);
 }
 
@@ -1906,6 +2039,42 @@ body.loaded .hero-meta {
     background: var(--white);
     border-color: var(--white);
     color: var(--void);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL TICKER
+═══════════════════════════════════════════ */
+.scroll-ticker {
+    background: #1E1C1C;
+    padding: 0.6rem 0;
+    overflow: hidden;
+    user-select: none;
+}
+
+.scroll-ticker-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.scroll-ticker-phrase {
+    font-family: var(--display);
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    flex-shrink: 0;
+    padding-right: clamp(3rem, 6vw, 7rem);
+}
+
+/* "DOCUMENTED" — outlined/stroked, no fill */
+.scroll-ticker-phrase em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--white);
+    text-stroke: 1.5px var(--white);
 }
 
 /* ═══════════════════════════════════════════
@@ -2510,6 +2679,7 @@ footer {
 
     .films { padding: 4rem 1.5rem 3rem; }
     .films-grid { grid-template-columns: 1fr; }
+    #films .films-grid { grid-template-columns: repeat(2, 1fr); }
     .films-explore-btn { padding: 1.1rem 2rem; }
 
     .shorts { padding: 0 1.5rem 4rem; }

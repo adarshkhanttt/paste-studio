@@ -244,7 +244,14 @@
             <li><a href="index.html#founders">Founders</a></li>
             <li><a href="index.html#membership">Membership</a></li>
         </ul>
-        <a href="index.html#contact" class="nav-contact">Contact</a>
+        <div class="nav-contact-wrap">
+            <button class="nav-contact" aria-haspopup="true" aria-expanded="false">Contact</button>
+            <ul class="nav-contact-dropdown">
+                <li><a href="mailto:zac@getpasted.com">Zac</a></li>
+                <li><a href="mailto:alan@getpasted.com">Alan</a></li>
+                <li><a href="mailto:kim@getpasted.com">Team</a></li>
+            </ul>
+        </div>
         <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
             <span></span>
             <span></span>
@@ -264,7 +271,14 @@
             <li><a href="index.html#studio">Studio</a></li>
             <li><a href="index.html#founders">Founders</a></li>
             <li><a href="index.html#membership">Membership</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li class="nav-mobile-contact-group">
+                <span class="nav-mobile-contact-label">Contact</span>
+                <div class="nav-mobile-contact-items">
+                    <a href="mailto:zac@getpasted.com">Zac</a>
+                    <a href="mailto:alan@getpasted.com">Alan</a>
+                    <a href="mailto:kim@getpasted.com">Team</a>
+                </div>
+            </li>
         </ul>
     </div>
 
@@ -519,9 +533,9 @@
                 <div class="footer-col footer-credit" data-delay="700">
                     <h4 class="footer-col-label">CONTACT</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">YouTube</a></li>
-                        <li><a href="#">Email</a></li>
+                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener">YouTube</a></li>
+                        <li><a href="mailto:alan@getpasted.com">Email</a></li>
                     </ul>
                 </div>
             </div>
@@ -532,19 +546,6 @@
             <span class="footer-coords">54°35'N &nbsp;&nbsp; 5°56'W</span>
         </div>
     </footer>
-
-    <!-- Simple unlock modal (used by unlock.js for locked cards) -->
-    <div class="modal" id="modal">
-        <button class="modal-close">×</button>
-        <div class="modal-content">
-            <h3>REQUEST ACCESS</h3>
-            <p>ENTER YOUR EMAIL TO UNLOCK THE FULL LIBRARY AND RECEIVE EARLY ACCESS TO NEW RELEASES.</p>
-            <form>
-                <input type="email" placeholder="Email address" required>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
 
     <!-- ═══════════════════════════════════════════
          CONTACT FORM MODAL (Library + Partnerships)
@@ -589,6 +590,7 @@
                     </select>
                 </div>
                 <input type="text" id="cf-instagram" placeholder="Instagram / Company">
+                <input type="hidden" id="cf-source" value="">
                 <button type="submit" id="cf-submit">SUBMIT</button>
                 <p id="cf-error-msg" class="cf-error-msg" hidden>Something went wrong. Please try again.</p>
             </form>
@@ -609,14 +611,6 @@
     <script src="js/unlock.js"></script>
     <script src="js/hubspot.js"></script>
     <script>
-        // Simple unlock modal close
-        (function () {
-            var m = document.getElementById('modal');
-            if (!m) return;
-            m.querySelector('.modal-close').addEventListener('click', function () { m.classList.remove('active'); });
-            m.addEventListener('click', function (e) { if (e.target === m) m.classList.remove('active'); });
-        })();
-
         // ── Footer: film credits roll ──────────────────────────────
         (function () {
             var footer = document.querySelector('footer');
@@ -656,9 +650,17 @@
                 partnerships: 'TELL US ABOUT YOURSELF AND WE\'LL BE IN TOUCH TO EXPLORE THE RIGHT FIT.'
             };
 
+            var sources = {
+                membership:   'Library',
+                partnerships: 'Partnership'
+            };
+
             function openCM(type) {
-                if (cmTitle) cmTitle.textContent = titles[type] || 'GET IN TOUCH';
-                if (cmSub)   cmSub.textContent   = subs[type]   || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.';
+                if (cm.classList.contains('active')) return;
+                if (cmTitle) { cmTitle.textContent = titles[type] || 'GET IN TOUCH'; cmTitle.hidden = false; }
+                if (cmSub)   { cmSub.textContent   = subs[type]   || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.'; cmSub.hidden = false; }
+                var sourceInput = document.getElementById('cf-source');
+                if (sourceInput) sourceInput.value = sources[type] || 'Unknown';
                 cm.classList.add('active');
             }
 

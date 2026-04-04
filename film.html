@@ -16,22 +16,26 @@
     <script src="https://fast.wistia.com/player.js" async></script>
     <style>
         /* Reduce gap from hero to first section */
-        .films:first-of-type { padding-top: 4rem; }
-
-        /* ── Film page hero image background ── */
-        .hero-img-wrap {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
+        .films:first-of-type {
+            padding-top: 4rem;
         }
 
-        .hero-img-wrap img {
+        /* ── Cinematic still background ── */
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
+            object-fit: contain;
+            object-position: center center;
+            z-index: 0;
+        }
+
+        /* Blend all four edges into the dark background */
+        .hero-overlay {
+            background:
+                linear-gradient(to right,  var(--void) 0%, rgba(5,5,5,0.15) 18%, transparent 38%, transparent 62%, rgba(5,5,5,0.15) 82%, var(--void) 100%),
+                linear-gradient(to top,    var(--void) 0%, rgba(5,5,5,0.5)  22%, transparent 50%, rgba(5,5,5,0.45) 88%, var(--void) 100%);
         }
 
         /* ── Film hero content — vertically centered, max-width matches Films/Shorts sections ── */
@@ -54,6 +58,7 @@
             text-transform: uppercase;
             font-weight: 400;
             margin: 0 0 1.75rem;
+            max-width: 12em;
         }
 
         /* ── CTA buttons ── */
@@ -159,7 +164,14 @@
             <li><a href="index.html#founders">Founders</a></li>
             <li><a href="index.html#membership">Membership</a></li>
         </ul>
-        <a href="index.html#contact" class="nav-contact">Contact</a>
+        <div class="nav-contact-wrap">
+            <button class="nav-contact" aria-haspopup="true" aria-expanded="false">Contact</button>
+            <ul class="nav-contact-dropdown">
+                <li><a href="mailto:zac@getpasted.com">Zac</a></li>
+                <li><a href="mailto:alan@getpasted.com">Alan</a></li>
+                <li><a href="mailto:kim@getpasted.com">Team</a></li>
+            </ul>
+        </div>
         <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
             <span></span>
             <span></span>
@@ -179,7 +191,14 @@
             <li><a href="index.html#studio">Studio</a></li>
             <li><a href="index.html#founders">Founders</a></li>
             <li><a href="index.html#membership">Membership</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li class="nav-mobile-contact-group">
+                <span class="nav-mobile-contact-label">Contact</span>
+                <div class="nav-mobile-contact-items">
+                    <a href="mailto:zac@getpasted.com">Zac</a>
+                    <a href="mailto:alan@getpasted.com">Alan</a>
+                    <a href="mailto:kim@getpasted.com">Team</a>
+                </div>
+            </li>
         </ul>
     </div>
 
@@ -188,20 +207,18 @@
     ═══════════════════════════════════════════ -->
     <section class="hero">
 
-        <!-- Static image background — swap src for video wrapper later -->
-        <div class="hero-img-wrap">
-            <img src="images/hero-bg.jpg" alt="The Art of Restraint">
-        </div>
+        <!-- Cinematic still background -->
+        <img src="images/films-thumbnail/built-by-design.jpg" alt="Built by Design" class="hero-bg-img">
 
-        <!-- Cinematic vignette + seamless gradient blending into page bg -->
+        <!-- Cinematic vignette overlay -->
         <div class="hero-overlay"></div>
 
-        <!-- Film content — bottom left -->
+        <!-- Film content — centered -->
         <div class="hero-film-content">
-            <h1 class="hero-film-title">THE ART<br>OF RESTRAINT</h1>
+            <h1 class="hero-film-title" id="filmHeroTitle">BUILT BY DESIGN — DR. JON MARASHI</h1>
             <div class="hero-film-btns">
-                <a href="#" class="btn-film btn-film-filled">UNLOCK FULL ACCESS</a>
-                <a href="#" class="btn-film btn-film-outlined">WATCH TRAILER</a>
+                <a href="#membership" class="btn-film btn-film-filled">UNLOCK FULL ACCESS</a>
+                <button id="filmTrailerBtn" class="btn-film btn-film-outlined">WATCH TRAILER</button>
             </div>
             <p class="hero-film-meta">DOCUMENTARY &mdash; 22 MIN</p>
         </div>
@@ -347,7 +364,8 @@
             <div class="shorts-header reveal">
                 <h2 class="shorts-title">SHORTS WORTH EXPLORING</h2>
                 <div class="shorts-nav">
-                    <button class="shorts-arrow shorts-arrow-prev disabled" id="shortsPrev" aria-label="Previous">&#8592;</button>
+                    <button class="shorts-arrow shorts-arrow-prev disabled" id="shortsPrev"
+                        aria-label="Previous">&#8592;</button>
                     <button class="shorts-arrow shorts-arrow-next" id="shortsNext" aria-label="Next">&#8594;</button>
                 </div>
             </div>
@@ -383,7 +401,8 @@
                     <article class="short-card locked" data-media-id="ea4bpi99jb">
                         <wistia-player media-id="ea4bpi99jb" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
-                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                            fullscreen-button="false" settings-control="false"
+                            small-play-button="false"></wistia-player>
                         <div class="short-card-lock-overlay">
                             <div class="short-card-lock-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -403,7 +422,8 @@
                     <article class="short-card locked" data-media-id="d2frf6dfar">
                         <wistia-player media-id="d2frf6dfar" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
-                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                            fullscreen-button="false" settings-control="false"
+                            small-play-button="false"></wistia-player>
                         <div class="short-card-lock-overlay">
                             <div class="short-card-lock-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -423,7 +443,8 @@
                     <article class="short-card locked" data-media-id="b3ch9wkwaf">
                         <wistia-player media-id="b3ch9wkwaf" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
-                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                            fullscreen-button="false" settings-control="false"
+                            small-play-button="false"></wistia-player>
                         <div class="short-card-lock-overlay">
                             <div class="short-card-lock-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -448,6 +469,14 @@
 
         </div><!-- /.shorts-inner -->
     </section>
+
+    <!-- Hero trailer player overlay -->
+    <div class="hero-player-overlay" id="filmTrailerOverlay" aria-hidden="true">
+        <button class="hero-player-close" id="filmTrailerClose" aria-label="Close player">&#x2715;</button>
+        <div class="hero-player-letterbox"></div>
+        <div class="hero-player-inner" id="filmTrailerInner"></div>
+        <div class="hero-player-letterbox"></div>
+    </div>
 
     <!-- Shorts video player overlay -->
     <div class="hero-player-overlay" id="shortsPlayerOverlay" aria-hidden="true">
@@ -525,9 +554,9 @@
                 <div class="footer-col footer-credit" data-delay="700">
                     <h4 class="footer-col-label">CONTACT</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">YouTube</a></li>
-                        <li><a href="#">Email</a></li>
+                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener">YouTube</a></li>
+                        <li><a href="mailto:alan@getpasted.com">Email</a></li>
                     </ul>
                 </div>
             </div>
@@ -542,19 +571,6 @@
         </div>
 
     </footer>
-
-    <!-- Simple unlock modal (used by unlock.js for locked cards) -->
-    <div class="modal" id="modal">
-        <button class="modal-close">×</button>
-        <div class="modal-content">
-            <h3>REQUEST ACCESS</h3>
-            <p>ENTER YOUR EMAIL TO UNLOCK THE FULL LIBRARY AND RECEIVE EARLY ACCESS TO NEW RELEASES.</p>
-            <form>
-                <input type="email" placeholder="Email address" required>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
 
     <!-- ═══════════════════════════════════════════
          CONTACT FORM MODAL (Library + Partnerships)
@@ -608,6 +624,7 @@
                     </select>
                 </div>
                 <input type="text" id="cf-instagram" placeholder="Instagram / Company">
+                <input type="hidden" id="cf-source" value="">
                 <button type="submit" id="cf-submit">SUBMIT</button>
                 <p id="cf-error-msg" class="cf-error-msg" hidden>Something went wrong. Please try again.</p>
             </form>
@@ -627,6 +644,55 @@
     <script src="js/reveal.js"></script>
     <script src="js/unlock.js"></script>
     <script src="js/hubspot.js"></script>
+    <script>
+        // ── Hero title: fetch from Wistia oEmbed ──────────────────
+        fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2Fo6oncnfzlu')
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                if (data.title) {
+                    var el = document.getElementById('filmHeroTitle');
+                    if (el) el.textContent = data.title;
+                }
+            })
+            .catch(function () {});
+
+        // ── Trailer overlay: open on "WATCH TRAILER", stop at 28s ─
+        (function () {
+            var overlay  = document.getElementById('filmTrailerOverlay');
+            var inner    = document.getElementById('filmTrailerInner');
+            var closeBtn = document.getElementById('filmTrailerClose');
+            var openBtn  = document.getElementById('filmTrailerBtn');
+            if (!overlay) return;
+
+            function openTrailer() {
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                var iframe = document.createElement('iframe');
+                // endVideoAt=28 stops playback at the 28-second mark
+                iframe.src = 'https://fast.wistia.net/embed/iframe/o6oncnfzlu?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false&endVideoAt=28';
+                iframe.setAttribute('allowtransparency', 'true');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('allow', 'autoplay; fullscreen');
+                iframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;inset:0;';
+                inner.appendChild(iframe);
+            }
+
+            function closeTrailer() {
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                var iframe = inner.querySelector('iframe');
+                if (iframe) iframe.remove();
+            }
+
+            if (openBtn) openBtn.addEventListener('click', openTrailer);
+            closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeTrailer(); });
+            overlay.addEventListener('click', function (e) { if (e.target === overlay) closeTrailer(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('active')) closeTrailer(); });
+        })();
+    </script>
+
     <script>
         // ── Shorts: carousel ─────────────────────────────────────
         (function () {
@@ -710,7 +776,7 @@
             fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2F' + mediaId)
                 .then(function (r) { return r.json(); })
                 .then(function (data) { if (data.title) titleEl.textContent = data.title; })
-                .catch(function () {});
+                .catch(function () { });
         });
 
         // ── Shorts: click card → open full player ─────────────────
@@ -753,21 +819,13 @@
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeShort(); });
         })();
 
-        // Simple unlock modal close
-        (function () {
-            var m = document.getElementById('modal');
-            if (!m) return;
-            m.querySelector('.modal-close').addEventListener('click', function () { m.classList.remove('active'); });
-            m.addEventListener('click', function (e) { if (e.target === m) m.classList.remove('active'); });
-        })();
-
         // ── Footer: film credits roll ─────────────────────────────
         (function () {
             var footer = document.querySelector('footer');
             if (!footer) return;
             var credits = footer.querySelectorAll('.footer-credit');
-            var labels  = footer.querySelectorAll('.footer-col-label');
-            var fired   = false;
+            var labels = footer.querySelectorAll('.footer-col-label');
+            var fired = false;
 
             var observer = new IntersectionObserver(function (entries) {
                 if (fired || !entries[0].isIntersecting) return;
@@ -801,10 +859,17 @@
                 membership:   'FILL IN YOUR DETAILS AND WE\'LL REVIEW YOUR APPLICATION PERSONALLY.',
                 partnerships: 'TELL US ABOUT YOURSELF AND WE\'LL BE IN TOUCH TO EXPLORE THE RIGHT FIT.'
             };
+            var sources = {
+                membership:   'Library',
+                partnerships: 'Partnership'
+            };
 
             function openCM(type) {
-                if (cmTitle) cmTitle.textContent = titles[type] || 'GET IN TOUCH';
-                if (cmSub)   cmSub.textContent   = subs[type]   || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.';
+                if (cm.classList.contains('active')) return;
+                if (cmTitle) { cmTitle.textContent = titles[type] || 'GET IN TOUCH'; cmTitle.hidden = false; }
+                if (cmSub)   { cmSub.textContent   = subs[type]   || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.'; cmSub.hidden = false; }
+                var sourceInput = document.getElementById('cf-source');
+                if (sourceInput) sourceInput.value = sources[type] || 'Unknown';
                 cm.classList.add('active');
             }
 
@@ -816,11 +881,11 @@
                     cmForm.querySelectorAll('.error').forEach(function (el) { el.classList.remove('error'); });
                 }
                 if (cmTitle) cmTitle.hidden = false;
-                if (cmSub)   cmSub.hidden   = false;
+                if (cmSub) cmSub.hidden = false;
                 var successEl = document.getElementById('cf-success');
                 if (successEl) successEl.hidden = true;
-                var errorMsg  = document.getElementById('cf-error-msg');
-                if (errorMsg)  errorMsg.hidden  = true;
+                var errorMsg = document.getElementById('cf-error-msg');
+                if (errorMsg) errorMsg.hidden = true;
                 var submitBtn = document.getElementById('cf-submit');
                 if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'SUBMIT'; }
             }

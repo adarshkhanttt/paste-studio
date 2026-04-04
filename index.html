@@ -15,6 +15,7 @@
     <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
     <script src="https://fast.wistia.com/player.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
 
 <body>
@@ -55,7 +56,14 @@
             <li><a href="#founders">Founders</a></li>
             <li><a href="#membership">Membership</a></li>
         </ul>
-        <a href="#contact" class="nav-contact">Contact</a>
+        <div class="nav-contact-wrap">
+            <button class="nav-contact" aria-haspopup="true" aria-expanded="false">Contact</button>
+            <ul class="nav-contact-dropdown">
+                <li><a href="mailto:zac@getpasted.com">Zac</a></li>
+                <li><a href="mailto:alan@getpasted.com">Alan</a></li>
+                <li><a href="mailto:kim@getpasted.com">Team</a></li>
+            </ul>
+        </div>
         <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
             <span></span>
             <span></span>
@@ -75,7 +83,14 @@
             <li><a href="#studio">Studio</a></li>
             <li><a href="#founders">Founders</a></li>
             <li><a href="#membership">Membership</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="nav-mobile-contact-group">
+                <span class="nav-mobile-contact-label">Contact</span>
+                <div class="nav-mobile-contact-items">
+                    <a href="mailto:zac@getpasted.com">Zac</a>
+                    <a href="mailto:alan@getpasted.com">Alan</a>
+                    <a href="mailto:kim@getpasted.com">Team</a>
+                </div>
+            </li>
         </ul>
     </div>
 
@@ -135,9 +150,7 @@
 
                 <!-- Card 1 — visible -->
                 <article class="film-card reveal" data-media-id="wow8j0h2kl">
-                    <wistia-player media-id="wow8j0h2kl" class="film-card-player" play-button="false" playbar="false"
-                        controls-visible-on-load="false" volume-control="false" fullscreen-button="false"
-                        settings-control="false" small-play-button="false"></wistia-player>
+                    <img src="images/films-thumbnail/art-of-restraint.jpg" alt="The Art of Restraint" class="film-card-img">
                     <div class="film-card-overlay">
                         <span class="film-card-category">Founder Story</span>
                         <h3 class="film-card-title"></h3>
@@ -147,9 +160,7 @@
 
                 <!-- Card 2 — visible -->
                 <article class="film-card reveal" data-media-id="o6oncnfzlu">
-                    <wistia-player media-id="o6oncnfzlu" class="film-card-player" play-button="false" playbar="false"
-                        controls-visible-on-load="false" volume-control="false" fullscreen-button="false"
-                        settings-control="false" small-play-button="false"></wistia-player>
+                    <img src="images/films-thumbnail/built-by-design.jpg" alt="Built by Design" class="film-card-img">
                     <div class="film-card-overlay">
                         <span class="film-card-category">Founder Story</span>
                         <h3 class="film-card-title"></h3>
@@ -477,11 +488,6 @@
                 <div class="investor-stat reveal" data-stat="12+" data-label="COUNTRIES"></div>
             </div>
 
-            <!-- CTA -->
-            <div class="investors-cta-wrap reveal">
-                <a href="#" class="investors-cta" data-modal="investors">REQUEST DECK</a>
-            </div>
-
         </div>
     </section>
 
@@ -529,6 +535,22 @@
     </section>
 
     <!-- ═══════════════════════════════════════════
+         SCROLL TICKER
+    ═══════════════════════════════════════════ -->
+    <section class="scroll-ticker" id="scroll-ticker" aria-hidden="true">
+        <div class="scroll-ticker-track">
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
          FOOTER
     ═══════════════════════════════════════════ -->
     <footer>
@@ -558,9 +580,9 @@
                 <div class="footer-col footer-credit" data-delay="700">
                     <h4 class="footer-col-label">CONTACT</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">YouTube</a></li>
-                        <li><a href="#">Email</a></li>
+                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener">YouTube</a></li>
+                        <li><a href="mailto:alan@getpasted.com">Email</a></li>
                     </ul>
                 </div>
             </div>
@@ -605,21 +627,6 @@
         <div class="hero-player-letterbox"></div>
         <div class="hero-player-inner" id="shortsPlayerInner"></div>
         <div class="hero-player-letterbox"></div>
-    </div>
-
-    <!-- ═══════════════════════════════════════════
-         MODAL
-    ═══════════════════════════════════════════ -->
-    <div class="modal" id="modal">
-        <button class="modal-close">×</button>
-        <div class="modal-content">
-            <h3>REQUEST ACCESS</h3>
-            <p>ENTER YOUR EMAIL TO UNLOCK THE FULL LIBRARY AND RECEIVE EARLY ACCESS TO NEW RELEASES.</p>
-            <form>
-                <input type="email" placeholder="Email address" required>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
     </div>
 
     <!-- ═══════════════════════════════════════════
@@ -678,6 +685,7 @@
                 </div>
 
                 <input type="text" id="cf-instagram" placeholder="Instagram / Company">
+                <input type="hidden" id="cf-source" value="">
 
                 <button type="submit" id="cf-submit">SUBMIT</button>
 
@@ -698,6 +706,32 @@
     <script src="js/nav.js"></script>
     <script src="js/reveal.js"></script>
     <script src="js/hero.js"></script>
+    <script>
+        // ── Scroll ticker ─────────────────────────────────────────
+        window.addEventListener('load', function () {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+            gsap.registerPlugin(ScrollTrigger);
+
+            var section = document.getElementById('scroll-ticker');
+            var track   = section && section.querySelector('.scroll-ticker-track');
+            if (!section || !track) return;
+
+            var totalWidth = track.scrollWidth;
+            gsap.fromTo(track,
+                { x: -totalWidth * 0.08 },
+                {
+                    x: totalWidth * 0.17,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1.2
+                    }
+                }
+            );
+        });
+    </script>
     <script>
         // Counter animation
         function runCounter(el) {
@@ -961,24 +995,7 @@
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePlayer(); });
         })();
 
-        // Modal — simple email modal (investors only)
-        const modal = document.getElementById('modal');
-        document.querySelectorAll('[data-modal="investors"]').forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
-                e.preventDefault();
-                modal.classList.add('active');
-            });
-        });
-
-        document.querySelector('.modal-close').addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.remove('active');
-        });
-
-        // Contact form modal (library + partnerships)
+        // Contact form modal (films unlock, shorts unlock, library, partnerships, investors)
         (function () {
             var cm = document.getElementById('contact-modal');
             var cmClose = document.getElementById('contact-modal-close');
@@ -987,17 +1004,27 @@
             var cmForm = document.getElementById('contact-form');
 
             var titles = {
-                membership: 'REQUEST PRIVATE ACCESS',
-                partnerships: 'DISCUSS PARTNERSHIP'
+                membership:   'REQUEST PRIVATE ACCESS',
+                partnerships: 'DISCUSS PARTNERSHIP',
+                investors:    'REQUEST DECK'
             };
             var subs = {
-                membership: 'FILL IN YOUR DETAILS AND WE\'LL REVIEW YOUR APPLICATION PERSONALLY.',
-                partnerships: 'TELL US ABOUT YOURSELF AND WE\'LL BE IN TOUCH TO EXPLORE THE RIGHT FIT.'
+                membership:   'FILL IN YOUR DETAILS AND WE\'LL REVIEW YOUR APPLICATION PERSONALLY.',
+                partnerships: 'TELL US ABOUT YOURSELF AND WE\'LL BE IN TOUCH TO EXPLORE THE RIGHT FIT.',
+                investors:    'FILL IN YOUR DETAILS AND WE\'LL SEND OVER THE DECK.'
+            };
+            var sources = {
+                membership:   'Library',
+                partnerships: 'Partnership',
+                investors:    'Investors'
             };
 
             function openCM(type) {
-                if (cmTitle) cmTitle.textContent = titles[type] || 'GET IN TOUCH';
-                if (cmSub) cmSub.textContent = subs[type] || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.';
+                if (cm.classList.contains('active')) return;
+                if (cmTitle) { cmTitle.textContent = titles[type] || 'GET IN TOUCH'; cmTitle.hidden = false; }
+                if (cmSub)   { cmSub.textContent   = subs[type]   || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.'; cmSub.hidden = false; }
+                var sourceInput = document.getElementById('cf-source');
+                if (sourceInput) sourceInput.value = sources[type] || 'Unknown';
                 cm.classList.add('active');
             }
 
@@ -1008,7 +1035,6 @@
                     cmForm.hidden = false;
                     cmForm.querySelectorAll('.error').forEach(function (el) { el.classList.remove('error'); });
                 }
-                // Restore title and subheading in case the success state was shown
                 if (cmTitle) cmTitle.hidden = false;
                 if (cmSub) cmSub.hidden = false;
                 var successEl = document.getElementById('cf-success');
@@ -1019,7 +1045,7 @@
                 if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'SUBMIT'; }
             }
 
-            document.querySelectorAll('[data-modal="membership"], [data-modal="partnerships"]').forEach(function (trigger) {
+            document.querySelectorAll('[data-modal="membership"], [data-modal="partnerships"], [data-modal="investors"]').forEach(function (trigger) {
                 trigger.addEventListener('click', function (e) {
                     e.preventDefault();
                     openCM(trigger.dataset.modal);
