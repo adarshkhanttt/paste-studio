@@ -171,10 +171,10 @@
 
                 <!-- Card 3 — visible -->
                 <article class="film-card reveal" data-media-id="t79pc3h06u">
-                    <img src="" alt="" class="film-card-img">
+                    <img src="images/films-thumbnail/brian-harris-thumbnail.jpeg" alt="The Human Edge" class="film-card-img">
                     <div class="film-card-overlay">
                         <span class="film-card-category">Founder Story</span>
-                        <h3 class="film-card-title"></h3>
+                        <h3 class="film-card-title">THE HUMAN EDGE — BRIAN HARRIS</h3>
                         <span class="film-card-duration">Documentary</span>
                     </div>
                 </article>
@@ -202,7 +202,7 @@
             </div><!-- /.films-grid -->
 
             <div class="films-cta reveal">
-                <a href="film.html" class="films-explore-btn">EXPLORE ALL FROM ARCHIVES</a>
+                <a href="film.html" class="films-explore-btn">EXPLORE ALL FROM COLLECTION</a>
             </div>
 
         </div><!-- /.films-inner -->
@@ -317,7 +317,7 @@
             </div><!-- /.shorts-track-wrap -->
 
             <div class="shorts-cta reveal">
-                <a href="shorts.html" class="shorts-explore-btn">EXPLORE ALL FROM ARCHIVES</a>
+                <a href="shorts.html" class="shorts-explore-btn">EXPLORE ALL FROM COLLECTION</a>
             </div>
 
         </div><!-- /.shorts-inner -->
@@ -340,31 +340,38 @@
 
             <!-- Right: city list -->
             <div class="studio-cities reveal" id="studioCities">
+                <div class="studio-city active" data-city="london">LONDON</div>
                 <div class="studio-city" data-city="new-york">NEW YORK</div>
                 <div class="studio-city" data-city="los-angeles">LOS ANGELES</div>
-                <div class="studio-city" data-city="london">LONDON</div>
-                <div class="studio-city" data-city="sydney">SYDNEY</div>
             </div>
 
         </div>
 
-        <!-- Full-width city image strip — no gap, flush below grid -->
+        <!-- Full-width city video strip -->
         <div class="studio-img-strip" id="studioImgStrip">
-            <div class="studio-strip-img" data-city="new-york">
-                <img src="https://images.unsplash.com/photo-1769492321152-e2909ad25946?w=600&h=900&fit=crop&q=80"
-                    alt="New York">
+            <div class="studio-strip-img active" data-city="london" data-city-label="London">
+                <wistia-player media-id="e2i9vigkz6" class="studio-strip-player"
+                    play-button="false" playbar="false" controls-visible-on-load="false"
+                    volume-control="false" fullscreen-button="false" settings-control="false"
+                    small-play-button="false" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover"></wistia-player>
+                <div class="studio-strip-overlay"></div>
             </div>
-            <div class="studio-strip-img" data-city="los-angeles">
-                <img src="https://images.unsplash.com/photo-1609924211018-5526c55bad5b?w=600&h=900&fit=crop&q=80"
-                    alt="Los Angeles">
+            <div class="studio-strip-img" data-city="new-york" data-city-label="New York">
+                <wistia-player media-id="3jd279wbcn" class="studio-strip-player"
+                    play-button="false" playbar="false" controls-visible-on-load="false"
+                    volume-control="false" fullscreen-button="false" settings-control="false"
+                    small-play-button="false" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover"></wistia-player>
+                <div class="studio-strip-overlay"></div>
             </div>
-            <div class="studio-strip-img" data-city="london">
-                <img src="https://images.unsplash.com/photo-1454793147212-9e7e57e89a4f?w=600&h=900&fit=crop&q=80"
-                    alt="London">
-            </div>
-            <div class="studio-strip-img" data-city="sydney">
-                <img src="https://images.unsplash.com/photo-1548565495-a692bd1c1d1c?w=600&h=900&fit=crop&q=80"
-                    alt="Sydney">
+            <div class="studio-strip-img" data-city="los-angeles" data-city-label="Los Angeles">
+                <wistia-player media-id="fxmxjyzkx0" class="studio-strip-player"
+                    play-button="false" playbar="false" controls-visible-on-load="false"
+                    volume-control="false" fullscreen-button="false" settings-control="false"
+                    small-play-button="false" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover"></wistia-player>
+                <div class="studio-strip-overlay"></div>
             </div>
         </div>
 
@@ -835,32 +842,78 @@
             applyOffset(0, false);
         })();
 
-        // Studio city ↔ image hover
+        // Studio city ↔ video hover
         (function () {
             var cities = document.querySelectorAll('#studioCities .studio-city');
-            var imgs = document.querySelectorAll('#studioImgStrip .studio-strip-img');
+            var slots  = document.querySelectorAll('#studioImgStrip .studio-strip-img');
+
+            function getPlayer(slot) {
+                return slot.querySelector('.studio-strip-player');
+            }
+
+            function activate(cityKey) {
+                cities.forEach(function (c) { c.classList.toggle('active', c.dataset.city === cityKey); });
+                slots.forEach(function (s) {
+                    var isActive = s.dataset.city === cityKey;
+                    s.classList.toggle('active', isActive);
+                    var player = getPlayer(s);
+                    if (!player) return;
+                    if (isActive) {
+                        if (typeof player.play === 'function') player.play();
+                    } else {
+                        if (typeof player.pause === 'function') player.pause();
+                    }
+                });
+            }
+
+            // Start the first (London) video on load
+            window.addEventListener('load', function () {
+                var firstSlot = document.querySelector('#studioImgStrip .studio-strip-img.active');
+                if (firstSlot) {
+                    var p = getPlayer(firstSlot);
+                    if (p && typeof p.play === 'function') p.play();
+                }
+
+                // Mobile-only: auto-play London → New York → LA, loop every 3s
+                if (window.innerWidth <= 640) {
+                    var slotList = Array.from(slots);
+                    var current = 0;
+
+                    function playSlot(index) {
+                        slotList.forEach(function (s) {
+                            var p = getPlayer(s);
+                            if (p && typeof p.pause === 'function') p.pause();
+                        });
+                        var p = getPlayer(slotList[index]);
+                        if (p && typeof p.play === 'function') p.play();
+                    }
+
+                    // Wait 1.5s for Wistia to initialise, then start
+                    setTimeout(function () {
+                        playSlot(0);
+                        setInterval(function () {
+                            current = (current + 1) % slotList.length;
+                            playSlot(current);
+                        }, 2500);
+                    }, 1500);
+                }
+            });
+
+            cities.forEach(function (c) {
+                c.addEventListener('mouseenter', function () { activate(c.dataset.city); });
+            });
+
+            // Pause all videos when cursor leaves the city list
             var citiesWrap = document.getElementById('studioCities');
-            var imgStrip = document.getElementById('studioImgStrip');
-            var leaveTimer;
+            citiesWrap.addEventListener('mouseleave', function () {
+                slots.forEach(function (s) {
+                    var player = getPlayer(s);
+                    if (player && typeof player.pause === 'function') player.pause();
+                    s.classList.remove('active');
+                });
+                cities.forEach(function (c) { c.classList.remove('active'); });
+            });
 
-            function activate(city) {
-                clearTimeout(leaveTimer);
-                cities.forEach(function (c) { c.classList.toggle('active', c.dataset.city === city); });
-                imgs.forEach(function (i) { i.classList.toggle('active', i.dataset.city === city); });
-            }
-
-            function scheduleDeactivate() {
-                leaveTimer = setTimeout(function () {
-                    cities.forEach(function (c) { c.classList.remove('active'); });
-                    imgs.forEach(function (i) { i.classList.remove('active'); });
-                }, 60);
-            }
-
-            cities.forEach(function (c) { c.addEventListener('mouseenter', function () { activate(c.dataset.city); }); });
-            imgs.forEach(function (i) { i.addEventListener('mouseenter', function () { activate(i.dataset.city); }); });
-
-            citiesWrap.addEventListener('mouseleave', scheduleDeactivate);
-            imgStrip.addEventListener('mouseleave', scheduleDeactivate);
         })();
 
         // ── Films: Wistia title fetch + click-to-open ────────────

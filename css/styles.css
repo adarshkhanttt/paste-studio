@@ -1414,38 +1414,48 @@ body.loaded .hero-meta {
 }
 
 .studio-strip-img {
-    flex: 0 0 25%;
-    height: 620px;
+    flex: 0 0 33.333%;
+    height: 700px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
 }
 
-.studio-strip-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-/* Dark overlay on every image by default */
-.studio-strip-img::after {
-    content: '';
+/* Wistia player: oversized by 6% on each side so shadow-DOM border-radius is clipped */
+.studio-strip-player {
     position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.65);
-    transition: opacity 0.3s ease;
+    top: -3%;
+    left: -3%;
+    width: 106%;
+    height: 106%;
+    display: block;
     pointer-events: none;
 }
 
-/* Active image — overlay fades, slight zoom */
-.studio-strip-img.active::after {
-    opacity: 0;
+.studio-strip-player *,
+.studio-strip-player video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
 }
 
-.studio-strip-img.active img {
-    transform: scale(1.03);
+/* Dark overlay — dims inactive slots */
+.studio-strip-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Active slot — overlay fades out */
+.studio-strip-img.active .studio-strip-overlay {
+    opacity: 0;
 }
 
 /* ═══════════════════════════════════════════
@@ -2651,7 +2661,6 @@ footer {
     .studio-grid { grid-template-columns: 1fr; gap: 2rem; }
     .studio-img-strip { flex-wrap: wrap; margin-left: -2rem; width: calc(100% + 4rem); }
     .studio-strip-img { flex: 0 0 50%; height: 360px; }
-    .studio-city-img { flex: 0 0 50%; height: 220px; }
 
     .founders { padding: 6rem 2rem; }
     .founders-grid { grid-template-columns: 1fr; gap: 4rem; }
@@ -2712,7 +2721,7 @@ footer {
 
     .studio { padding: 4rem 1.5rem 0; }
     .studio-img-strip { margin-left: -1.5rem; width: calc(100% + 3rem); }
-    .studio-strip-img { flex: 0 0 50%; height: 300px; }
+    .studio-strip-img { flex: 0 0 33.333%; height: 280px; }
 
     .founders { padding: 5rem 1.5rem; }
 
