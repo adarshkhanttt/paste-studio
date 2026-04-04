@@ -711,10 +711,11 @@ body.loaded .hero-meta {
     gap: 1rem;
 }
 
-/* ── Portrait 2-up grid — index.html #films section only ── */
+/* ── Portrait grid — index.html #films section only ── */
 #films .films-grid {
-    grid-template-columns: repeat(2, minmax(0, 320px));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     justify-content: start;
+    gap: 1rem;
 }
 
 /* ── Film card ── */
@@ -802,7 +803,7 @@ body.loaded .hero-meta {
 
 /* Smaller title for portrait cards on index.html */
 #films .film-card-title {
-    font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+    font-size: clamp(0.7rem, 1.8vw, 1.1rem);
     line-height: 1.2;
 }
 
@@ -2607,6 +2608,8 @@ footer {
 
 /* ── Large tablets / small desktops (≤1200px) ── */
 @media (max-width: 1200px) {
+    #films .films-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
     .bento-grid { grid-template-columns: repeat(6, 1fr); }
     .bento-item.large  { grid-column: span 6; grid-row: span 1; }
     .bento-item.tall   { grid-column: span 3; grid-row: span 1; aspect-ratio: 4/5; }
@@ -2695,7 +2698,7 @@ footer {
 
     .films { padding: 4rem 1.5rem 3rem; }
     .films-grid { grid-template-columns: 1fr; }
-    #films .films-grid { grid-template-columns: 1fr; }
+    #films .films-grid { grid-template-columns: repeat(2, 1fr); }
     .films-explore-btn { padding: 1.1rem 2rem; }
 
     .shorts { padding: 0 1.5rem 4rem; }
