@@ -711,9 +711,10 @@ body.loaded .hero-meta {
     gap: 1rem;
 }
 
-/* ── Portrait 4-up grid — index.html #films section only ── */
+/* ── Portrait 2-up grid — index.html #films section only ── */
 #films .films-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 320px));
+    justify-content: start;
 }
 
 /* ── Film card ── */
@@ -727,7 +728,7 @@ body.loaded .hero-meta {
 
 /* Portrait orientation — index.html #films section only */
 #films .film-card {
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 2 / 3;
 }
 
 .film-card-img {
@@ -2679,7 +2680,7 @@ footer {
 
     .films { padding: 4rem 1.5rem 3rem; }
     .films-grid { grid-template-columns: 1fr; }
-    #films .films-grid { grid-template-columns: repeat(2, 1fr); }
+    #films .films-grid { grid-template-columns: 1fr; }
     .films-explore-btn { padding: 1.1rem 2rem; }
 
     .shorts { padding: 0 1.5rem 4rem; }
