@@ -1679,7 +1679,7 @@ body.loaded .hero-meta {
 
 .library {
     display: flex;
-    min-height: 100vh;
+    min-height: 600px;
     background: var(--void);
     position: relative;
     overflow: hidden;
@@ -1690,18 +1690,24 @@ body.loaded .hero-meta {
     flex: 0 0 50%;
     position: relative;
     overflow: hidden;
+    max-height: 100%;
 }
 
 .library-video-wrap {
     position: absolute;
     inset: 0;
+    overflow: hidden;
 }
 
-.library-bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+.library-bg-iframe {
+    position: absolute;
+    top: -8%;
+    left: -8%;
+    width: 116%;
+    height: 116%;
+    border: none;
+    pointer-events: none;
+    border-radius: 0;
 }
 
 /* Seamless gradient: fades image into the right pricing column */
