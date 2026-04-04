@@ -875,11 +875,18 @@
                 var titleEl = card.querySelector('.film-card-title');
                 var cardPlayer = card.querySelector('.film-card-player');
 
-                // Fetch title from Wistia oEmbed
-                if (titleEl) {
+                // Fetch title + duration from Wistia oEmbed
+                var durationEl = card.querySelector('.film-card-duration');
+                if (titleEl || durationEl) {
                     fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2F' + mediaId)
                         .then(function (r) { return r.json(); })
-                        .then(function (data) { if (data.title) titleEl.textContent = data.title; })
+                        .then(function (data) {
+                            if (data.title && titleEl) titleEl.textContent = data.title;
+                            if (data.duration && durationEl) {
+                                var mins = Math.round(data.duration / 60);
+                                durationEl.textContent = 'Documentary \u00B7 ' + mins + ' min';
+                            }
+                        })
                         .catch(function () { });
                 }
 

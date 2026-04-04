@@ -821,9 +821,24 @@ body.loaded .hero-meta {
 }
 
 /* Hide lock overlays once the card is unlocked (.locked removed by JS) */
-.film-card:not(.locked) .film-card-lock-overlay,
+.film-card:not(.locked):not(.coming-soon) .film-card-lock-overlay,
 .short-card:not(.locked) .short-card-lock-overlay {
     display: none;
+}
+
+/* Coming-soon cards — blurred image, no pointer interaction */
+.film-card.coming-soon {
+    cursor: default;
+    pointer-events: none;
+}
+
+.film-card.coming-soon .film-card-img {
+    filter: blur(14px);
+    transform: scale(1.05);
+}
+
+.film-card.coming-soon .film-card-overlay {
+    z-index: 2;
 }
 
 .film-card-lock-overlay {

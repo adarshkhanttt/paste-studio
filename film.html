@@ -20,22 +20,12 @@
             padding-top: 4rem;
         }
 
-        /* ── Cinematic still background ── */
-        .hero-bg-img {
+        /* ── Full-bleed Wistia background video ── */
+        .hero-video-wrap {
             position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center center;
             z-index: 0;
-        }
-
-        /* Blend all four edges into the dark background */
-        .hero-overlay {
-            background:
-                linear-gradient(to right,  var(--void) 0%, rgba(5,5,5,0.15) 18%, transparent 38%, transparent 62%, rgba(5,5,5,0.15) 82%, var(--void) 100%),
-                linear-gradient(to top,    var(--void) 0%, rgba(5,5,5,0.5)  22%, transparent 50%, rgba(5,5,5,0.45) 88%, var(--void) 100%);
+            overflow: hidden;
         }
 
         /* ── Film hero content — vertically centered, max-width matches Films/Shorts sections ── */
@@ -207,8 +197,11 @@
     ═══════════════════════════════════════════ -->
     <section class="hero">
 
-        <!-- Cinematic still background -->
-        <img src="images/films-thumbnail/built-by-design.jpg" alt="Built by Design" class="hero-bg-img">
+        <!-- Full-bleed Wistia background video -->
+        <div class="hero-video-wrap">
+            <div class="wistia_embed wistia_async_66o4d2abaa fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false"
+                style="height:100%;width:100%;"></div>
+        </div>
 
         <!-- Cinematic vignette overlay -->
         <div class="hero-overlay"></div>
@@ -235,83 +228,70 @@
 
             <div class="films-grid">
 
-                <!-- Card 1 — locked -->
-                <article class="film-card locked reveal">
-                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&h=506&fit=crop&q=80"
-                        alt="Locked" class="film-card-img">
+                <!-- Card 1 — The Art of Restraint (unlocked) -->
+                <article class="film-card reveal" data-media-id="wow8j0h2kl">
+                    <img src="" alt="The Art of Restraint" class="film-card-img" id="archiveCard1Thumb">
+                    <div class="film-card-overlay">
+                        <span class="film-card-category">Founder Story</span>
+                        <h3 class="film-card-title">THE ART OF RESTRAINT</h3>
+                        <span class="film-card-duration">Documentary</span>
+                    </div>
+                </article>
+
+                <!-- Card 2 — Coming Soon -->
+                <article class="film-card coming-soon reveal">
+                    <img src="images/films-thumbnail/john-marashi-film-thumbnail.jpeg" alt="Refined by Culture" class="film-card-img">
                     <div class="film-card-lock-overlay">
                         <div class="film-card-lock-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="11" width="18" height="11" rx="2" />
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                <circle cx="12" cy="12" r="9" />
+                                <polyline points="12 7 12 12 15 15" />
                             </svg>
                         </div>
-                        <span class="film-card-unlock">UNLOCK FULL ACCESS</span>
+                        <span class="film-card-unlock">COMING SOON</span>
                     </div>
                     <div class="film-card-overlay">
                         <span class="film-card-category">Founder Story</span>
-                        <h3 class="film-card-title">THE PURSUIT OF PERFECTION</h3>
-                        <span class="film-card-duration">Documentary · 22 min</span>
+                        <h3 class="film-card-title">REFINED BY CULTURE — DR. JON MARASHI</h3>
+                        <span class="film-card-duration">Documentary</span>
                     </div>
                 </article>
 
-                <!-- Card 2 — locked -->
-                <article class="film-card locked reveal">
-                    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=900&h=506&fit=crop&q=80"
-                        alt="Locked" class="film-card-img">
+                <!-- Card 3 — Coming Soon -->
+                <article class="film-card coming-soon reveal">
+                    <img src="images/films-thumbnail/marshall-hanson-film-thumbnail.jpeg" alt="The Art of Becoming" class="film-card-img">
                     <div class="film-card-lock-overlay">
                         <div class="film-card-lock-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="11" width="18" height="11" rx="2" />
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                <circle cx="12" cy="12" r="9" />
+                                <polyline points="12 7 12 12 15 15" />
                             </svg>
                         </div>
-                        <span class="film-card-unlock">UNLOCK FULL ACCESS</span>
-                    </div>
-                    <div class="film-card-overlay">
-                        <span class="film-card-category">Clinical Mastery</span>
-                        <h3 class="film-card-title">THE ART OF PRECISION</h3>
-                        <span class="film-card-duration">Documentary · 18 min</span>
-                    </div>
-                </article>
-
-                <!-- Card 3 — locked -->
-                <article class="film-card locked reveal">
-                    <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=900&h=506&fit=crop&q=80"
-                        alt="Locked" class="film-card-img">
-                    <div class="film-card-lock-overlay">
-                        <div class="film-card-lock-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="11" width="18" height="11" rx="2" />
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                            </svg>
-                        </div>
-                        <span class="film-card-unlock">UNLOCK FULL ACCESS</span>
+                        <span class="film-card-unlock">COMING SOON</span>
                     </div>
                     <div class="film-card-overlay">
                         <span class="film-card-category">Founder Story</span>
-                        <h3 class="film-card-title">BUILT BY DESIGN</h3>
-                        <span class="film-card-duration">Documentary · 25 min</span>
+                        <h3 class="film-card-title">THE ART OF BECOMING — DR. MARSHALL HANSON</h3>
+                        <span class="film-card-duration">Documentary</span>
                     </div>
                 </article>
 
-                <!-- Card 4 — locked -->
-                <article class="film-card locked reveal">
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&h=506&fit=crop&q=80"
-                        alt="Locked" class="film-card-img">
+                <!-- Card 4 — Coming Soon -->
+                <article class="film-card coming-soon reveal">
+                    <img src="images/films-thumbnail/alex-besmer-thumbnail.jpeg" alt="It's Not About Me" class="film-card-img">
                     <div class="film-card-lock-overlay">
                         <div class="film-card-lock-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="11" width="18" height="11" rx="2" />
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                <circle cx="12" cy="12" r="9" />
+                                <polyline points="12 7 12 12 15 15" />
                             </svg>
                         </div>
-                        <span class="film-card-unlock">UNLOCK FULL ACCESS</span>
+                        <span class="film-card-unlock">COMING SOON</span>
                     </div>
                     <div class="film-card-overlay">
-                        <span class="film-card-category">Practice Growth</span>
-                        <h3 class="film-card-title">THE LONG GAME</h3>
-                        <span class="film-card-duration">Documentary · 31 min</span>
+                        <span class="film-card-category">Founder Story</span>
+                        <h3 class="film-card-title">IT'S NOT ABOUT ME — DR. ALEX BESMER</h3>
+                        <span class="film-card-duration">Documentary</span>
                     </div>
                 </article>
 
@@ -645,6 +625,26 @@
     <script src="js/unlock.js"></script>
     <script src="js/hubspot.js"></script>
     <script>
+        // ── Film cards: fetch duration for cards with data-media-id ─
+        document.querySelectorAll('.film-card[data-media-id]').forEach(function (card) {
+            var mediaId    = card.dataset.mediaId;
+            var durationEl = card.querySelector('.film-card-duration');
+            var thumbEl    = card.querySelector('.film-card-img[src=""]');
+            if (!mediaId) return;
+            fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2F' + mediaId)
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    if (data.duration && durationEl) {
+                        var mins = Math.round(data.duration / 60);
+                        durationEl.textContent = 'Documentary \u00B7 ' + mins + ' min';
+                    }
+                    if (data.thumbnail_url && thumbEl) {
+                        thumbEl.src = data.thumbnail_url;
+                    }
+                })
+                .catch(function () {});
+        });
+
         // ── Hero title: fetch from Wistia oEmbed ──────────────────
         fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2Fo6oncnfzlu')
             .then(function (r) { return r.json(); })
@@ -670,7 +670,7 @@
                 document.body.style.overflow = 'hidden';
                 var iframe = document.createElement('iframe');
                 // endVideoAt=28 stops playback at the 28-second mark
-                iframe.src = 'https://fast.wistia.net/embed/iframe/o6oncnfzlu?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false&endVideoAt=28';
+                iframe.src = 'https://fast.wistia.net/embed/iframe/66o4d2abaa?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false';
                 iframe.setAttribute('allowtransparency', 'true');
                 iframe.setAttribute('allowfullscreen', '');
                 iframe.setAttribute('allow', 'autoplay; fullscreen');
