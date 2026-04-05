@@ -3,27 +3,6 @@
  * Toggles a full-screen overlay with staggered link animations.
  */
 
-// ── Contact dropdown (click/touch toggle) ─────────────────────────────────
-(function () {
-    var wrap = document.querySelector('.nav-contact-wrap');
-    var btn  = wrap && wrap.querySelector('.nav-contact');
-    if (!wrap || !btn) return;
-
-    function close() {
-        wrap.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-    }
-
-    btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var isOpen = wrap.classList.contains('open');
-        isOpen ? close() : (wrap.classList.add('open'), btn.setAttribute('aria-expanded', 'true'));
-    });
-
-    document.addEventListener('click', close);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-})();
-
 (function () {
   const hamburger  = document.querySelector('.nav-hamburger');
   const mobileNav  = document.getElementById('nav-mobile');

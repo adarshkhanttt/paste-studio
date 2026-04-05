@@ -99,10 +99,6 @@ nav {
     opacity: 1;
 }
 
-.nav-contact-wrap {
-    position: relative;
-}
-
 .nav-contact {
     font-size: 0.65rem;
     letter-spacing: 0.15em;
@@ -122,108 +118,6 @@ nav {
     opacity: 0.75;
 }
 
-/* ── Dropdown panel ── */
-.nav-contact-dropdown {
-    position: absolute;
-    top: calc(100% + 0.85rem);
-    right: 0;
-    list-style: none;
-    background: rgba(5, 5, 5, 0.94);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    min-width: 130px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-6px);
-    transition: opacity 0.22s ease, transform 0.22s ease;
-    z-index: 10;
-}
-
-.nav-contact-wrap:hover .nav-contact-dropdown,
-.nav-contact-wrap.open .nav-contact-dropdown {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-.nav-contact-dropdown li + li {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.nav-contact-dropdown a {
-    display: block;
-    padding: 0.7rem 1.1rem;
-    color: var(--white);
-    text-decoration: none;
-    font-size: 0.6rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.6;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-}
-
-.nav-contact-dropdown a:hover {
-    opacity: 1;
-}
-
-/* ── Mobile contact group ── */
-.nav-mobile-contact-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.nav-mobile-contact-label {
-    font-family: var(--sans);
-    font-size: 0.55rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(250, 248, 245, 0.35);
-    display: block;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-mobile.active .nav-mobile-contact-label {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.33s;
-}
-
-.nav-mobile-contact-items {
-    display: flex;
-    gap: clamp(1rem, 5vw, 2.5rem);
-    justify-content: center;
-}
-
-.nav-mobile-contact-items a {
-    font-family: var(--display);
-    font-size: clamp(1rem, 6vw, 2.5rem);
-    color: var(--white);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    opacity: 0;
-    transform: translateY(28px);
-    display: block;
-    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                color 0.3s;
-    transition-delay: 0.38s;
-}
-
-.nav-mobile.active .nav-mobile-contact-items a {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.nav-mobile-contact-items a:hover {
-    color: var(--stone);
-}
 
 /* ═══════════════════════════════════════════
    PRELOADER
