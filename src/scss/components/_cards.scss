@@ -1,0 +1,445 @@
+// ─────────────────────────────────────────────
+// CARDS — film-card, short-card, bento-item
+// ─────────────────────────────────────────────
+
+// ── Films grid ──────────────────────────────
+.films-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-gap-xxs);
+}
+
+// Portrait grid — index.html #films only
+#films .films-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    justify-content: start;
+}
+
+// ── Film card ────────────────────────────────
+.film-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    cursor: pointer;
+    background: var(--charcoal);
+
+    &-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s var(--ease-spring);
+    }
+
+    &:not(.locked):hover &-img { transform: scale(1.04); }
+
+    // Wistia player: border-radius must be 0 (Wistia injects rounded corners)
+    &-player {
+        display: block;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0 !important;  // required: overrides Wistia shadow DOM
+        transform: scale(1.22);
+        transition: transform 0.7s var(--ease-spring);
+    }
+
+    &-player,
+    &-player iframe,
+    &-player video,
+    &-player * {
+        border-radius: 0 !important;  // required: deep Wistia border-radius kill
+    }
+
+    &:not(.locked) &-overlay { pointer-events: none; }
+    &:not(.locked):hover &-player { transform: scale(1.27); }
+
+    &-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top,
+            rgba(5, 5, 5, 0.92) 0%,
+            rgba(5, 5, 5, 0.20) 45%,
+            transparent 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.75rem;
+    }
+
+    &-category {
+        font-size: var(--text-label-sm);
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.4rem;
+    }
+
+    &-title {
+        font-family: var(--display);
+        font-size: var(--text-card-title);
+        letter-spacing: 0.04em;
+        line-height: 1.1;
+        color: var(--white);
+    }
+
+    &-duration {
+        font-size: var(--text-label-md);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ash);
+        margin-top: 0.4rem;
+    }
+
+    // ── Lock overlay ─────────────────────────
+    &-lock-overlay {
+        position: absolute;
+        inset: 0;
+        background: var(--color-overlay-dark);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-gap-xxs);
+        z-index: 1;
+    }
+
+    &-lock-icon {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--color-border-mid);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 14px;
+            height: 14px;
+            color: var(--white);
+        }
+    }
+
+    &-unlock {
+        font-size: var(--text-body-xxs);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--white);
+        font-family: var(--sans);
+    }
+
+    &.locked &-overlay   { z-index: 2; }
+    &.locked &-img       { filter: blur(14px); transform: scale(1.05); }
+
+    // Coming-soon: no interaction, blurred
+    &.coming-soon {
+        cursor: default;
+        pointer-events: none;
+
+        .film-card-img     { filter: blur(14px); transform: scale(1.05); }
+        .film-card-overlay { z-index: 2; }
+    }
+
+    // Hide lock overlay once unlocked
+    &:not(.locked):not(.coming-soon) .film-card-lock-overlay { display: none; }
+}
+
+// Portrait variant — index.html #films only
+#films .film-card {
+    aspect-ratio: 2 / 3;
+
+    .film-card-overlay {
+        background: linear-gradient(to top,
+            rgba(5, 5, 5, 0.97) 0%,
+            rgba(5, 5, 5, 0.55) 50%,
+            rgba(5, 5, 5, 0.15) 100%);
+    }
+
+    .film-card-title {
+        font-size: var(--text-card-title-sm);
+        line-height: 1.2;
+    }
+}
+
+// ── Short card ───────────────────────────────
+.short-card {
+    flex: 0 0 calc((100% - 3rem) / 3.5);
+    aspect-ratio: 9 / 16;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--charcoal);
+    border-radius: 0;
+    isolation: isolate;
+
+    &-player {
+        display: block;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0 !important;  // required: Wistia override
+        transform: scale(1.07);
+        transition: transform 0.7s var(--ease-spring);
+        will-change: transform;
+    }
+
+    &-player,
+    &-player iframe,
+    &-player video,
+    &-player * {
+        border-radius: 0 !important;  // required: deep Wistia border-radius kill
+    }
+
+    &:not(.locked):hover &-player { transform: scale(1.12); }
+    &:not(.locked) &-overlay      { cursor: pointer; }
+
+    &-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top,
+            rgba(5, 5, 5, 0.92) 0%,
+            rgba(5, 5, 5, 0.20) 45%,
+            transparent 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.75rem;
+    }
+
+    &-category {
+        font-size: var(--text-label-sm);
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.4rem;
+    }
+
+    &-title {
+        font-family: var(--display);
+        font-size: var(--text-short-title);
+        letter-spacing: 0.04em;
+        line-height: 1.35;
+        color: var(--white);
+    }
+
+    // ── Lock state ───────────────────────────
+    &.locked &-player {
+        filter: blur(12px);
+        transform: scale(1.06);
+        pointer-events: none;
+    }
+
+    &.locked &-overlay { z-index: 2; }
+
+    &-lock-overlay {
+        position: absolute;
+        inset: 0;
+        background: var(--color-overlay-medium);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.85rem;
+        z-index: 1;
+    }
+
+    &-lock-icon {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 30px;
+        height: 30px;
+        border: 1px solid var(--color-border-mid);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 13px;
+            height: 13px;
+            color: var(--white);
+        }
+    }
+
+    &-unlock {
+        font-size: var(--text-label-md);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--white);
+        font-family: var(--sans);
+    }
+
+    // Unlocked: hide lock overlay
+    &:not(.locked) .short-card-lock-overlay { display: none; }
+}
+
+// ── Shorts track ─────────────────────────────
+.shorts-track-wrap { overflow: hidden; }
+
+.shorts-track {
+    display: flex;
+    gap: var(--space-gap-xxs);
+    user-select: none;
+    will-change: transform;
+
+    &.dragging { cursor: grabbing; }
+}
+
+// ── Shorts navigation arrows ─────────────────
+.shorts-nav {
+    display: flex;
+    gap: var(--space-gap-micro);
+}
+
+.shorts-arrow {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: none;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-body-lg);
+    transition: border-color 0.25s, opacity 0.25s;
+
+    &.disabled {
+        opacity: 0.22;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &:not(.disabled):hover { border-color: var(--white); }
+}
+
+// ── Bento grid (legacy — films page) ─────────
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 300px 300px auto;
+    gap: var(--space-gap-xxs);
+    max-width: var(--max-w);
+    margin: 0 auto;
+}
+
+.bento-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--charcoal);
+    transition:
+        transform 0.65s var(--ease-spring),
+        box-shadow 0.65s var(--ease-spring),
+        z-index 0s;
+    will-change: transform;
+
+    &:hover {
+        transform: scale(1.025);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+        z-index: 2;
+    }
+
+    &.large  { grid-column: span 8; grid-row: span 2; }
+    &.tall   { grid-column: span 4; grid-row: span 2; }
+    &.wide   { grid-column: span 6; aspect-ratio: 16/9; }
+    &.square { grid-column: span 3; aspect-ratio: 1; }
+}
+
+.bento-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: all 0.8s var(--ease-spring);
+}
+
+.bento-item:hover .bento-img {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+.bento-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+        rgba(5, 5, 5, 0.95) 0%,
+        rgba(5, 5, 5, 0.20) 40%,
+        transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    transition: opacity 0.4s;
+}
+
+.bento-item.large .bento-overlay { padding: 3rem; }
+
+.bento-category {
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.bento-name {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+}
+
+.bento-item.large .bento-name { font-size: 2.5rem; }
+
+.bento-duration {
+    font-size: var(--text-body-xxs);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-top: 0.5rem;
+}
+
+.bento-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 70px;
+    height: 70px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.5s var(--ease-spring);
+
+    svg { width: 18px; height: 18px; margin-left: 3px; fill: var(--white); }
+}
+
+.bento-item:hover .bento-play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.bento-lock {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 32px;
+    height: 32px;
+    background: var(--color-overlay-black);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg { width: 14px; height: 14px; stroke: var(--stone); fill: none; }
+}

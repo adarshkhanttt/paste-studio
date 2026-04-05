@@ -1,0 +1,126 @@
+// ─────────────────────────────────────────────
+// BUTTONS & CTAs — all interactive link/button
+//   elements that aren't part of forms or nav
+// ─────────────────────────────────────────────
+
+// ── Shared outline CTA mixin ─────────────────
+%cta-outline {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: var(--text-body-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--white);
+    background: transparent;
+    border: 1px solid var(--color-border-cta);
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        color 0.35s ease;
+
+    &:hover {
+        background: var(--white);
+        border-color: var(--white);
+        color: var(--void);
+    }
+}
+
+// ── Films section CTA ────────────────────────
+.films-cta {
+    margin-top: var(--space-gap-xs);
+    text-align: center;
+}
+
+.films-explore-btn {
+    @extend %cta-outline;
+    padding: 1.1rem 4rem;
+    width: 100%;
+    text-align: center;
+    border-color: var(--color-border-mid);
+}
+
+// ── Shorts section CTA ───────────────────────
+.shorts-cta {
+    margin-top: var(--space-gap-xs);
+    text-align: center;
+}
+
+.shorts-explore-btn {
+    @extend %cta-outline;
+    display: inline-block;
+    width: 100%;
+    padding: 1.1rem 2rem;
+    text-align: center;
+    border-color: var(--color-border-mid);
+}
+
+// ── Be Featured CTA ──────────────────────────
+.featured-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-gap-xxs);
+    font-family: var(--sans);
+    font-size: var(--text-body-sm);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1.25rem 2.5rem;
+    background: var(--white);
+    color: var(--void);
+    text-decoration: none;
+    transition: all 0.4s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    svg { width: 14px; height: 14px; }
+}
+
+// ── Investors CTA ────────────────────────────
+.investors-cta {
+    @extend %cta-outline;
+    display: block;
+    width: 100%;
+    padding: 1.1rem;
+    text-align: center;
+    font-size: var(--text-body-xs);
+}
+
+// ── Partnerships CTA ─────────────────────────
+.partnerships-cta {
+    text-align: center;
+
+    &-btn {
+        @extend %cta-outline;
+        padding: 1.1rem 4rem;
+    }
+}
+
+// ── Library CTA ──────────────────────────────
+.library-cta {
+    display: block;
+    width: 100%;
+    padding: 1.15rem;
+    font-family: var(--sans);
+    font-size: var(--text-body-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    color: var(--white);
+    background: transparent;
+    border: 1px solid var(--color-border-strong);
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        color 0.35s ease;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--white);
+        border-color: var(--white);
+        color: var(--void);
+    }
+}

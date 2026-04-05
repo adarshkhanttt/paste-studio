@@ -1,0 +1,48 @@
+// ─────────────────────────────────────────────
+// TYPOGRAPHY — shared text patterns
+// Component-specific type lives in its partial.
+// ─────────────────────────────────────────────
+
+// ── Section labels (shared across sections) ──
+.section-label {
+    font-size: var(--text-label-md);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--ash);
+}
+
+// ── Stat block ───────────────────────────────
+.stat {
+    text-align: left;
+
+    &-number {
+        font-family: var(--display);
+        font-size: var(--text-stat-number);
+        line-height: 1;
+        color: var(--white);
+        letter-spacing: 0.02em;
+    }
+
+    &-label {
+        font-size: var(--text-body-xxs);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ash);
+        margin-top: 0.5rem;
+    }
+}
+
+// ── Statement section ─────────────────────────
+.statement-text {
+    font-family: var(--display);
+    font-size: var(--text-display-xxl);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    max-width: var(--max-w);
+    margin: 0 auto;
+
+    span {
+        -webkit-text-stroke: 1px var(--white);
+        color: transparent;
+    }
+}

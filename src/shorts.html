@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
+    <title>Pasted Studio — Shorts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Archivo:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./scss/main.scss">
+    <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        /* ══════════════════════════════════════════
+           SHORTS HERO — Two-column layout
+        ══════════════════════════════════════════ */
+        .shorts-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: var(--void);
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ── Left column — text ── */
+        .shorts-hero-left {
+            position: relative;
+            z-index: 2;
+            width: 42%;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 2rem 0 max(var(--gutter), calc((100vw - var(--max-w)) / 2));
+        }
+
+        .shorts-hero-title {
+            font-family: var(--display);
+            font-size: clamp(2rem, 4vw, 3.75rem);
+            color: var(--white);
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin: 0 0 1.75rem;
+        }
+
+        .shorts-hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-short {
+            display: inline-block;
+            padding: 0.85rem 1.75rem;
+            font-family: var(--sans);
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid var(--white);
+            transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+        }
+
+        .btn-short-filled {
+            background: var(--white);
+            color: var(--void);
+        }
+
+        .btn-short-filled:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .btn-short-outlined {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .btn-short-outlined:hover {
+            background: var(--white);
+            color: var(--void);
+        }
+
+        /* ── Right column — scrolling card columns ── */
+        .shorts-hero-right {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Gradient overlays — pointer-events: none so they don't block interaction */
+        .shorts-hero-right::before,
+        .shorts-hero-right::after {
+            content: '';
+            position: absolute;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Bottom gradient */
+        .shorts-hero-right::after {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, var(--void) 0%, transparent 60%);
+        }
+
+        /* Left gradient */
+        .shorts-hero-right::before {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 45%;
+            background: linear-gradient(to right, var(--void) 0%, transparent 100%);
+        }
+
+        /* Top gradient */
+        .shorts-hero-top-grad {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(to bottom, var(--void) 0%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Three-column flex track */
+        .shorts-hero-cols {
+            display: flex;
+            gap: 1.5rem;
+            height: 100%;
+            padding: 0 1.5rem 0 0;
+        }
+
+        /* Each scrolling column */
+        .shorts-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            will-change: transform;
+        }
+
+        /* Individual card */
+        .shorts-col-card {
+            flex-shrink: 0;
+            width: 100%;
+            border-radius: 0;
+            overflow: hidden;
+            aspect-ratio: 3 / 4;
+            filter: brightness(0.55);
+            transition: filter 0.4s ease;
+        }
+
+        .shorts-col-card:hover {
+            filter: brightness(0.8);
+            transition: filter 0.35s ease;
+        }
+
+        .shorts-col-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .shorts-hero {
+                flex-direction: column;
+                height: 100vh;
+            }
+
+            .shorts-hero-right {
+                order: -1;
+                width: 100%;
+                height: 65vh;
+                flex-shrink: 0;
+            }
+
+            .shorts-hero-left {
+                width: 100%;
+                flex: 1;
+                padding: 2rem var(--gutter);
+                justify-content: center;
+            }
+
+            .shorts-hero-title {
+                font-size: clamp(1.75rem, 9vw, 2.5rem);
+            }
+
+            /* 2-column ticker on mobile — hide 3rd column, remaining two expand */
+            #shortsCol3 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════
+         PRELOADER
+    ═══════════════════════════════════════════ -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-rule"></div>
+            <p class="preloader-label">A PASTED STUDIO PRODUCTION</p>
+            <h2 class="preloader-title">PASTED STUDIO</h2>
+            <p class="preloader-presents">PRESENTS</p>
+            <div class="preloader-rule"></div>
+        </div>
+    </div>
+
+    <!-- Film Grain -->
+    <div class="grain"></div>
+
+    <!-- ═══════════════════════════════════════════
+         NAVIGATION
+    ═══════════════════════════════════════════ -->
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <img src="./assets/images/logo.png" alt="Pasted" class="nav-logo-img">
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html#films">Films</a></li>
+            <li><a href="index.html#shorts">Shorts</a></li>
+            <li><a href="index.html#studio">Studio</a></li>
+            <li><a href="index.html#founders">Founders</a></li>
+            <li><a href="index.html#membership">Membership</a></li>
+        </ul>
+        <a href="index.html#partnerships" class="nav-contact">EXPLORE PARTNERSHIPS</a>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+        <button class="nav-mobile-close" aria-label="Close menu">
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-mobile-menu">
+            <li><a href="index.html#films">Films</a></li>
+            <li><a href="index.html#shorts">Shorts</a></li>
+            <li><a href="index.html#studio">Studio</a></li>
+            <li><a href="index.html#founders">Founders</a></li>
+            <li><a href="index.html#membership">Membership</a></li>
+            <li><a href="index.html#partnerships">Explore Partnerships</a></li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="shorts-hero">
+
+        <!-- Left — text -->
+        <div class="shorts-hero-left">
+            <h1 class="shorts-hero-title">DR. MARSHALL<br>HANSON</h1>
+            <div class="shorts-hero-btns">
+                <a href="#membership" class="btn-short btn-short-filled">UNLOCK FULL ACCESS</a>
+                <a href="#archive" class="btn-short btn-short-outlined">WATCH SHORTS</a>
+            </div>
+        </div>
+
+        <!-- Right — three scrolling card columns -->
+        <div class="shorts-hero-right">
+
+            <!-- Top gradient -->
+            <div class="shorts-hero-top-grad"></div>
+
+            <div class="shorts-hero-cols">
+
+                <!-- Column 1 -->
+                <div class="shorts-col" id="shortsCol1">
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.04.56%20AM8.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.04.57%20AM.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.04.57%20AM1.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.04.57%20AM28.jpeg" alt=""></div>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="shorts-col" id="shortsCol2">
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.04.57%20AM7.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.04.57%20AM9.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.06.34%20AM1.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.06.34%20AM3.jpeg" alt=""></div>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="shorts-col" id="shortsCol3">
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.06.34%20AM4.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.06.34%20AM5.jpeg" alt=""></div>
+                    <div class="shorts-col-card"><img src="./assets/images/shorts-ticker/WhatsApp%20Image%202026-04-01%20at%209.06.34%20AM6.jpeg" alt=""></div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         MORE FROM COLLECTION
+    ═══════════════════════════════════════════ -->
+    <section class="shorts" id="archive">
+        <div class="shorts-inner">
+
+            <div class="shorts-header reveal">
+                <h2 class="shorts-title">MORE FROM COLLECTION</h2>
+                <div class="shorts-nav">
+                    <button class="shorts-arrow shorts-arrow-prev disabled" id="archivePrev" aria-label="Previous">&#8592;</button>
+                    <button class="shorts-arrow shorts-arrow-next" id="archiveNext" aria-label="Next">&#8594;</button>
+                </div>
+            </div>
+
+            <div class="shorts-track-wrap">
+                <div class="shorts-track" id="archiveTrack">
+
+                    <!-- Card 1 — locked -->
+                    <article class="short-card locked" data-media-id="ea4bpi99jb">
+                        <wistia-player media-id="ea4bpi99jb" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 — locked -->
+                    <article class="short-card locked" data-media-id="d2frf6dfar">
+                        <wistia-player media-id="d2frf6dfar" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 — locked -->
+                    <article class="short-card locked" data-media-id="b3ch9wkwaf">
+                        <wistia-player media-id="b3ch9wkwaf" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 — locked -->
+                    <article class="short-card locked" data-media-id="qb4s0ch4sg">
+                        <wistia-player media-id="qb4s0ch4sg" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 5 — Serena Wong -->
+                    <article class="short-card locked" data-media-id="snlwrrz0v2">
+                        <wistia-player media-id="snlwrrz0v2" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Founder Story</span>
+                            <h3 class="short-card-title">SERENA WONG</h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 6 — Solventum x Pasted Testimonials -->
+                    <article class="short-card locked" data-media-id="vt0w2t8mpm">
+                        <wistia-player media-id="vt0w2t8mpm" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Testimonial</span>
+                            <h3 class="short-card-title">SOLVENTUM X PASTED</h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 7 — Michael Allen -->
+                    <article class="short-card locked" data-media-id="lvp712fvc4">
+                        <wistia-player media-id="lvp712fvc4" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Founder Story</span>
+                            <h3 class="short-card-title">MICHAEL ALLEN</h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 8 — Zac -->
+                    <article class="short-card locked" data-media-id="1o5ko289aj">
+                        <wistia-player media-id="1o5ko289aj" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Founder Story</span>
+                            <h3 class="short-card-title">ZAC</h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 9 — Tim Hoeschen -->
+                    <article class="short-card locked" data-media-id="xp2wrqxkiw">
+                        <wistia-player media-id="xp2wrqxkiw" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Founder Story</span>
+                            <h3 class="short-card-title">TIM HOESCHEN</h3>
+                        </div>
+                    </article>
+
+                </div><!-- /.shorts-track -->
+            </div><!-- /.shorts-track-wrap -->
+
+        </div><!-- /.shorts-inner -->
+    </section>
+
+    <!-- Archive player overlay -->
+    <div class="hero-player-overlay" id="archivePlayerOverlay" aria-hidden="true">
+        <button class="hero-player-close" id="archivePlayerClose" aria-label="Close player">&#x2715;</button>
+        <div class="hero-player-letterbox"></div>
+        <div class="hero-player-inner" id="archivePlayerInner"></div>
+        <div class="hero-player-letterbox"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         LIBRARY
+    ═══════════════════════════════════════════ -->
+    <section class="library" id="membership">
+        <div class="library-video-col">
+            <div class="library-video-wrap">
+                <iframe src="https://fast.wistia.net/embed/iframe/8ogqkyozsk?autoPlay=true&silentAutoPlay=true&muted=true&endVideoBehavior=loop&fitStrategy=cover&controlsVisibleOnLoad=false&playbar=false&volumeControl=false&fullscreenButton=false&playButton=false&settingsControl=false&smallPlayButton=false&videoFoam=false&chromeless=true" allow="autoplay" allowtransparency="true" class="library-bg-iframe" scrolling="no" frameborder="0"></iframe>
+            </div>
+            <div class="library-video-gradient"></div>
+            <div class="library-video-text">
+                <h2 class="library-heading reveal">THE LIBRARY</h2>
+                <p class="library-subtext reveal">A PRIVATE FILM LIBRARY FOR DENTISTS SHAPING THE FUTURE OF THE
+                    PROFESSION. FULL ACCESS. EARLY RELEASES. PRIVATE DROPS.</p>
+            </div>
+        </div>
+        <div class="library-pricing-col reveal">
+            <span class="library-label">FULL MEMBERSHIP</span>
+            <ul class="library-features">
+                <li><span class="library-bullet">•</span>ACCESS ALL FILMS</li>
+                <li><span class="library-bullet">•</span>EARLY RELEASES</li>
+                <li><span class="library-bullet">•</span>PRIVATE CONTENT DROPS</li>
+                <li><span class="library-bullet">•</span>EVENT INVITATIONS</li>
+                <li><span class="library-bullet">•</span>CLINICAL INSIGHT</li>
+                <li><span class="library-bullet">•</span>80 HOURS VERIFIABLE CE</li>
+                <li><span class="library-bullet">•</span>BEGIN YOUR PATHWAY TO PASTED PROFESSIONAL</li>
+            </ul>
+            <a href="#" class="library-cta" data-modal="membership">REQUEST PRIVATE ACCESS</a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PARTNER WITH PASTED
+    ═══════════════════════════════════════════ -->
+    <section class="partnerships" id="partnerships">
+        <div class="partnerships-inner">
+            <div class="partnerships-header reveal">
+                <h2 class="partnerships-title">PARTNER WITH PASTED</h2>
+                <p class="partnerships-text">ALIGN YOUR BRAND WITH THE CULTURAL AUTHORITY IN DENTISTRY. STRATEGIC
+                    PARTNERSHIPS FOR COMPANIES WHO UNDERSTAND THE VALUE OF PREMIUM POSITIONING.</p>
+            </div>
+            <div class="partnerships-divider"></div>
+            <div class="partnerships-grid">
+                <div class="partnership-col reveal">
+                    <h3 class="partnership-name">BRAND INTEGRATION</h3>
+                    <p class="partnership-desc">SEAMLESS PRODUCT PLACEMENT WITHIN OUR DOCUMENTARY CONTENT</p>
+                </div>
+                <div class="partnership-col reveal">
+                    <h3 class="partnership-name">EVENT SPONSORSHIP</h3>
+                    <p class="partnership-desc">EXCLUSIVE ACCESS TO PASTED PRESENTS AND PRIVATE SCREENINGS</p>
+                </div>
+                <div class="partnership-col reveal">
+                    <h3 class="partnership-name">CO-PRODUCTION</h3>
+                    <p class="partnership-desc">JOINT CONTENT CREATION WITH THE PASTED STUDIO TEAM</p>
+                </div>
+            </div>
+            <div class="partnerships-divider"></div>
+            <div class="partnerships-cta reveal">
+                <a href="#" class="partnerships-cta-btn" data-modal="partnerships">DISCUSS PARTNERSHIP</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand footer-credit" data-delay="0">
+                <img src="./assets/images/pasted-footer-logo.svg" alt="Pasted Studio" class="footer-logo">
+                <p class="footer-tagline">A PRODUCTION STUDIO DOCUMENTING THE FUTURE OF DENTISTRY.</p>
+            </div>
+            <div class="footer-nav">
+                <div class="footer-col footer-credit" data-delay="200">
+                    <h4 class="footer-col-label">PLATFORM</h4>
+                    <ul>
+                        <li><a href="index.html#films">Films</a></li>
+                        <li><a href="#membership">Membership</a></li>
+                        <li><a href="#partnerships">Work With Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-credit" data-delay="450">
+                    <h4 class="footer-col-label">STUDIO</h4>
+                    <ul>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-credit" data-delay="700">
+                    <h4 class="footer-col-label">CONTACT</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener">YouTube</a></li>
+                        <li><a href="mailto:alan@getpasted.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-divider footer-credit" data-delay="900"></div>
+        <div class="footer-bottom footer-credit" data-delay="1050">
+            <p class="footer-legal">© 2026. All rights reserved.</p>
+            <span class="footer-coords">54°35'N &nbsp;&nbsp; 5°56'W</span>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT FORM MODAL (Library + Partnerships)
+    ═══════════════════════════════════════════ -->
+    <div class="modal" id="contact-modal">
+        <button class="modal-close" id="contact-modal-close">×</button>
+        <div class="modal-content contact-form-content">
+            <h3 id="contact-modal-title">GET IN TOUCH</h3>
+            <p id="contact-modal-sub">THE PASTED LIBRARY IS A CURATED ENVIRONMENT FOR THE PROFESSION'S MOST AMBITIOUS VOICES. TO MAINTAIN THE CALIBER OF OUR COMMUNITY, WE PROCESS NEW MEMBER INTAKES IN LIMITED MONTHLY COHORTS.</p>
+            <form id="contact-form" autocomplete="off">
+                <input type="text" id="cf-first" placeholder="First Name" required>
+                <input type="text" id="cf-last" placeholder="Last Name" required>
+                <input type="email" id="cf-email" placeholder="Email" required>
+                <input type="tel" id="cf-mobile" placeholder="Mobile Number">
+                <div class="cf-select-wrap">
+                    <select id="cf-country">
+                        <option value="" disabled selected>Country</option>
+                        <option>United States</option><option>United Kingdom</option>
+                        <option>Canada</option><option>Australia</option>
+                        <option>Germany</option><option>France</option>
+                        <option>Netherlands</option><option>United Arab Emirates</option>
+                        <option>Saudi Arabia</option><option>Singapore</option>
+                        <option>India</option><option>Ireland</option>
+                        <option>New Zealand</option><option>South Africa</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="cf-select-wrap">
+                    <select id="cf-role">
+                        <option value="" disabled selected>Profession / Role</option>
+                        <option>Associate Dentist</option><option>Practice Owner</option>
+                        <option>Brand</option><option>Other</option>
+                    </select>
+                </div>
+                <div class="cf-select-wrap">
+                    <select id="cf-intent">
+                        <option value="" disabled selected>Intent</option>
+                        <option value="Get better cases">Get Better Cases</option>
+                        <option value="Build a personal brand">Build a Personal Brand</option>
+                        <option value="Grow my practice">Grow My Practice</option>
+                        <option value="Just exploring">Just Exploring</option>
+                    </select>
+                </div>
+                <input type="text" id="cf-instagram" placeholder="Instagram / Company">
+                <input type="hidden" id="cf-source" value="">
+                <button type="submit" id="cf-submit">SUBMIT</button>
+                <p id="cf-error-msg" class="cf-error-msg" hidden>Something went wrong. Please try again.</p>
+            </form>
+            <div id="cf-success" class="cf-success" hidden>
+                <h3>ACCESS UNLOCKED</h3>
+                <p>THANK YOU. WE'LL BE IN TOUCH SHORTLY.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         SCRIPTS
+    ═══════════════════════════════════════════ -->
+    <script src="./js/modules/preloader.js"></script>
+    <script src="./js/modules/smooth-scroll.js"></script>
+    <script src="./js/modules/nav.js"></script>
+    <script src="./js/modules/reveal.js"></script>
+    <script src="./js/modules/unlock.js"></script>
+    <script src="./js/modules/hubspot.js"></script>
+    <script>
+        // ── Footer: film credits roll ──────────────────────────────
+        (function () {
+            var footer = document.querySelector('footer');
+            if (!footer) return;
+            var credits = footer.querySelectorAll('.footer-credit');
+            var labels  = footer.querySelectorAll('.footer-col-label');
+            var fired   = false;
+            var observer = new IntersectionObserver(function (entries) {
+                if (fired || !entries[0].isIntersecting) return;
+                fired = true;
+                credits.forEach(function (el) {
+                    var delay = parseInt(el.dataset.delay || 0, 10);
+                    setTimeout(function () { el.classList.add('credits-visible'); }, delay);
+                });
+                labels.forEach(function (label, i) {
+                    setTimeout(function () { label.classList.add('label-revealed'); }, 250 + i * 250);
+                });
+                observer.disconnect();
+            }, { threshold: 0.15 });
+            observer.observe(footer);
+        })();
+
+        // ── Contact form modal (Library + Partnerships) ───────────
+        (function () {
+            var cm      = document.getElementById('contact-modal');
+            var cmClose = document.getElementById('contact-modal-close');
+            var cmTitle = document.getElementById('contact-modal-title');
+            var cmSub   = document.getElementById('contact-modal-sub');
+            var cmForm  = document.getElementById('contact-form');
+
+            var titles = {
+                membership:   'REQUEST PRIVATE ACCESS',
+                partnerships: 'DISCUSS PARTNERSHIP'
+            };
+            var subs = {
+                membership:   'FILL IN YOUR DETAILS AND WE\'LL REVIEW YOUR APPLICATION PERSONALLY.',
+                partnerships: 'TELL US ABOUT YOURSELF AND WE\'LL BE IN TOUCH TO EXPLORE THE RIGHT FIT.'
+            };
+
+            var sources = {
+                membership:   'Library',
+                partnerships: 'Partnership'
+            };
+
+            function openCM(type) {
+                if (cm.classList.contains('active')) return;
+                if (cmTitle) { cmTitle.textContent = titles[type] || 'GET IN TOUCH'; cmTitle.hidden = false; }
+                if (cmSub)   { cmSub.textContent   = subs[type]   || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.'; cmSub.hidden = false; }
+                var sourceInput = document.getElementById('cf-source');
+                if (sourceInput) sourceInput.value = sources[type] || 'Unknown';
+                cm.classList.add('active');
+            }
+
+            function closeCM() {
+                cm.classList.remove('active');
+                if (cmForm) { cmForm.reset(); cmForm.hidden = false; cmForm.querySelectorAll('.error').forEach(function (el) { el.classList.remove('error'); }); }
+                if (cmTitle) cmTitle.hidden = false;
+                if (cmSub)   cmSub.hidden   = false;
+                var s = document.getElementById('cf-success'); if (s) s.hidden = true;
+                var e = document.getElementById('cf-error-msg'); if (e) e.hidden = true;
+                var b = document.getElementById('cf-submit'); if (b) { b.disabled = false; b.textContent = 'SUBMIT'; }
+            }
+
+            document.querySelectorAll('[data-modal="membership"], [data-modal="partnerships"]').forEach(function (t) {
+                t.addEventListener('click', function (e) { e.preventDefault(); openCM(t.dataset.modal); });
+            });
+            if (cmClose) cmClose.addEventListener('click', closeCM);
+            cm.addEventListener('click', function (e) { if (e.target === cm) closeCM(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && cm.classList.contains('active')) closeCM(); });
+        })();
+    </script>
+
+    <script>
+        // ── Archive carousel ──────────────────────────────────────
+        (function () {
+            var track   = document.getElementById('archiveTrack');
+            var prevBtn = document.getElementById('archivePrev');
+            var nextBtn = document.getElementById('archiveNext');
+            if (!track) return;
+
+            var offset = 0;
+
+            function cardStep() {
+                var card = track.querySelector('.short-card');
+                if (!card) return 260;
+                return card.offsetWidth + (parseFloat(getComputedStyle(track).gap) || 16);
+            }
+            function maxOffset() {
+                return Math.max(0, track.scrollWidth - track.parentElement.offsetWidth);
+            }
+            function applyOffset(val, animate) {
+                offset = Math.max(0, Math.min(val, maxOffset()));
+                track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.16,1,0.3,1)' : 'none';
+                track.style.transform  = 'translateX(' + (-offset) + 'px)';
+                prevBtn.classList.toggle('disabled', offset <= 0);
+                nextBtn.classList.toggle('disabled', offset >= maxOffset());
+            }
+
+            prevBtn.addEventListener('click', function () {
+                if (!prevBtn.classList.contains('disabled')) applyOffset(offset - cardStep(), true);
+            });
+            nextBtn.addEventListener('click', function () {
+                if (!nextBtn.classList.contains('disabled')) applyOffset(offset + cardStep(), true);
+            });
+
+            var dragging = false, didDrag = false, dragStartX = 0, dragStartOffset = 0;
+            var DRAG_THRESHOLD = 8;
+            track.addEventListener('mousedown', function (e) {
+                dragging = true; didDrag = false; dragStartX = e.clientX; dragStartOffset = offset;
+            });
+            window.addEventListener('mousemove', function (e) {
+                if (!dragging) return;
+                var dx = dragStartX - e.clientX;
+                if (!didDrag && Math.abs(dx) < DRAG_THRESHOLD) return;
+                didDrag = true;
+                track.classList.add('dragging');
+                applyOffset(dragStartOffset + dx, false);
+            });
+            window.addEventListener('mouseup', function () {
+                if (!dragging) return;
+                dragging = false; track.classList.remove('dragging');
+            });
+
+            var touchStartX = 0, touchOffset = 0;
+            track.addEventListener('touchstart', function (e) {
+                touchStartX = e.touches[0].clientX; touchOffset = offset;
+            }, { passive: true });
+            track.addEventListener('touchmove', function (e) {
+                applyOffset(touchOffset + (touchStartX - e.touches[0].clientX), false);
+            }, { passive: true });
+            track.addEventListener('touchend', function (e) {
+                var dx = touchStartX - e.changedTouches[0].clientX;
+                applyOffset(Math.round((touchOffset + dx) / cardStep()) * cardStep(), true);
+            });
+
+            applyOffset(0, false);
+        })();
+
+        // ── Archive: oEmbed title fetch ───────────────────────────
+        document.querySelectorAll('#archiveTrack .short-card').forEach(function (card) {
+            var player  = card.querySelector('wistia-player');
+            var titleEl = card.querySelector('.short-card-title');
+            if (!player || !titleEl) return;
+            var mediaId = player.getAttribute('media-id');
+            if (!mediaId) return;
+            fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2F' + mediaId)
+                .then(function (r) { return r.json(); })
+                .then(function (data) { if (data.title) titleEl.textContent = data.title; })
+                .catch(function () {});
+        });
+
+        // ── Archive: click → open player ─────────────────────────
+        (function () {
+            var overlay  = document.getElementById('archivePlayerOverlay');
+            var inner    = document.getElementById('archivePlayerInner');
+            var closeBtn = document.getElementById('archivePlayerClose');
+            if (!overlay) return;
+
+            function openArchive(mediaId) {
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                var iframe = document.createElement('iframe');
+                iframe.src = 'https://fast.wistia.net/embed/iframe/' + mediaId + '?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false';
+                iframe.setAttribute('allowtransparency', 'true');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('allow', 'autoplay; fullscreen');
+                iframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;inset:0;';
+                inner.appendChild(iframe);
+            }
+            function closeArchive() {
+                overlay.classList.remove('active');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                var iframe = inner.querySelector('iframe');
+                if (iframe) iframe.remove();
+            }
+
+            document.querySelectorAll('#archiveTrack .short-card[data-media-id]').forEach(function (card) {
+                card.addEventListener('click', function () {
+                    if (card.closest('#archiveTrack').classList.contains('dragging')) return;
+                    openArchive(card.dataset.mediaId);
+                });
+            });
+
+            closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeArchive(); });
+            overlay.addEventListener('click', function (e) { if (e.target === overlay) closeArchive(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeArchive(); });
+        })();
+    </script>
+
+    <!-- ═══════════════════════════════════════════
+         GSAP TICKER (kept last so DOM is ready)
+    ═══════════════════════════════════════════ -->
+    <script>
+        // ── Scrolling card columns — GSAP infinite vertical ticker ──
+        // Run after full page load so images have dimensions before measuring
+        window.addEventListener('load', function () {
+            var cols = [
+                { el: document.getElementById('shortsCol1'), speed: 30, reverse: false },
+                { el: document.getElementById('shortsCol2'), speed: 22, reverse: true  },
+                { el: document.getElementById('shortsCol3'), speed: 26, reverse: false }
+            ];
+
+            cols.forEach(function (col) {
+                if (!col.el) return;
+
+                // Duplicate children for seamless infinite loop
+                var original = col.el.innerHTML;
+                col.el.innerHTML = original + original;
+
+                // For reverse cols: set initial position before first paint
+                if (col.reverse) {
+                    gsap.set(col.el, { y: '-50%' });
+                }
+
+                // RAF to let browser apply the set transform before measuring
+                requestAnimationFrame(function () {
+                    var halfHeight = col.el.scrollHeight / 2;
+                    if (!halfHeight) return;
+                    var duration = halfHeight / col.speed;
+
+                    if (col.reverse) {
+                        gsap.fromTo(col.el,
+                            { y: -halfHeight },
+                            { y: 0, duration: duration, ease: 'none', repeat: -1 }
+                        );
+                    } else {
+                        gsap.to(col.el, {
+                            y: -halfHeight,
+                            duration: duration,
+                            ease: 'none',
+                            repeat: -1
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+// ─────────────────────────────────────────────
+// NAVBAR — desktop nav, hamburger, mobile overlay
+// ─────────────────────────────────────────────
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.25rem max(var(--gutter), calc((100vw - var(--max-w)) / 2));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-overlay-nav);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border-faint);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+
+    &-img {
+        height: 24px;
+        width: auto;
+    }
+}
+
+.nav-menu {
+    display: flex;
+    gap: var(--space-gap-sm);
+    list-style: none;
+
+    a {
+        color: var(--white);
+        text-decoration: none;
+        font-size: var(--text-body-xs);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-weight: 400;
+        opacity: 0.6;
+        transition: opacity var(--dur-fast);
+
+        &:hover { opacity: 1; }
+    }
+}
+
+.nav-contact {
+    font-size: var(--text-body-xs);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 1;
+    transition: opacity var(--dur-fast);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+
+    &:hover { opacity: 0.75; }
+}
+
+// ── Hamburger button ────────────────────────
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 1100;
+    position: relative;
+
+    span {
+        display: block;
+        width: 22px;
+        height: 1px;
+        background: var(--white);
+        transition: all 0.45s var(--ease-spring);
+        transform-origin: center;
+    }
+
+    &.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    &.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    &.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+}
+
+// ── Mobile overlay ────────────────────────
+.nav-mobile {
+    position: fixed;
+    inset: 0;
+    background: var(--void);
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: max(4.5rem, 12vh) 2rem max(2.5rem, 6vh);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-mid) var(--ease-spring);
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    &-menu {
+        flex: 1;
+        list-style: none;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--space-gap-xs);
+        width: 100%;
+
+        a {
+            font-family: var(--display);
+            font-size: var(--text-mobile-nav);
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            opacity: 0;
+            transform: translateY(28px);
+            display: block;
+            transition:
+                opacity var(--dur-mid) var(--ease-spring),
+                transform var(--dur-mid) var(--ease-spring),
+                color var(--dur-fast);
+
+            &:hover { color: var(--stone); }
+        }
+    }
+
+    &.active &-menu a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    // Staggered entrance delays
+    &.active &-menu li:nth-child(1) a { transition-delay: 0.08s; }
+    &.active &-menu li:nth-child(2) a { transition-delay: 0.13s; }
+    &.active &-menu li:nth-child(3) a { transition-delay: 0.18s; }
+    &.active &-menu li:nth-child(4) a { transition-delay: 0.23s; }
+    &.active &-menu li:nth-child(5) a { transition-delay: 0.28s; }
+    &.active &-menu li:nth-child(6) a { transition-delay: 0.33s; }
+
+    &-close {
+        order: 1;
+        flex-shrink: 0;
+        width: 52px;
+        height: 52px;
+        background: none;
+        border: 1px solid var(--color-white-dim);
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: border-color var(--dur-fast);
+
+        &:hover { border-color: rgba(250, 248, 245, 0.7); }
+
+        span {
+            position: absolute;
+            width: 18px;
+            height: 1px;
+            background: var(--white);
+            display: block;
+            transition: background var(--dur-fast);
+
+            &:nth-child(1) { transform: rotate(45deg); }
+            &:nth-child(2) { transform: rotate(-45deg); }
+        }
+
+        &:hover span { background: var(--stone); }
+    }
+}

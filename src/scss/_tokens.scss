@@ -1,0 +1,106 @@
+// ─────────────────────────────────────────────
+// DESIGN TOKENS
+// Every value in this file maps 1:1 to something
+// already used in the project. Nothing invented.
+// ─────────────────────────────────────────────
+
+:root {
+    // ── Palette ─────────────────────────────
+    --void:        #050505;
+    --black:       #0a0a0a;
+    --dark:        #111110;
+    --charcoal:    #1a1918;
+    --warm-dark:   #252320;
+    --stone:       #a09890;
+    --ash:         #6b665d;
+    --cream:       #f0ebe3;
+    --white:       #faf8f5;
+    --accent:      #e8a45c;
+    --color-warm-bg:  #1E1C1C;   // scroll-ticker bg, investor-stat bg, founder role bg
+    --color-error:    #e05252;   // form validation error
+
+    // ── Overlays ────────────────────────────
+    --color-overlay-nav:    rgba(5, 5, 5, 0.60);  // nav background
+    --color-overlay-modal:  rgba(5, 5, 5, 0.95);  // modal backdrop
+    --color-overlay-dark:   rgba(5, 5, 5, 0.45);  // locked film card
+    --color-overlay-medium: rgba(5, 5, 5, 0.40);  // locked short card
+    --color-overlay-dim:    rgba(0, 0, 0, 0.70);  // studio inactive strip
+    --color-overlay-black:  rgba(0, 0, 0, 0.50);  // bento lock
+
+    // ── Borders ─────────────────────────────
+    --color-border-faint:   rgba(255, 255, 255, 0.06);  // nav bottom, grid dividers
+    --color-border-subtle:  rgba(255, 255, 255, 0.08);  // stat dividers, partnership divider
+    --color-border-light:   rgba(255, 255, 255, 0.15);  // hero meta, founder quote
+    --color-border-mid:     rgba(255, 255, 255, 0.25);  // lock icons, explore btns
+    --color-border-strong:  rgba(255, 255, 255, 0.40);  // library cta
+    --color-border-cta:     rgba(255, 255, 255, 0.35);  // investors / partnerships cta
+    --color-border-input:   rgba(255, 255, 255, 0.10);  // form inputs
+    --color-border-input-focus: rgba(255, 255, 255, 0.30);
+
+    // ── Text alphas ─────────────────────────
+    --color-white-muted:    rgba(255, 255, 255, 0.50);   // library subtext
+    --color-white-dim:      rgba(250, 248, 245, 0.30);   // mobile close border
+    --color-white-faded:    rgba(255, 255, 255, 0.40);   // footer links
+    --color-white-role:     rgba(255, 255, 255, 0.55);   // founder role label
+    --color-city-inactive:  #666;                         // inactive studio city
+
+    // ── Typography ──────────────────────────
+    --display: 'Special Gothic Expanded One', Impact, sans-serif;
+    --sans:    'Archivo', system-ui, sans-serif;
+    --serif:   'Cormorant Garamond', Georgia, serif;
+
+    // ── Type scale ──────────────────────────
+    --text-hero-ticker:   clamp(4rem, 9vw, 11rem);
+    --text-display-xl:    clamp(3rem, 6vw, 5rem);       // intro-title, bento-title
+    --text-display-lg:    clamp(3rem, 7vw, 6rem);       // featured-cta-title
+    --text-display-xxl:   clamp(4rem, 10vw, 9rem);      // statement
+    --text-section-title: clamp(1.5rem, 2.5vw, 2.25rem); // all section headings
+    --text-card-title:    clamp(1rem, 1.6vw, 1.5rem);
+    --text-card-title-sm: clamp(0.7rem, 1.8vw, 1.1rem);
+    --text-short-title:   clamp(0.85rem, 1.3vw, 1.1rem);
+    --text-stat-number:   clamp(3rem, 4.5vw, 5rem);
+    --text-investor-stat: clamp(2.25rem, 4.5vw, 4rem);
+    --text-investor-label: clamp(1.5rem, 3vw, 2.75rem);
+    --text-library-price: clamp(2.5rem, 4vw, 4rem);
+    --text-preloader:     clamp(2.5rem, 7vw, 5.5rem);
+    --text-partnership-name: clamp(1rem, 1.5vw, 1.35rem);
+    --text-founder-name:  clamp(1rem, 1.6vw, 1.35rem);
+    --text-mobile-nav:    clamp(2.2rem, 9vw, 4.5rem);
+    --text-scroll-ticker: clamp(2rem, 5vw, 4.5rem);
+    --text-cf-title:      clamp(1.5rem, 3vw, 2.25rem);
+
+    --text-body-lg:   0.85rem;
+    --text-body-md:   0.75rem;
+    --text-body-sm:   0.70rem;
+    --text-body-xs:   0.65rem;
+    --text-body-xxs:  0.60rem;
+    --text-label-md:  0.55rem;
+    --text-label-sm:  0.50rem;
+    --text-label-xs:  0.45rem;
+
+    // ── Spacing ─────────────────────────────
+    --space-section:    10rem;   // large section padding
+    --space-section-md:  6rem;   // medium section padding
+    --space-section-sm:  4rem;   // small section padding
+    --space-gap-xl:      8rem;   // intro grid gap
+    --space-gap-lg:      6rem;   // studio grid gap
+    --space-gap-md:      4rem;   // hero-meta, intro-stats
+    --space-gap-sm:      3rem;   // nav menu, bento-header margin
+    --space-gap-xs:      2rem;   // component-level
+    --space-gap-xxs:     1rem;   // card gap, fine spacing
+    --space-gap-micro: 0.5rem;   // very small
+
+    // ── Easings ─────────────────────────────
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);  // primary — most animations
+    --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);  // slot machine counter
+
+    // ── Durations ───────────────────────────
+    --dur-fast:  0.3s;
+    --dur-mid:   0.55s;
+    --dur-slow:  0.9s;
+    --dur-long:  1.2s;
+
+    // ── Layout ──────────────────────────────
+    --max-w:  1400px;
+    --gutter: 4rem;
+}

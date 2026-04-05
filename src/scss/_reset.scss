@@ -1,0 +1,24 @@
+// ─────────────────────────────────────────────
+// RESET & BASE
+// ─────────────────────────────────────────────
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: auto; // overridden by js/modules/smooth-scroll.js
+}
+
+body {
+    font-family: var(--sans);
+    background: var(--void);
+    color: var(--white);
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
