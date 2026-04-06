@@ -17,7 +17,7 @@ export default defineConfig({
     }),
     // Routes auto-discovered from rollupOptions.input; 404 excluded from sitemap
     sitemap({
-      hostname: 'https://pastedstudio.com',
+      hostname: 'https://pastedseries.com',
       exclude: ['/404'],
       readable: true,
     }),
