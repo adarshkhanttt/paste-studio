@@ -692,6 +692,8 @@
 
 .partnership-col {
     padding: var(--space-gap-sm);
+    display: flex;
+    flex-direction: column;
 
     &:not(:last-child) { border-right: 1px solid var(--color-border-subtle); }
 }
@@ -711,6 +713,29 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     line-height: 2;
+}
+
+.partnership-btn {
+    display: block;
+    width: 100%;
+    padding: 1.1rem;
+    margin-top: 2.5rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-family: var(--sans);
+    font-size: var(--text-body-xs);
+    color: var(--white);
+    background: transparent;
+    border: 1px solid var(--color-border-mid);
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+
+    &:hover {
+        background: var(--white);
+        border-color: var(--white);
+        color: var(--void);
+    }
 }
 
 // ── Scroll ticker ─────────────────────────────
