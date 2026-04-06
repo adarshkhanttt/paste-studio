@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
         <loc>
-            https://pastedstudio.com/film
+            https://pastedseries.com/film
         </loc>
         <lastmod>
-            2026-04-06T17:04:41.926Z
+            2026-04-06T17:07:54.375Z
         </lastmod>
         <changefreq>
             daily
@@ -16,10 +16,10 @@
     </url>
     <url>
         <loc>
-            https://pastedstudio.com/
+            https://pastedseries.com/
         </loc>
         <lastmod>
-            2026-04-06T17:04:41.926Z
+            2026-04-06T17:07:54.375Z
         </lastmod>
         <changefreq>
             daily
@@ -30,10 +30,10 @@
     </url>
     <url>
         <loc>
-            https://pastedstudio.com/shorts
+            https://pastedseries.com/shorts
         </loc>
         <lastmod>
-            2026-04-06T17:04:41.926Z
+            2026-04-06T17:07:54.375Z
         </lastmod>
         <changefreq>
             daily
