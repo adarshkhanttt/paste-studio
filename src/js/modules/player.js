@@ -91,34 +91,66 @@ export function initTrailerPlayer() {
     if (openBtn) openBtn.addEventListener('click', () => player.open('66o4d2abaa'));
 }
 
-// ── Click Wistia's fullscreen button inside a specific overlay container.
-//    Targets innerEl (e.g. #shortsPlayerInner) directly — avoids matching
-//    the decorative card thumbnail players that share the same media-id
-//    but have fullscreen-button="false".
+// ── Trigger Wistia fullscreen inside a specific overlay container.
+//    Targets innerEl directly to avoid matching decorative card players.
+//    Tries three methods in order:
+//    1. Click the Wistia fullscreen button (desktop + Android)
+//    2. Dispatch TouchEvent on the button (mobile Safari click quirks)
+//    3. video.webkitEnterFullscreen() — iOS Safari native path
 function wistiaFullscreen(innerEl) {
-    function getShadow(wp) {
-        return wp.__shadow || wp.shadowRoot || null;
+    function getShadow(el) {
+        return el.__shadow || el.shadowRoot || null;
     }
 
-    function findBtn(root) {
-        const btn = root.querySelector('button[aria-label="Fullscreen"]');
-        if (btn) return btn;
+    function findInRoot(root, selector) {
+        const found = root.querySelector(selector);
+        if (found) return found;
         for (const el of root.querySelectorAll('*')) {
-            const sr = el.__shadow || el.shadowRoot;
-            if (sr) { const b = findBtn(sr); if (b) return b; }
+            const sr = getShadow(el);
+            if (sr) { const f = findInRoot(sr, selector); if (f) return f; }
         }
         return null;
     }
 
+    // Wistia marks the fullscreen control with data-handle and aria-label
+    const BTN_SEL   = 'button[aria-label="Fullscreen"], [data-handle="fullscreenControl"] button';
+    const VIDEO_SEL = 'video';
+
     let ticks = 0;
     function poll() {
         ticks++;
-        if (ticks > 300) return; // ~10 s timeout
+        if (ticks > 300) return;
+
         const wp     = innerEl.querySelector('wistia-player');
         const shadow = wp && getShadow(wp);
-        const btn    = shadow && findBtn(shadow);
-        if (btn) { btn.click(); }
-        else     { requestAnimationFrame(poll); }
+        if (!shadow) { requestAnimationFrame(poll); return; }
+
+        const btn = findInRoot(shadow, BTN_SEL);
+        if (btn) {
+            // Method 1: standard click (desktop / Android Chrome)
+            btn.click();
+            // Method 2: touch events (mobile Safari)
+            try {
+                btn.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, cancelable: true }));
+                btn.dispatchEvent(new TouchEvent('touchend',   { bubbles: true, cancelable: true }));
+            } catch (_) {}
+            return;
+        }
+
+        // Method 3: iOS native video fullscreen via webkitEnterFullscreen
+        const video = findInRoot(shadow, VIDEO_SEL);
+        if (video) {
+            try {
+                if (typeof video.webkitEnterFullscreen === 'function') {
+                    video.webkitEnterFullscreen();
+                } else if (typeof video.requestFullscreen === 'function') {
+                    video.requestFullscreen().catch(() => {});
+                }
+            } catch (_) {}
+            return;
+        }
+
+        requestAnimationFrame(poll);
     }
     requestAnimationFrame(poll);
 }
