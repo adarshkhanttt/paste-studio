@@ -5,7 +5,8 @@ import { resolve } from 'path';
 
 export default defineConfig({
   root: 'src',
-  base: '/',
+  // On GitHub Actions the env var is automatically 'true'; locally stays '/'
+  base: process.env.GITHUB_ACTIONS === 'true' ? '/paste-studio/' : '/',
 
   plugins: [
     ViteImageOptimizer({
@@ -14,9 +15,11 @@ export default defineConfig({
       png:  { quality: 90 },
       webp: { lossless: false, quality: 80 },
     }),
+    // Routes auto-discovered from rollupOptions.input; 404 excluded from sitemap
     sitemap({
       hostname: 'https://pastedstudio.com',
-      dynamicRoutes: ['/', '/film', '/shorts'],
+      exclude: ['/404'],
+      readable: true,
     }),
   ],
 
@@ -29,6 +32,9 @@ export default defineConfig({
     outDir: '../dist',
     emptyOutDir: true,
     cssCodeSplit: false,
+    target: 'es2018',
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 200,
     rollupOptions: {
       input: {
         main:   resolve(__dirname, 'src/index.html'),
@@ -41,6 +47,10 @@ export default defineConfig({
             return 'vendor-gsap';
           }
         },
+        // Readable asset filenames: [name]-[hash][ext]
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
       },
     },
   },

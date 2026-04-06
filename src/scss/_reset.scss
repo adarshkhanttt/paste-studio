@@ -22,3 +22,14 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
+
+// Wistia injects a branding logo <img alt="Logo" src="*.wistia.com/..."> into
+// every player. Multiple selectors to beat Wistia's own w-css-reset !important rules.
+img[alt="Logo"][src*="wistia.com"],
+img[alt="Logo"][src*="wistia.net"],
+img.w-css-reset[alt="Logo"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}

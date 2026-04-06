@@ -6,128 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
     <title>Pasted Studio — Films</title>
+    <meta name="description" content="Watch cinematic documentary films by Pasted Studio — full-length features showcasing exceptional dental professionals worldwide.">
+    <link rel="canonical" href="https://pastedstudio.com/film.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pastedstudio.com/film.html">
+    <meta property="og:title" content="Pasted Studio — Films">
+    <meta property="og:description" content="Cinematic documentary films showcasing exceptional dental professionals worldwide.">
+    <meta property="og:image" content="https://pastedstudio.com/assets/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pasted Studio — Films">
+    <meta name="twitter:description" content="Cinematic documentary films showcasing exceptional dental professionals worldwide.">
+    <meta name="twitter:image" content="https://pastedstudio.com/assets/images/og-image.jpg">
+    <link rel="preload" as="image" href="./assets/images/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Archivo:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./scss/main.scss">
+    <!-- Intercept Wistia shadow roots BEFORE Wistia scripts run -->
+    <script>
+    (function(){
+        var CSS='img[alt="Logo"],img.w-css-reset[alt="Logo"],img[src*="437d34ac1d176786a595e87008ce5a0e"]{display:none!important;visibility:hidden!important;opacity:0!important}';
+        var SEL='img[alt="Logo"][src*="wistia"],img.w-css-reset[alt="Logo"],img[src*="437d34ac1d176786a595e87008ce5a0e"]';
+        var sheet=null;try{sheet=new CSSStyleSheet();sheet.replaceSync(CSS);}catch(_){}
+        function hide(el){el.style.setProperty('display','none','important');el.style.setProperty('visibility','hidden','important');el.style.setProperty('opacity','0','important');}
+        function purge(root){try{root.querySelectorAll(SEL).forEach(hide);}catch(_){}}
+        function nuke(shadow){
+            if(sheet)try{if(!shadow.adoptedStyleSheets.includes(sheet))shadow.adoptedStyleSheets=[...shadow.adoptedStyleSheets,sheet];}catch(_){}
+            try{if(!shadow.querySelector('style[data-ps-nuke]')){var s=document.createElement('style');s.setAttribute('data-ps-nuke','');s.textContent=CSS;shadow.prepend(s);}}catch(_){}
+            purge(shadow);
+            new MutationObserver(function(mm){purge(shadow);mm.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.shadowRoot)nuke(n.shadowRoot);});});}).observe(shadow,{childList:true,subtree:true});
+        }
+        var _as=Element.prototype.attachShadow;
+        Element.prototype.attachShadow=function(i){var s=_as.call(this,i);nuke(s);return s;};
+        window._wq=window._wq||[];
+        window._wq.push({id:'_all',options:{plugin:{logoBug:{on:false},customLogo:{on:false}}}});
+    })();
+    </script>
     <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
     <script src="https://fast.wistia.com/player.js" async></script>
-    <style>
-        /* Reduce gap from hero to first section */
-        .films:first-of-type {
-            padding-top: 4rem;
-        }
-
-        /* ── Full-bleed Wistia background video ── */
-        .hero-video-wrap {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        /* ── Film hero content — vertically centered, max-width matches Films/Shorts sections ── */
-        .hero-film-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: calc(100% - 2 * var(--gutter));
-            max-width: var(--max-w);
-            z-index: 3;
-        }
-
-        .hero-film-title {
-            font-family: var(--display);
-            font-size: clamp(2rem, 4vw, 3.75rem);
-            color: var(--white);
-            line-height: 1.05;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
-            font-weight: 400;
-            margin: 0 0 1.75rem;
-            max-width: 12em;
-        }
-
-        /* ── CTA buttons ── */
-        .hero-film-btns {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.25rem;
-        }
-
-        .btn-film {
-            display: inline-block;
-            padding: 0.85rem 1.75rem;
-            font-family: var(--sans);
-            font-size: 0.6rem;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            text-decoration: none;
-            cursor: pointer;
-            border: 1px solid var(--white);
-            transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
-        }
-
-        /* Filled — white bg, dark text */
-        .btn-film-filled {
-            background: var(--white);
-            color: var(--void);
-        }
-
-        .btn-film-filled:hover {
-            background: transparent;
-            color: var(--white);
-        }
-
-        /* Outlined — transparent bg, white border + text */
-        .btn-film-outlined {
-            background: transparent;
-            color: var(--white);
-        }
-
-        .btn-film-outlined:hover {
-            background: var(--white);
-            color: var(--void);
-        }
-
-        /* ── Film meta label ── */
-        .hero-film-meta {
-            font-family: var(--sans);
-            font-size: 0.58rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: rgba(250, 248, 245, 0.45);
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 640px) {
-            .hero-film-content {
-                top: 50%;
-            }
-
-            .hero-film-title {
-                font-size: clamp(1.75rem, 9vw, 2.5rem);
-                margin-bottom: 1.5rem;
-            }
-
-            .btn-film {
-                padding: 0.8rem 1.4rem;
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <a class="skip-nav" href="#main-content">Skip to main content</a>
 
     <!-- ═══════════════════════════════════════════
          PRELOADER
     ═══════════════════════════════════════════ -->
-    <div class="preloader" id="preloader">
+    <div class="preloader" id="preloader" aria-hidden="true">
         <div class="preloader-content">
             <div class="preloader-rule"></div>
             <p class="preloader-label">A PASTED STUDIO PRODUCTION</p>
@@ -145,7 +72,7 @@
     ═══════════════════════════════════════════ -->
     <nav>
         <a href="index.html" class="nav-logo">
-            <img src="./assets/images/logo.png" alt="Pasted" class="nav-logo-img">
+            <img src="./assets/images/logo.png" alt="Pasted" class="nav-logo-img" width="120" height="32" loading="eager" fetchpriority="high" decoding="async">
         </a>
         <ul class="nav-menu">
             <li><a href="index.html#films">Films</a></li>
@@ -178,6 +105,8 @@
         </ul>
     </div>
 
+    <main id="main-content">
+
     <!-- ═══════════════════════════════════════════
          HERO
     ═══════════════════════════════════════════ -->
@@ -185,7 +114,7 @@
 
         <!-- Full-bleed Wistia background video -->
         <div class="hero-video-wrap">
-            <div class="wistia_embed wistia_async_66o4d2abaa fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false"
+            <div class="wistia_embed wistia_async_66o4d2abaa fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false plugin[logoBug][on]=false plugin[customLogo][on]=false"
                 style="height:100%;width:100%;"></div>
         </div>
 
@@ -216,7 +145,7 @@
 
                 <!-- Card 1 — The Art of Restraint (unlocked) -->
                 <article class="film-card reveal" data-media-id="wow8j0h2kl">
-                    <img src="" alt="The Art of Restraint" class="film-card-img" id="archiveCard1Thumb">
+                    <img src="" alt="The Art of Restraint" class="film-card-img" id="archiveCard1Thumb" loading="lazy" decoding="async">
                     <div class="film-card-overlay">
                         <span class="film-card-category">Founder Story</span>
                         <h3 class="film-card-title">THE ART OF RESTRAINT</h3>
@@ -226,7 +155,7 @@
 
                 <!-- Card 2 — unlocked -->
                 <article class="film-card reveal" data-media-id="t79pc3h06u">
-                    <img src="./assets/images/films-thumbnail/brian-harris-thumbnail.jpeg" alt="The Human Edge" class="film-card-img">
+                    <img src="./assets/images/films-thumbnail/brian-harris-thumbnail.jpeg" alt="The Human Edge" class="film-card-img" loading="lazy" decoding="async">
                     <div class="film-card-overlay">
                         <span class="film-card-category">Founder Story</span>
                         <h3 class="film-card-title">THE HUMAN EDGE — BRIAN HARRIS</h3>
@@ -236,7 +165,7 @@
 
                 <!-- Card 3 — Coming Soon -->
                 <article class="film-card coming-soon reveal">
-                    <img src="./assets/images/films-thumbnail/john-marashi-film-thumbnail.jpeg" alt="Refined by Culture" class="film-card-img">
+                    <img src="./assets/images/films-thumbnail/john-marashi-film-thumbnail.jpeg" alt="Refined by Culture" class="film-card-img" loading="lazy" decoding="async">
                     <div class="film-card-lock-overlay">
                         <div class="film-card-lock-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -255,7 +184,7 @@
 
                 <!-- Card 3 — Coming Soon -->
                 <article class="film-card coming-soon reveal">
-                    <img src="./assets/images/films-thumbnail/marshall-hanson-film-thumbnail.jpeg" alt="The Art of Becoming" class="film-card-img">
+                    <img src="./assets/images/films-thumbnail/marshall-hanson-film-thumbnail.jpeg" alt="The Art of Becoming" class="film-card-img" loading="lazy" decoding="async">
                     <div class="film-card-lock-overlay">
                         <div class="film-card-lock-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -274,7 +203,7 @@
 
                 <!-- Card 4 — Coming Soon -->
                 <article class="film-card coming-soon reveal">
-                    <img src="./assets/images/films-thumbnail/alex-besmer-thumbnail.jpeg" alt="It's Not About Me" class="film-card-img">
+                    <img src="./assets/images/films-thumbnail/alex-besmer-thumbnail.jpeg" alt="It's Not About Me" class="film-card-img" loading="lazy" decoding="async">
                     <div class="film-card-lock-overlay">
                         <div class="film-card-lock-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -304,7 +233,13 @@
         <!-- Left: image column -->
         <div class="library-video-col">
             <div class="library-video-wrap">
-                <iframe src="https://fast.wistia.net/embed/iframe/8ogqkyozsk?autoPlay=true&silentAutoPlay=true&muted=true&endVideoBehavior=loop&fitStrategy=cover&controlsVisibleOnLoad=false&playbar=false&volumeControl=false&fullscreenButton=false&playButton=false&settingsControl=false&smallPlayButton=false&videoFoam=false&chromeless=true" allow="autoplay" allowtransparency="true" class="library-bg-iframe" scrolling="no" frameborder="0"></iframe>
+                <wistia-player media-id="8ogqkyozsk" class="library-bg-iframe"
+                    autoplay="true" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover" controls-visible-on-load="false"
+                    playbar="false" volume-control="false" fullscreen-button="false"
+                    play-button="false" settings-control="false" small-play-button="false"
+                    video-foam="false"
+                    plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
             </div>
             <div class="library-video-gradient"></div>
             <div class="library-video-text">
@@ -354,7 +289,7 @@
                         <wistia-player media-id="qb4s0ch4sg" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
                             fullscreen-button="false" settings-control="false" small-play-button="false"
-                            end-video-behavior="default"></wistia-player>
+                            end-video-behavior="default" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
                         <div class="short-card-overlay">
                             <span class="short-card-category">Clinical Mastery</span>
                             <h3 class="short-card-title"></h3>
@@ -366,7 +301,7 @@
                         <wistia-player media-id="0dlp41jm4g" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
                             fullscreen-button="false" settings-control="false" small-play-button="false"
-                            end-video-behavior="default"></wistia-player>
+                            end-video-behavior="default" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
                         <div class="short-card-overlay">
                             <span class="short-card-category">Clinical Mastery</span>
                             <h3 class="short-card-title"></h3>
@@ -378,7 +313,7 @@
                         <wistia-player media-id="ea4bpi99jb" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
                             fullscreen-button="false" settings-control="false"
-                            small-play-button="false"></wistia-player>
+                            small-play-button="false" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
                         <div class="short-card-lock-overlay">
                             <div class="short-card-lock-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -399,7 +334,7 @@
                         <wistia-player media-id="d2frf6dfar" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
                             fullscreen-button="false" settings-control="false"
-                            small-play-button="false"></wistia-player>
+                            small-play-button="false" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
                         <div class="short-card-lock-overlay">
                             <div class="short-card-lock-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -420,7 +355,7 @@
                         <wistia-player media-id="b3ch9wkwaf" class="short-card-player" play-button="false"
                             playbar="false" controls-visible-on-load="false" volume-control="false"
                             fullscreen-button="false" settings-control="false"
-                            small-play-button="false"></wistia-player>
+                            small-play-button="false" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
                         <div class="short-card-lock-overlay">
                             <div class="short-card-lock-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -447,7 +382,7 @@
     </section>
 
     <!-- Hero trailer player overlay -->
-    <div class="hero-player-overlay" id="filmTrailerOverlay" aria-hidden="true">
+    <div class="hero-player-overlay" id="filmTrailerOverlay" role="dialog" aria-label="Video player" aria-hidden="true">
         <button class="hero-player-close" id="filmTrailerClose" aria-label="Close player">&#x2715;</button>
         <div class="hero-player-letterbox"></div>
         <div class="hero-player-inner" id="filmTrailerInner"></div>
@@ -455,7 +390,7 @@
     </div>
 
     <!-- Shorts video player overlay -->
-    <div class="hero-player-overlay" id="shortsPlayerOverlay" aria-hidden="true">
+    <div class="hero-player-overlay" id="shortsPlayerOverlay" role="dialog" aria-label="Video player" aria-hidden="true">
         <button class="hero-player-close" id="shortsPlayerClose" aria-label="Close player">&#x2715;</button>
         <div class="hero-player-letterbox"></div>
         <div class="hero-player-inner" id="shortsPlayerInner"></div>
@@ -500,6 +435,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- ═══════════════════════════════════════════
          FOOTER
     ═══════════════════════════════════════════ -->
@@ -507,7 +444,7 @@
         <div class="footer-inner">
 
             <div class="footer-brand footer-credit" data-delay="0">
-                <img src="./assets/images/pasted-footer-logo.svg" alt="Pasted Studio" class="footer-logo">
+                <img src="./assets/images/pasted-footer-logo.svg" alt="Pasted Studio" class="footer-logo" loading="lazy" decoding="async">
                 <p class="footer-tagline">A PRODUCTION STUDIO DOCUMENTING THE FUTURE OF DENTISTRY.</p>
             </div>
 
@@ -530,8 +467,8 @@
                 <div class="footer-col footer-credit" data-delay="700">
                     <h4 class="footer-col-label">CONTACT</h4>
                     <ul>
-                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank" rel="noopener">Instagram</a></li>
-                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener">YouTube</a></li>
+                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener noreferrer">YouTube</a></li>
                         <li><a href="mailto:alan@getpasted.com">Email</a></li>
                     </ul>
                 </div>
@@ -551,8 +488,8 @@
     <!-- ═══════════════════════════════════════════
          CONTACT FORM MODAL (Library + Partnerships)
     ═══════════════════════════════════════════ -->
-    <div class="modal" id="contact-modal">
-        <button class="modal-close" id="contact-modal-close">×</button>
+    <div class="modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-hidden="true">
+        <button class="modal-close" id="contact-modal-close" aria-label="Close modal">×</button>
         <div class="modal-content contact-form-content">
             <h3 id="contact-modal-title">GET IN TOUCH</h3>
             <p id="contact-modal-sub">THE PASTED LIBRARY IS A CURATED ENVIRONMENT FOR THE PROFESSION'S MOST AMBITIOUS VOICES. TO MAINTAIN THE CALIBER OF OUR COMMUNITY, WE PROCESS NEW MEMBER INTAKES IN LIMITED MONTHLY COHORTS.</p>
@@ -582,6 +519,7 @@
                     </select>
                 </div>
                 <div class="cf-select-wrap">
+                    <label class="sr-only" for="cf-role">Profession / Role</label>
                     <select id="cf-role">
                         <option value="" disabled selected>Profession / Role</option>
                         <option>Associate Dentist</option>
@@ -591,6 +529,7 @@
                     </select>
                 </div>
                 <div class="cf-select-wrap">
+                    <label class="sr-only" for="cf-intent">Intent</label>
                     <select id="cf-intent">
                         <option value="" disabled selected>Intent</option>
                         <option value="Get better cases">Get Better Cases</option>
@@ -599,7 +538,8 @@
                         <option value="Just exploring">Just Exploring</option>
                     </select>
                 </div>
-                <input type="text" id="cf-instagram" placeholder="Instagram / Company">
+                <label class="sr-only" for="cf-instagram">Instagram or Company</label>
+                <input type="text" id="cf-instagram" placeholder="Instagram / Company" autocomplete="organization">
                 <input type="hidden" id="cf-source" value="">
                 <button type="submit" id="cf-submit">SUBMIT</button>
                 <p id="cf-error-msg" class="cf-error-msg" hidden>Something went wrong. Please try again.</p>
@@ -614,293 +554,14 @@
     <!-- ═══════════════════════════════════════════
          SCRIPTS
     ═══════════════════════════════════════════ -->
-    <script src="./js/modules/preloader.js"></script>
-    <script src="./js/modules/smooth-scroll.js"></script>
-    <script src="./js/modules/nav.js"></script>
-    <script src="./js/modules/reveal.js"></script>
-    <script src="./js/modules/unlock.js"></script>
-    <script src="./js/modules/hubspot.js"></script>
-    <script>
-        // ── Film cards: fetch duration for cards with data-media-id ─
-        document.querySelectorAll('.film-card[data-media-id]').forEach(function (card) {
-            var mediaId    = card.dataset.mediaId;
-            var titleEl    = card.querySelector('.film-card-title');
-            var durationEl = card.querySelector('.film-card-duration');
-            var thumbEl    = card.querySelector('.film-card-img[src=""]');
-            if (!mediaId) return;
-            fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2F' + mediaId)
-                .then(function (r) { return r.json(); })
-                .then(function (data) {
-                    if (data.title && titleEl && !titleEl.textContent.trim()) titleEl.textContent = data.title;
-                    if (data.duration && durationEl) {
-                        var mins = Math.round(data.duration / 60);
-                        durationEl.textContent = 'Documentary \u00B7 ' + mins + ' min';
-                    }
-                    if (data.thumbnail_url && thumbEl) thumbEl.src = data.thumbnail_url;
-                })
-                .catch(function () {});
-        });
 
-        // ── Hero title: fetch from Wistia oEmbed ──────────────────
-        fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2Fo6oncnfzlu')
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                if (data.title) {
-                    var el = document.getElementById('filmHeroTitle');
-                    if (el) el.textContent = data.title;
-                }
-            })
-            .catch(function () {});
-
-        // ── Trailer overlay: open on "WATCH TRAILER", stop at 28s ─
-        (function () {
-            var overlay  = document.getElementById('filmTrailerOverlay');
-            var inner    = document.getElementById('filmTrailerInner');
-            var closeBtn = document.getElementById('filmTrailerClose');
-            var openBtn  = document.getElementById('filmTrailerBtn');
-            if (!overlay) return;
-
-            function openTrailer() {
-                overlay.classList.add('active');
-                overlay.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                var iframe = document.createElement('iframe');
-                // endVideoAt=28 stops playback at the 28-second mark
-                iframe.src = 'https://fast.wistia.net/embed/iframe/66o4d2abaa?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false';
-                iframe.setAttribute('allowtransparency', 'true');
-                iframe.setAttribute('allowfullscreen', '');
-                iframe.setAttribute('allow', 'autoplay; fullscreen');
-                iframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;inset:0;';
-                inner.appendChild(iframe);
-            }
-
-            function closeTrailer() {
-                overlay.classList.remove('active');
-                overlay.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-                var iframe = inner.querySelector('iframe');
-                if (iframe) iframe.remove();
-            }
-
-            if (openBtn) openBtn.addEventListener('click', openTrailer);
-            closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeTrailer(); });
-            overlay.addEventListener('click', function (e) { if (e.target === overlay) closeTrailer(); });
-            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('active')) closeTrailer(); });
-        })();
-    </script>
-
-    <script>
-        // ── Shorts: carousel ─────────────────────────────────────
-        (function () {
-            var track = document.getElementById('shortsTrack');
-            var prevBtn = document.getElementById('shortsPrev');
-            var nextBtn = document.getElementById('shortsNext');
-            if (!track) return;
-
-            var offset = 0;
-
-            function cardStep() {
-                var card = track.querySelector('.short-card');
-                if (!card) return 260;
-                var gap = parseFloat(getComputedStyle(track).gap) || 16;
-                return card.offsetWidth + gap;
-            }
-
-            function maxOffset() {
-                return Math.max(0, track.scrollWidth - track.parentElement.offsetWidth);
-            }
-
-            function applyOffset(val, animate) {
-                offset = Math.max(0, Math.min(val, maxOffset()));
-                track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.16,1,0.3,1)' : 'none';
-                track.style.transform = 'translateX(' + (-offset) + 'px)';
-                prevBtn.classList.toggle('disabled', offset <= 0);
-                nextBtn.classList.toggle('disabled', offset >= maxOffset());
-            }
-
-            prevBtn.addEventListener('click', function () {
-                if (!prevBtn.classList.contains('disabled')) applyOffset(offset - cardStep(), true);
-            });
-            nextBtn.addEventListener('click', function () {
-                if (!nextBtn.classList.contains('disabled')) applyOffset(offset + cardStep(), true);
-            });
-
-            var dragging = false, didDrag = false, dragStartX = 0, dragStartOffset = 0;
-            var DRAG_THRESHOLD = 8;
-
-            track.addEventListener('mousedown', function (e) {
-                dragging = true; didDrag = false;
-                dragStartX = e.clientX; dragStartOffset = offset;
-            });
-            window.addEventListener('mousemove', function (e) {
-                if (!dragging) return;
-                var dx = dragStartX - e.clientX;
-                if (!didDrag && Math.abs(dx) < DRAG_THRESHOLD) return;
-                didDrag = true;
-                track.classList.add('dragging');
-                applyOffset(dragStartOffset + dx, false);
-            });
-            window.addEventListener('mouseup', function () {
-                if (!dragging) return;
-                dragging = false;
-                track.classList.remove('dragging');
-            });
-
-            var touchStartX = 0, touchOffset = 0;
-            track.addEventListener('touchstart', function (e) {
-                touchStartX = e.touches[0].clientX; touchOffset = offset;
-            }, { passive: true });
-            track.addEventListener('touchmove', function (e) {
-                applyOffset(touchOffset + (touchStartX - e.touches[0].clientX), false);
-            }, { passive: true });
-            track.addEventListener('touchend', function (e) {
-                var dx = touchStartX - e.changedTouches[0].clientX;
-                var step = cardStep();
-                applyOffset(Math.round((touchOffset + dx) / step) * step, true);
-            });
-
-            applyOffset(0, false);
-        })();
-
-        // ── Shorts: oEmbed title fetch ────────────────────────────
-        document.querySelectorAll('.short-card').forEach(function (card) {
-            var player = card.querySelector('wistia-player');
-            var titleEl = card.querySelector('.short-card-title');
-            if (!player || !titleEl) return;
-            var mediaId = player.getAttribute('media-id');
-            if (!mediaId) return;
-            fetch('https://fast.wistia.com/oembed.json?url=https%3A%2F%2Fgetpasted.wistia.com%2Fmedias%2F' + mediaId)
-                .then(function (r) { return r.json(); })
-                .then(function (data) { if (data.title) titleEl.textContent = data.title; })
-                .catch(function () { });
-        });
-
-        // ── Shorts: click card → open full player ─────────────────
-        (function () {
-            var overlay = document.getElementById('shortsPlayerOverlay');
-            var inner = document.getElementById('shortsPlayerInner');
-            var closeBtn = document.getElementById('shortsPlayerClose');
-            if (!overlay) return;
-
-            function openShort(mediaId) {
-                overlay.classList.add('active');
-                overlay.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                var iframe = document.createElement('iframe');
-                iframe.src = 'https://fast.wistia.net/embed/iframe/' + mediaId + '?autoPlay=true&muted=false&controlsVisibleOnLoad=true&fullscreenButton=true&playbar=true&volumeControl=true&settingsControl=true&videoFoam=false';
-                iframe.setAttribute('allowtransparency', 'true');
-                iframe.setAttribute('allowfullscreen', '');
-                iframe.setAttribute('allow', 'autoplay; fullscreen');
-                iframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;inset:0;';
-                inner.appendChild(iframe);
-            }
-
-            function closeShort() {
-                overlay.classList.remove('active');
-                overlay.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-                var iframe = inner.querySelector('iframe');
-                if (iframe) iframe.remove();
-            }
-
-            document.querySelectorAll('.short-card[data-media-id]').forEach(function (card) {
-                card.addEventListener('click', function () {
-                    if (card.closest('#shortsTrack').classList.contains('dragging')) return;
-                    openShort(card.dataset.mediaId);
-                });
-            });
-
-            closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closeShort(); });
-            overlay.addEventListener('click', function (e) { if (e.target === overlay) closeShort(); });
-            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeShort(); });
-        })();
-
-        // ── Footer: film credits roll ─────────────────────────────
-        (function () {
-            var footer = document.querySelector('footer');
-            if (!footer) return;
-            var credits = footer.querySelectorAll('.footer-credit');
-            var labels = footer.querySelectorAll('.footer-col-label');
-            var fired = false;
-
-            var observer = new IntersectionObserver(function (entries) {
-                if (fired || !entries[0].isIntersecting) return;
-                fired = true;
-                credits.forEach(function (el) {
-                    var delay = parseInt(el.dataset.delay || 0, 10);
-                    setTimeout(function () { el.classList.add('credits-visible'); }, delay);
-                });
-                labels.forEach(function (label, i) {
-                    setTimeout(function () { label.classList.add('label-revealed'); }, 250 + i * 250);
-                });
-                observer.disconnect();
-            }, { threshold: 0.15 });
-
-            observer.observe(footer);
-        })();
-
-        // Contact form modal — Library + Partnerships CTAs
-        (function () {
-            var cm = document.getElementById('contact-modal');
-            var cmClose = document.getElementById('contact-modal-close');
-            var cmTitle = document.getElementById('contact-modal-title');
-            var cmSub = document.getElementById('contact-modal-sub');
-            var cmForm = document.getElementById('contact-form');
-
-            var titles = {
-                membership:   'REQUEST PRIVATE ACCESS',
-                partnerships: 'DISCUSS PARTNERSHIP'
-            };
-            var subs = {
-                membership:   'FILL IN YOUR DETAILS AND WE\'LL REVIEW YOUR APPLICATION PERSONALLY.',
-                partnerships: 'TELL US ABOUT YOURSELF AND WE\'LL BE IN TOUCH TO EXPLORE THE RIGHT FIT.'
-            };
-            var sources = {
-                membership:   'Library',
-                partnerships: 'Partnership'
-            };
-
-            function openCM(type) {
-                if (cm.classList.contains('active')) return;
-                if (cmTitle) { cmTitle.textContent = titles[type] || 'GET IN TOUCH'; cmTitle.hidden = false; }
-                if (cmSub)   { cmSub.textContent   = subs[type]   || 'FILL IN YOUR DETAILS AND WE\'LL BE IN TOUCH SHORTLY.'; cmSub.hidden = false; }
-                var sourceInput = document.getElementById('cf-source');
-                if (sourceInput) sourceInput.value = sources[type] || 'Unknown';
-                cm.classList.add('active');
-            }
-
-            function closeCM() {
-                cm.classList.remove('active');
-                if (cmForm) {
-                    cmForm.reset();
-                    cmForm.hidden = false;
-                    cmForm.querySelectorAll('.error').forEach(function (el) { el.classList.remove('error'); });
-                }
-                if (cmTitle) cmTitle.hidden = false;
-                if (cmSub) cmSub.hidden = false;
-                var successEl = document.getElementById('cf-success');
-                if (successEl) successEl.hidden = true;
-                var errorMsg = document.getElementById('cf-error-msg');
-                if (errorMsg) errorMsg.hidden = true;
-                var submitBtn = document.getElementById('cf-submit');
-                if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'SUBMIT'; }
-            }
-
-            document.querySelectorAll('[data-modal="membership"], [data-modal="partnerships"]').forEach(function (trigger) {
-                trigger.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    openCM(trigger.dataset.modal);
-                });
-            });
-
-            if (cmClose) cmClose.addEventListener('click', closeCM);
-            cm.addEventListener('click', function (e) { if (e.target === cm) closeCM(); });
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && cm.classList.contains('active')) closeCM();
-            });
-        })();
-    </script>
-
+    <script type="module" src="./js/main.js"></script>
+    <noscript>
+        <style>.preloader{display:none!important}</style>
+        <p style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#141212;color:#FAF8F5;font-family:Arial,sans-serif;font-size:0.9rem;letter-spacing:0.1em;text-align:center;padding:2rem;z-index:9999">
+            This site requires JavaScript to run. Please enable it in your browser.
+        </p>
+    </noscript>
 </body>
 
 </html>

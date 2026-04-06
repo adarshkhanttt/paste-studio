@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | Pasted Studio</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #141212;
+            color: #FAF8F5;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+        .code {
+            font-size: clamp(6rem, 20vw, 12rem);
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            opacity: 0.12;
+            margin-bottom: 1rem;
+        }
+        .title {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            opacity: 0.6;
+        }
+        .back {
+            display: inline-block;
+            padding: 0.9rem 2.25rem;
+            border: 1px solid rgba(250,248,245,0.4);
+            color: #FAF8F5;
+            text-decoration: none;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .back:hover {
+            background: #FAF8F5;
+            color: #141212;
+            border-color: #FAF8F5;
+        }
+    </style>
+</head>
+<body>
+    <div class="code">404</div>
+    <p class="title">Page not found</p>
+    <a href="/" class="back">Return home</a>
+</body>
+</html>

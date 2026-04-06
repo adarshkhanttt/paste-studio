@@ -1,0 +1,197 @@
+// ─────────────────────────────────────────────
+// SHORTS HERO — shorts.html page styles
+// ─────────────────────────────────────────────
+
+/* ══════════════════════════════════════════
+   SHORTS HERO — Two-column layout
+══════════════════════════════════════════ */
+.shorts-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: var(--void);
+    display: flex;
+    overflow: hidden;
+}
+
+/* ── Left column — text ── */
+.shorts-hero-left {
+    position: relative;
+    z-index: 2;
+    width: 42%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2rem 0 max(var(--gutter), calc((100vw - var(--max-w)) / 2));
+}
+
+.shorts-hero-title {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.75rem);
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0 0 1.75rem;
+}
+
+.shorts-hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-short {
+    display: inline-block;
+    padding: 0.85rem 1.75rem;
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--white);
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+.btn-short-filled {
+    background: var(--white);
+    color: var(--void);
+}
+
+.btn-short-filled:hover {
+    background: transparent;
+    color: var(--white);
+}
+
+.btn-short-outlined {
+    background: transparent;
+    color: var(--white);
+}
+
+.btn-short-outlined:hover {
+    background: var(--white);
+    color: var(--void);
+}
+
+/* ── Right column — scrolling card columns ── */
+.shorts-hero-right {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Gradient overlays — pointer-events: none so they don't block interaction */
+.shorts-hero-right::before,
+.shorts-hero-right::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Bottom gradient */
+.shorts-hero-right::after {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, var(--void) 0%, transparent 60%);
+}
+
+/* Left gradient */
+.shorts-hero-right::before {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 45%;
+    background: linear-gradient(to right, var(--void) 0%, transparent 100%);
+}
+
+/* Top gradient */
+.shorts-hero-top-grad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, var(--void) 0%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Three-column flex track */
+.shorts-hero-cols {
+    display: flex;
+    gap: 1.5rem;
+    height: 100%;
+    padding: 0 1.5rem 0 0;
+}
+
+/* Each scrolling column */
+.shorts-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    will-change: transform;
+}
+
+/* Individual card */
+.shorts-col-card {
+    flex-shrink: 0;
+    width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    filter: brightness(0.55);
+    transition: filter 0.4s ease;
+}
+
+.shorts-col-card:hover {
+    filter: brightness(0.8);
+    transition: filter 0.35s ease;
+}
+
+.shorts-col-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .shorts-hero {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .shorts-hero-right {
+        order: -1;
+        width: 100%;
+        height: 65vh;
+        flex-shrink: 0;
+    }
+
+    .shorts-hero-left {
+        width: 100%;
+        flex: 1;
+        padding: 2rem var(--gutter);
+        justify-content: center;
+    }
+
+    .shorts-hero-title {
+        font-size: clamp(1.75rem, 9vw, 2.5rem);
+    }
+
+    /* 2-column ticker on mobile — hide 3rd column, remaining two expand */
+    #shortsCol3 {
+        display: none;
+    }
+}

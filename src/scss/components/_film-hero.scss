@@ -1,0 +1,108 @@
+// ─────────────────────────────────────────────
+// FILM HERO — film.html page styles
+// ─────────────────────────────────────────────
+
+/* Reduce gap from hero to first section */
+.films:first-of-type {
+    padding-top: 4rem;
+}
+
+/* ── Full-bleed Wistia background video ── */
+.hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* ── Film hero content — vertically centered, max-width matches Films/Shorts sections ── */
+.hero-film-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 2 * var(--gutter));
+    max-width: var(--max-w);
+    z-index: 3;
+}
+
+.hero-film-title {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.75rem);
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0 0 1.75rem;
+    max-width: 12em;
+}
+
+/* ── CTA buttons ── */
+.hero-film-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.btn-film {
+    display: inline-block;
+    padding: 0.85rem 1.75rem;
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--white);
+    transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+}
+
+/* Filled — white bg, dark text */
+.btn-film-filled {
+    background: var(--white);
+    color: var(--void);
+}
+
+.btn-film-filled:hover {
+    background: transparent;
+    color: var(--white);
+}
+
+/* Outlined — transparent bg, white border + text */
+.btn-film-outlined {
+    background: transparent;
+    color: var(--white);
+}
+
+.btn-film-outlined:hover {
+    background: var(--white);
+    color: var(--void);
+}
+
+/* ── Film meta label ── */
+.hero-film-meta {
+    font-family: var(--sans);
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(250, 248, 245, 0.45);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+    .hero-film-content {
+        top: 50%;
+    }
+
+    .hero-film-title {
+        font-size: clamp(1.75rem, 9vw, 2.5rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-film {
+        padding: 0.8rem 1.4rem;
+    }
+}

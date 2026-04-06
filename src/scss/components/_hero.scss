@@ -37,6 +37,11 @@
         inset: 0;
         width: 100% !important;   // required: Wistia shadow DOM override
         height: 100% !important;  // required: Wistia shadow DOM override
+
+        // Hide the poster/thumbnail still-image Wistia injects before the
+        // video starts. The video element itself is <video> or <canvas>,
+        // not <img>, so this only removes the static poster flash.
+        img { display: none !important; }
     }
 
     iframe { border: none; }
@@ -238,10 +243,19 @@
     z-index: 1;
     transform: scale(0.96) translateY(10px);
     transition: transform 0.65s var(--ease-spring);
+
+    // Fade iframe in after a short delay so the Wistia poster/thumbnail
+    // never flashes — by the time it's visible, autoPlay has started.
+    iframe {
+        opacity: 0;
+        transition: opacity 0.4s ease 0.35s;
+    }
 }
 
 .hero-player-overlay.active .hero-player-inner {
     transform: scale(1) translateY(0);
+
+    iframe { opacity: 1; }
 }
 
 .hero-player-meta {
