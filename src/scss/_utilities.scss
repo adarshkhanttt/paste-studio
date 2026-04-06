@@ -60,6 +60,38 @@
     z-index: 10000;
 }
 
+// ── iOS CSS fake fullscreen ───────────────────
+// iOS WebKit blocks requestFullscreen() on custom elements.
+// This class forces the overlay to cover the full screen using CSS only.
+.ios-fake-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    z-index: 99999 !important;
+    background: #000 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    // Safe area insets for notch / home indicator
+    padding-top: env(safe-area-inset-top) !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+    padding-left: env(safe-area-inset-left) !important;
+    padding-right: env(safe-area-inset-right) !important;
+}
+
+// Make inner container and wistia-player fill the full overlay
+.ios-fake-fullscreen .hero-player-inner,
+.ios-fake-fullscreen wistia-player {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: unset !important;
+    position: absolute !important;
+    inset: 0 !important;
+}
+
 // ── SVG inline used in grain overlay + player ─
 %grain-svg {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");

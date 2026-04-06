@@ -91,14 +91,36 @@ export function initTrailerPlayer() {
     if (openBtn) openBtn.addEventListener('click', () => player.open('66o4d2abaa'));
 }
 
-// ── Trigger Wistia fullscreen inside a specific overlay container.
-//    Targets innerEl directly to avoid matching decorative card players.
-//    iOS path is completely separate — WebKit only supports fullscreen
-//    via video.webkitEnterFullscreen(), all other methods are silently ignored.
+// ── iOS detection ─────────────────────────────
+// Covers iPhone/iPod, iPad (pre-iOS13), and iPad (iOS13+ reports MacIntel)
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+
+// ── iOS CSS fake fullscreen ────────────────────────────────────────────
+// iOS WebKit silently ignores requestFullscreen() on custom elements.
+// Instead we apply a CSS class that forces the overlay to cover 100% of
+// the screen with safe-area insets. Android and desktop are NOT affected.
+function applyIOSFullscreen(overlay) {
+    overlay.classList.add('ios-fake-fullscreen');
+    document.body.style.position = 'fixed';
+    document.body.style.width    = '100%';
+    // Refresh GSAP ScrollTrigger on orientation change so layout stays correct
+    window.addEventListener('orientationchange', () => {
+        if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    }, { once: false });
+}
+
+function removeIOSFullscreen(overlay) {
+    overlay.classList.remove('ios-fake-fullscreen');
+    document.body.style.position = '';
+    document.body.style.width    = '';
+}
+
+// ── Android + desktop: click Wistia's own fullscreen button ───────────
+// Targets innerEl directly to avoid matching decorative card thumbnail
+// players that share the same media-id but have fullscreen-button="false".
 function wistiaFullscreen(innerEl) {
-    function getShadow(el) {
-        return el.__shadow || el.shadowRoot || null;
-    }
+    function getShadow(el) { return el.__shadow || el.shadowRoot || null; }
 
     function findInRoot(root, selector) {
         const found = root.querySelector(selector);
@@ -110,67 +132,15 @@ function wistiaFullscreen(innerEl) {
         return null;
     }
 
-    // ── iOS-only path ─────────────────────────────────────────────────────
-    // iOS Safari and iOS Chrome (both WebKit) ignore requestFullscreen() on
-    // divs/custom elements. Only video.webkitEnterFullscreen() works.
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-        (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
-
-    if (isIOS) {
-        const wp = innerEl.querySelector('wistia-player');
-        if (!wp) return;
-
-        function tryEnterFullscreen(video) {
-            if (typeof video.webkitEnterFullscreen !== 'function') return;
-            // Primary: call immediately (gesture context may still be valid)
-            video.webkitEnterFullscreen();
-            // Fallback: if gesture context expired, retry inside the play event
-            // iOS sometimes permits fullscreen from within a play callback
-            video.addEventListener('play', function handler() {
-                video.removeEventListener('play', handler);
-                if (typeof video.webkitEnterFullscreen === 'function') {
-                    try { video.webkitEnterFullscreen(); } catch (_) {}
-                }
-            }, { once: true });
-        }
-
-        // Check Wistia API directly first (cleanest path)
-        if (wp.api && typeof wp.api.video === 'function') {
-            const v = wp.api.video();
-            if (v) { tryEnterFullscreen(v); return; }
-        }
-
-        // Watch the shadow root for the <video> element via MutationObserver.
-        // MutationObserver callbacks fired immediately after a click still
-        // retain gesture context on most iOS versions.
-        const shadow = getShadow(wp);
-        if (!shadow) return;
-
-        const existing = findInRoot(shadow, 'video');
-        if (existing) { tryEnterFullscreen(existing); return; }
-
-        const obs = new MutationObserver(() => {
-            const video = findInRoot(shadow, 'video');
-            if (!video) return;
-            obs.disconnect();
-            tryEnterFullscreen(video);
-        });
-        obs.observe(shadow, { childList: true, subtree: true });
-        return; // iOS handled — do NOT fall through to rAF path
-    }
-
-    // ── Desktop + Android path (DO NOT CHANGE — both work correctly) ──────
     const BTN_SEL = 'button[aria-label="Fullscreen"], [data-handle="fullscreenControl"] button';
 
     let ticks = 0;
     function poll() {
         ticks++;
         if (ticks > 300) return;
-
         const wp     = innerEl.querySelector('wistia-player');
         const shadow = wp && getShadow(wp);
         if (!shadow) { requestAnimationFrame(poll); return; }
-
         const btn = findInRoot(shadow, BTN_SEL);
         if (btn) {
             btn.click();
@@ -180,7 +150,6 @@ function wistiaFullscreen(innerEl) {
             } catch (_) {}
             return;
         }
-
         requestAnimationFrame(poll);
     }
     requestAnimationFrame(poll);
@@ -188,31 +157,43 @@ function wistiaFullscreen(innerEl) {
 
 // ── Shorts overlay (index.html + film.html) ──
 export function initShortsPlayer(trackId = 'shortsTrack') {
-    const inner  = document.getElementById('shortsPlayerInner');
-    const player = createOverlayPlayer('shortsPlayerOverlay', 'shortsPlayerInner', 'shortsPlayerClose');
+    const inner   = document.getElementById('shortsPlayerInner');
+    const overlay = document.getElementById('shortsPlayerOverlay');
+    const player  = createOverlayPlayer('shortsPlayerOverlay', 'shortsPlayerInner', 'shortsPlayerClose');
     if (!player || !inner) return;
 
     document.querySelectorAll('.short-card[data-media-id]').forEach(card => {
         card.addEventListener('click', () => {
             const track = card.closest(`#${trackId}`);
             if (track && track.classList.contains('dragging')) return;
-            player.open(card.dataset.mediaId);
-            wistiaFullscreen(inner);
+            if (isIOS) {
+                player.open(card.dataset.mediaId, () => removeIOSFullscreen(overlay));
+                applyIOSFullscreen(overlay);
+            } else {
+                player.open(card.dataset.mediaId);
+                wistiaFullscreen(inner);
+            }
         });
     });
 }
 
 // ── Archive overlay (shorts.html) ────────────
 export function initArchivePlayer() {
-    const inner  = document.getElementById('archivePlayerInner');
-    const player = createOverlayPlayer('archivePlayerOverlay', 'archivePlayerInner', 'archivePlayerClose');
+    const inner   = document.getElementById('archivePlayerInner');
+    const overlay = document.getElementById('archivePlayerOverlay');
+    const player  = createOverlayPlayer('archivePlayerOverlay', 'archivePlayerInner', 'archivePlayerClose');
     if (!player || !inner) return;
 
     document.querySelectorAll('#archiveTrack .short-card[data-media-id]').forEach(card => {
         card.addEventListener('click', () => {
             if (card.closest('#archiveTrack')?.classList.contains('dragging')) return;
-            player.open(card.dataset.mediaId);
-            wistiaFullscreen(inner);
+            if (isIOS) {
+                player.open(card.dataset.mediaId, () => removeIOSFullscreen(overlay));
+                applyIOSFullscreen(overlay);
+            } else {
+                player.open(card.dataset.mediaId);
+                wistiaFullscreen(inner);
+            }
         });
     });
 }
