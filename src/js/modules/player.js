@@ -46,7 +46,6 @@ export function createOverlayPlayer(overlayId, innerId, closeBtnId) {
         if (media) media.remove();
         if (typeof overlay._onClose === 'function') overlay._onClose();
         overlay._onClose = null;
-        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     }
 
     if (closeBtn) closeBtn.addEventListener('click', e => { e.stopPropagation(); close(); });
@@ -92,47 +91,65 @@ export function initTrailerPlayer() {
     if (openBtn) openBtn.addEventListener('click', () => player.open('66o4d2abaa'));
 }
 
+// ── Click Wistia's fullscreen button inside a specific overlay container.
+//    Targets innerEl (e.g. #shortsPlayerInner) directly — avoids matching
+//    the decorative card thumbnail players that share the same media-id
+//    but have fullscreen-button="false".
+function wistiaFullscreen(innerEl) {
+    function getShadow(wp) {
+        return wp.__shadow || wp.shadowRoot || null;
+    }
+
+    function findBtn(root) {
+        const btn = root.querySelector('button[aria-label="Fullscreen"]');
+        if (btn) return btn;
+        for (const el of root.querySelectorAll('*')) {
+            const sr = el.__shadow || el.shadowRoot;
+            if (sr) { const b = findBtn(sr); if (b) return b; }
+        }
+        return null;
+    }
+
+    let ticks = 0;
+    function poll() {
+        ticks++;
+        if (ticks > 300) return; // ~10 s timeout
+        const wp     = innerEl.querySelector('wistia-player');
+        const shadow = wp && getShadow(wp);
+        const btn    = shadow && findBtn(shadow);
+        if (btn) { btn.click(); }
+        else     { requestAnimationFrame(poll); }
+    }
+    requestAnimationFrame(poll);
+}
+
 // ── Shorts overlay (index.html + film.html) ──
 export function initShortsPlayer(trackId = 'shortsTrack') {
-    const overlay = document.getElementById('shortsPlayerOverlay');
+    const inner  = document.getElementById('shortsPlayerInner');
     const player = createOverlayPlayer('shortsPlayerOverlay', 'shortsPlayerInner', 'shortsPlayerClose');
-    if (!player) return;
-
-    // When user exits fullscreen via ESC or browser UI, close the overlay
-    document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement && overlay.classList.contains('active')) {
-            player.close();
-        }
-    });
+    if (!player || !inner) return;
 
     document.querySelectorAll('.short-card[data-media-id]').forEach(card => {
         card.addEventListener('click', () => {
             const track = card.closest(`#${trackId}`);
             if (track && track.classList.contains('dragging')) return;
             player.open(card.dataset.mediaId);
-            overlay.requestFullscreen?.().catch?.(() => {});
+            wistiaFullscreen(inner);
         });
     });
 }
 
 // ── Archive overlay (shorts.html) ────────────
 export function initArchivePlayer() {
-    const overlay = document.getElementById('archivePlayerOverlay');
+    const inner  = document.getElementById('archivePlayerInner');
     const player = createOverlayPlayer('archivePlayerOverlay', 'archivePlayerInner', 'archivePlayerClose');
-    if (!player) return;
-
-    // When user exits fullscreen via ESC or browser UI, close the overlay
-    document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement && overlay.classList.contains('active')) {
-            player.close();
-        }
-    });
+    if (!player || !inner) return;
 
     document.querySelectorAll('#archiveTrack .short-card[data-media-id]').forEach(card => {
         card.addEventListener('click', () => {
             if (card.closest('#archiveTrack')?.classList.contains('dragging')) return;
             player.open(card.dataset.mediaId);
-            overlay.requestFullscreen?.().catch?.(() => {});
+            wistiaFullscreen(inner);
         });
     });
 }
