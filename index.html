@@ -39,7 +39,7 @@
             new MutationObserver(function(mm){purge(shadow);mm.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.shadowRoot)nuke(n.shadowRoot);});});}).observe(shadow,{childList:true,subtree:true});
         }
         var _as=Element.prototype.attachShadow;
-        Element.prototype.attachShadow=function(i){var s=_as.call(this,i);nuke(s);return s;};
+        Element.prototype.attachShadow=function(i){var s=_as.call(this,i);this.__shadow=s;nuke(s);return s;};
         window._wq=window._wq||[];
         window._wq.push({id:'_all',options:{plugin:{logoBug:{on:false},customLogo:{on:false}}}});
     })();
@@ -61,7 +61,7 @@
     }
     </script>
   <script type="module" crossorigin src="/paste-studio/assets/vendor-gsap-gNKDPx_G.js"></script>
-  <script type="module" crossorigin src="/paste-studio/assets/main-DTJqei0p.js"></script>
+  <script type="module" crossorigin src="/paste-studio/assets/main-BGCMIbv-.js"></script>
   <link rel="stylesheet" crossorigin href="/paste-studio/assets/style-DOJ-8eT7.css">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 </head>
