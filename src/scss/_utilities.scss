@@ -81,6 +81,11 @@
     padding-right: env(safe-area-inset-right) !important;
 }
 
+// Hide letterbox bars — not needed in fake fullscreen
+.ios-fake-fullscreen .hero-player-letterbox {
+    display: none !important;
+}
+
 // Make inner container and wistia-player fill the full overlay
 .ios-fake-fullscreen .hero-player-inner,
 .ios-fake-fullscreen wistia-player {
