@@ -101,19 +101,25 @@ const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
 // Instead we apply a CSS class that forces the overlay to cover 100% of
 // the screen with safe-area insets. Android and desktop are NOT affected.
 function applyIOSFullscreen(overlay) {
+    // Save scroll position — setting position:fixed resets it to 0
+    overlay._savedScrollY = window.scrollY;
     overlay.classList.add('ios-fake-fullscreen');
     document.body.style.position = 'fixed';
+    document.body.style.top      = `-${overlay._savedScrollY}px`;
     document.body.style.width    = '100%';
-    // Refresh GSAP ScrollTrigger on orientation change so layout stays correct
     window.addEventListener('orientationchange', () => {
         if (window.ScrollTrigger) window.ScrollTrigger.refresh();
     }, { once: false });
 }
 
 function removeIOSFullscreen(overlay) {
+    const scrollY = overlay._savedScrollY || 0;
     overlay.classList.remove('ios-fake-fullscreen');
     document.body.style.position = '';
+    document.body.style.top      = '';
     document.body.style.width    = '';
+    // Restore scroll position so the page returns to where the user was
+    window.scrollTo(0, scrollY);
 }
 
 // ── Android + desktop: click Wistia's own fullscreen button ───────────
