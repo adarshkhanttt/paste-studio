@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/paste-studio/assets/favicon-JpH4fPgy.svg">
+    <title>PASTED — Dental Production Studio</title>
+    <meta name="description" content="Pasted Studio — cinematic documentary films and short-form content for dental professionals. Based in London, New York, and LA.">
+    <link rel="canonical" href="https://pastedstudio.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pastedstudio.com/">
+    <meta property="og:title" content="PASTED — Dental Production Studio">
+    <meta property="og:description" content="Cinematic documentary films and short-form content for dental professionals.">
+    <meta property="og:image" content="https://pastedstudio.com/assets/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PASTED — Dental Production Studio">
+    <meta name="twitter:description" content="Cinematic documentary films and short-form content for dental professionals.">
+    <meta name="twitter:image" content="https://pastedstudio.com/assets/images/og-image.jpg">
+    <link rel="preload" as="image" href="/paste-studio/assets/logo-Cmcg1-hE.png">
+    <link rel="preload" as="image" href="/paste-studio/assets/hero-bg-CTJeBOmJ.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Archivo:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Intercept Wistia shadow roots BEFORE Wistia scripts run -->
+    <script>
+    (function(){
+        var CSS='img[alt="Logo"],img.w-css-reset[alt="Logo"],img[src*="437d34ac1d176786a595e87008ce5a0e"]{display:none!important;visibility:hidden!important;opacity:0!important}';
+        var SEL='img[alt="Logo"][src*="wistia"],img.w-css-reset[alt="Logo"],img[src*="437d34ac1d176786a595e87008ce5a0e"]';
+        var sheet=null;try{sheet=new CSSStyleSheet();sheet.replaceSync(CSS);}catch(_){}
+        function hide(el){el.style.setProperty('display','none','important');el.style.setProperty('visibility','hidden','important');el.style.setProperty('opacity','0','important');}
+        function purge(root){try{root.querySelectorAll(SEL).forEach(hide);}catch(_){}}
+        function nuke(shadow){
+            if(sheet)try{if(!shadow.adoptedStyleSheets.includes(sheet))shadow.adoptedStyleSheets=[...shadow.adoptedStyleSheets,sheet];}catch(_){}
+            try{if(!shadow.querySelector('style[data-ps-nuke]')){var s=document.createElement('style');s.setAttribute('data-ps-nuke','');s.textContent=CSS;shadow.prepend(s);}}catch(_){}
+            purge(shadow);
+            new MutationObserver(function(mm){purge(shadow);mm.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.shadowRoot)nuke(n.shadowRoot);});});}).observe(shadow,{childList:true,subtree:true});
+        }
+        var _as=Element.prototype.attachShadow;
+        Element.prototype.attachShadow=function(i){var s=_as.call(this,i);nuke(s);return s;};
+        window._wq=window._wq||[];
+        window._wq.push({id:'_all',options:{plugin:{logoBug:{on:false},customLogo:{on:false}}}});
+    })();
+    </script>
+    <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+    <script src="https://fast.wistia.com/player.js" async></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Pasted Studio",
+      "url": "https://pastedstudio.com",
+      "logo": "https://pastedstudio.com/assets/images/logo.png",
+      "description": "Cinematic documentary films and short-form content for dental professionals.",
+      "sameAs": [
+        "https://www.instagram.com/pasted.studio/",
+        "https://www.youtube.com/@Pasted.studio"
+      ]
+    }
+    </script>
+  <script type="module" crossorigin src="/paste-studio/assets/vendor-gsap-gNKDPx_G.js"></script>
+  <script type="module" crossorigin src="/paste-studio/assets/main-DTJqei0p.js"></script>
+  <link rel="stylesheet" crossorigin href="/paste-studio/assets/style-DOJ-8eT7.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+</head>
+
+<body>
+    <a class="skip-nav" href="#main-content">Skip to main content</a>
+
+    <!-- ═══════════════════════════════════════════
+         PRELOADER
+    ═══════════════════════════════════════════ -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+        <div class="preloader-content">
+            <div class="preloader-rule"></div>
+            <p class="preloader-label">A PASTED STUDIO PRODUCTION</p>
+            <h2 class="preloader-title">PASTED STUDIO</h2>
+            <p class="preloader-presents">PRESENTS</p>
+            <div class="preloader-rule"></div>
+        </div>
+    </div>
+
+    <!-- Custom cursor (hero only) -->
+    <div class="hero-cursor" id="heroCursor" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+            <polygon points="5,3 19,12 5,21" />
+        </svg>
+        <span>PLAY</span>
+    </div>
+
+    <!-- Film Grain -->
+    <div class="grain"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <img src="/paste-studio/assets/logo-Cmcg1-hE.png" alt="Pasted" class="nav-logo-img" width="120" height="32" loading="eager" fetchpriority="high" decoding="async">
+        </a>
+        <ul class="nav-menu">
+            <li><a href="#films">Films</a></li>
+            <li><a href="#shorts">Shorts</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#founders">Founders</a></li>
+            <li><a href="#membership">Membership</a></li>
+        </ul>
+        <a href="#partnerships" class="nav-contact">EXPLORE PARTNERSHIPS</a>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+        <button class="nav-mobile-close" aria-label="Close menu">
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-mobile-menu">
+            <li><a href="#films">Films</a></li>
+            <li><a href="#shorts">Shorts</a></li>
+            <li><a href="#studio">Studio</a></li>
+            <li><a href="#founders">Founders</a></li>
+            <li><a href="#membership">Membership</a></li>
+            <li><a href="#partnerships">Explore Partnerships</a></li>
+        </ul>
+    </div>
+
+    <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="hero">
+        <h1 class="sr-only">Pasted Studio — Cinematic Dental Production</h1>
+
+        <!-- Full-bleed Wistia background video -->
+        <div class="hero-video-wrap">
+            <div class="wistia_embed wistia_async_8kirf86p7j fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false plugin[logoBug][on]=false plugin[customLogo][on]=false"
+                style="height:100%;width:100%;"></div>
+        </div>
+
+        <!-- Cinematic vignette overlay -->
+        <div class="hero-overlay"></div>
+
+        <!-- Meta — bottom left, above ticker -->
+        <div class="hero-content">
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Status</span>
+                    <span class="hero-meta-value">Now Showing</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Location</span>
+                    <span class="hero-meta-value">Global</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Films</span>
+                    <span class="hero-meta-value">12 Releases</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticker — bleeds full width at bottom -->
+        <div class="hero-ticker-wrap" aria-hidden="true">
+            <div class="hero-ticker" id="heroTicker">
+                <span> PASTED <span class="ticker-outline">STUDIO SERIES</span> &nbsp;</span>
+                <span> PASTED <span class="ticker-outline">STUDIO SERIES</span> &nbsp;</span>
+                <span> PASTED <span class="ticker-outline">STUDIO SERIES</span> &nbsp;</span>
+                <span> PASTED <span class="ticker-outline">STUDIO SERIES</span> &nbsp;</span>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FILMS
+    ═══════════════════════════════════════════ -->
+    <section class="films" id="films">
+        <div class="films-inner">
+
+            <h2 class="films-title reveal">FILMS</h2>
+
+            <div class="films-grid">
+
+                <!-- Card 1 — visible -->
+                <article class="film-card reveal" data-media-id="wow8j0h2kl">
+                    <img src="/paste-studio/assets/art-of-restraint-BH2tKUS4.jpg" alt="The Art of Restraint"
+                        class="film-card-img" loading="lazy" decoding="async">
+                    <div class="film-card-overlay">
+                        <span class="film-card-category">Founder Story</span>
+                        <h3 class="film-card-title"></h3>
+                        <span class="film-card-duration">Documentary · 22 min</span>
+                    </div>
+                </article>
+
+                <!-- Card 2 — visible -->
+                <article class="film-card reveal" data-media-id="o6oncnfzlu">
+                    <img src="/paste-studio/assets/built-by-design-_X9H2rAa.jpg" alt="Built by Design" class="film-card-img" loading="lazy" decoding="async">
+                    <div class="film-card-overlay">
+                        <span class="film-card-category">Founder Story</span>
+                        <h3 class="film-card-title"></h3>
+                        <span class="film-card-duration">Documentary · 22 min</span>
+                    </div>
+                </article>
+
+                <!-- Card 3 — visible -->
+                <article class="film-card reveal" data-media-id="t79pc3h06u">
+                    <img src="/paste-studio/assets/brian-harris-thumbnail-DZPJcmNp.jpeg" alt="The Human Edge" class="film-card-img" loading="lazy" decoding="async">
+                    <div class="film-card-overlay">
+                        <span class="film-card-category">Founder Story</span>
+                        <h3 class="film-card-title">THE HUMAN EDGE — BRIAN HARRIS</h3>
+                        <span class="film-card-duration">Documentary</span>
+                    </div>
+                </article>
+
+                <!-- Card 4 — Coming Soon -->
+                <article class="film-card coming-soon reveal">
+                    <img src="/paste-studio/assets/john-marashi-film-thumbnail-2CSgo0-A.jpeg" alt="Refined by Culture"
+                        class="film-card-img" loading="lazy" decoding="async">
+                    <div class="film-card-lock-overlay">
+                        <div class="film-card-lock-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="9" />
+                                <polyline points="12 7 12 12 15 15" />
+                            </svg>
+                        </div>
+                        <span class="film-card-unlock">COMING SOON</span>
+                    </div>
+                    <div class="film-card-overlay">
+                        <span class="film-card-category">Founder Story</span>
+                        <h3 class="film-card-title">REFINED BY CULTURE - DR. JON MARASHI</h3>
+                        <span class="film-card-duration">Documentary</span>
+                    </div>
+                </article>
+
+            </div><!-- /.films-grid -->
+
+            <div class="films-cta reveal">
+                <a href="film.html" class="films-explore-btn">EXPLORE ALL FROM COLLECTION</a>
+            </div>
+
+        </div><!-- /.films-inner -->
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SHORTS
+    ═══════════════════════════════════════════ -->
+    <section class="shorts" id="shorts">
+        <div class="shorts-inner">
+
+            <div class="shorts-header reveal">
+                <h2 class="shorts-title">SHORTS</h2>
+                <div class="shorts-nav">
+                    <button class="shorts-arrow shorts-arrow-prev disabled" id="shortsPrev"
+                        aria-label="Previous">&#8592;</button>
+                    <button class="shorts-arrow shorts-arrow-next" id="shortsNext" aria-label="Next">&#8594;</button>
+                </div>
+            </div>
+
+            <div class="shorts-track-wrap">
+                <div class="shorts-track" id="shortsTrack">
+
+                    <!-- Card 1 — visible -->
+                    <article class="short-card" data-media-id="qb4s0ch4sg">
+                        <wistia-player media-id="qb4s0ch4sg" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"
+                            end-video-behavior="default" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 — visible -->
+                    <article class="short-card" data-media-id="0dlp41jm4g">
+                        <wistia-player media-id="0dlp41jm4g" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false" small-play-button="false"
+                            end-video-behavior="default" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 — locked -->
+                    <article class="short-card locked" data-media-id="ea4bpi99jb">
+                        <wistia-player media-id="ea4bpi99jb" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false"
+                            small-play-button="false" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 — locked -->
+                    <article class="short-card locked" data-media-id="d2frf6dfar">
+                        <wistia-player media-id="d2frf6dfar" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false"
+                            small-play-button="false" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                    <!-- Card 5 — locked -->
+                    <article class="short-card locked" data-media-id="b3ch9wkwaf">
+                        <wistia-player media-id="b3ch9wkwaf" class="short-card-player" play-button="false"
+                            playbar="false" controls-visible-on-load="false" volume-control="false"
+                            fullscreen-button="false" settings-control="false"
+                            small-play-button="false" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                        <div class="short-card-lock-overlay">
+                            <div class="short-card-lock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <span class="short-card-unlock">UNLOCK FULL ACCESS</span>
+                        </div>
+                        <div class="short-card-overlay">
+                            <span class="short-card-category">Clinical Mastery</span>
+                            <h3 class="short-card-title"></h3>
+                        </div>
+                    </article>
+
+                </div><!-- /.shorts-track -->
+            </div><!-- /.shorts-track-wrap -->
+
+            <div class="shorts-cta reveal">
+                <a href="shorts.html" class="shorts-explore-btn">EXPLORE ALL FROM COLLECTION</a>
+            </div>
+
+        </div><!-- /.shorts-inner -->
+    </section>
+
+
+
+    <!-- ═══════════════════════════════════════════
+         STUDIO
+    ═══════════════════════════════════════════ -->
+    <section class="studio" id="studio">
+        <div class="studio-grid">
+
+            <!-- Left: heading + subtitle -->
+            <div class="studio-content reveal">
+                <h2 class="studio-title">PASTED IS A<br>PRODUCTION STUDIO</h2>
+                <p class="studio-text">THE PREMIER DENTAL PRODUCTION STUDIO CRAFTING CINEMATIC NARRATIVES THAT ELEVATE THE WORLD'S LEADING DENTISTS INTO UNDENIABLE AUTHORITIES. WE DON'T JUST TELL STORIES; WE BUILD LEGACIES.</p>
+            </div>
+
+            <!-- Right: city list -->
+            <div class="studio-cities reveal" id="studioCities">
+                <div class="studio-city active" data-city="london">LONDON</div>
+                <div class="studio-city" data-city="new-york">NEW YORK</div>
+                <div class="studio-city" data-city="los-angeles">LOS ANGELES</div>
+            </div>
+
+        </div>
+
+        <!-- Full-width city video strip -->
+        <div class="studio-img-strip" id="studioImgStrip">
+            <div class="studio-strip-img active" data-city="london" data-city-label="London">
+                <wistia-player media-id="e2i9vigkz6" class="studio-strip-player"
+                    play-button="false" playbar="false" controls-visible-on-load="false"
+                    volume-control="false" fullscreen-button="false" settings-control="false"
+                    small-play-button="false" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                <div class="studio-strip-overlay"></div>
+            </div>
+            <div class="studio-strip-img" data-city="new-york" data-city-label="New York">
+                <wistia-player media-id="3jd279wbcn" class="studio-strip-player"
+                    play-button="false" playbar="false" controls-visible-on-load="false"
+                    volume-control="false" fullscreen-button="false" settings-control="false"
+                    small-play-button="false" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                <div class="studio-strip-overlay"></div>
+            </div>
+            <div class="studio-strip-img" data-city="los-angeles" data-city-label="Los Angeles">
+                <wistia-player media-id="atfx14vrba" class="studio-strip-player"
+                    play-button="false" playbar="false" controls-visible-on-load="false"
+                    volume-control="false" fullscreen-button="false" settings-control="false"
+                    small-play-button="false" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover" plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+                <div class="studio-strip-overlay"></div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FOUNDERS
+    ═══════════════════════════════════════════ -->
+    <section class="founders" id="founders">
+        <div class="founders-header reveal">
+            <h2 class="founders-title">FOUNDER'S</h2>
+        </div>
+        <div class="founders-grid">
+            <article class="founder-card reveal">
+                <div class="founder-portrait">
+                    <img src="/paste-studio/assets/zac-BGoJMgWe.jpeg" alt="Zac Orender" loading="lazy" decoding="async">
+                    <div class="founder-name-bar">
+                        <div class="founder-name-row">
+                            <h3 class="founder-name">Zac Orender</h3>
+                        </div>
+                        <div class="founder-role-row">
+                            <span class="founder-name-role">Co-Founder & Creative Director</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="founder-info">
+                    <span class="founder-role">Co-Founder & Creative Director</span>
+                    <p class="founder-bio">THE ARCHITECT BEHIND PASTED'S VISUAL LANGUAGE. BUILDING BRANDS THAT DON'T
+                        JUST LOOK DIFFERENT — THEY FEEL DIFFERENT.</p>
+                    <p class="founder-quote">"We don't make content. We make signals."</p>
+                </div>
+            </article>
+            <article class="founder-card reveal">
+                <div class="founder-portrait">
+                    <img src="/paste-studio/assets/dr.alan-DqyMMkh5.jpeg" alt="Dr. Alan Clarke" loading="lazy" decoding="async">
+                    <div class="founder-name-bar">
+                        <div class="founder-name-row">
+                            <h3 class="founder-name">Dr. Alan Clarke</h3>
+                        </div>
+                        <div class="founder-role-row">
+                            <span class="founder-name-role">Co-Founder & Cultural Authority</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="founder-info">
+                    <span class="founder-role">Co-Founder & Cultural Authority</span>
+                    <p class="founder-bio">FROM BURNOUT IN BELFAST TO GLOBAL STAGES. THE ORIGINAL CASE STUDY. STORY OVER
+                        STRATEGY. ALWAYS.</p>
+                    <p class="founder-quote">"Before the logo. Before the practice. This is the real work."</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         THE LIBRARY
+    ═══════════════════════════════════════════ -->
+    <section class="library" id="membership">
+
+        <!-- Left: image column -->
+        <div class="library-video-col">
+            <div class="library-video-wrap">
+                <wistia-player media-id="8ogqkyozsk" class="library-bg-iframe"
+                    autoplay="true" muted="true" end-video-behavior="loop"
+                    fit-strategy="cover" controls-visible-on-load="false"
+                    playbar="false" volume-control="false" fullscreen-button="false"
+                    play-button="false" settings-control="false" small-play-button="false"
+                    video-foam="false"
+                    plugin-logo-bug-on="false" plugin-custom-logo-on="false"></wistia-player>
+            </div>
+            <!-- Gradient: transparent left → site bg right (seamless blend) -->
+            <div class="library-video-gradient"></div>
+            <!-- Heading overlaid on image, centered -->
+            <div class="library-video-text">
+                <h2 class="library-heading reveal">THE LIBRARY</h2>
+                <p class="library-subtext reveal">A PRIVATE FILM LIBRARY FOR DENTISTS SHAPING THE FUTURE OF THE
+                    PROFESSION. FULL ACCESS. EARLY RELEASES. PRIVATE DROPS.</p>
+            </div>
+        </div>
+
+        <!-- Right: pricing column -->
+        <div class="library-pricing-col reveal">
+            <span class="library-label">FULL MEMBERSHIP</span>
+            <ul class="library-features">
+                <li><span class="library-bullet">•</span>Access all films</li>
+                <li><span class="library-bullet">•</span>Early releases</li>
+                <li><span class="library-bullet">•</span>Private content drops</li>
+                <li><span class="library-bullet">•</span>Event invitations</li>
+                <li><span class="library-bullet">•</span>Clinical insight</li>
+                <li><span class="library-bullet">•</span>80 hours verifiable CE</li>
+                <li><span class="library-bullet">•</span>Begin your pathway to Pasted Professional</li>
+            </ul>
+            <a href="#" class="library-cta" data-modal="membership">REQUEST PRIVATE ACCESS</a>
+        </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         INVESTORS
+    ═══════════════════════════════════════════ -->
+    <section class="investors" id="investors">
+        <div class="investors-inner">
+
+            <!-- Top row: heading + description -->
+            <div class="investors-header reveal">
+                <h2 class="investors-title">INVEST IN<br>THE FUTURE</h2>
+                <p class="investors-text">PASTED IS REDEFINING HOW PREMIUM PROFESSIONALS BUILD AUTHORITY. WE'RE LOOKING
+                    FOR STRATEGIC PARTNERS WHO UNDERSTAND CULTURAL CAPITAL.</p>
+            </div>
+
+            <!-- Stats rows -->
+            <div class="investors-stats">
+                <div class="investor-stat reveal" data-stat="$2.4M" data-label="ARR"></div>
+                <div class="investor-stat reveal" data-stat="340+" data-label="FILMS PRODUCED"></div>
+                <div class="investor-stat reveal" data-stat="168+" data-label="ACTIVE MEMBERS"></div>
+                <div class="investor-stat reveal" data-stat="94%" data-label="RETENTION RATE"></div>
+                <div class="investor-stat reveal" data-stat="12+" data-label="COUNTRIES"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CORPORATE PARTNERSHIPS
+    ═══════════════════════════════════════════ -->
+    <section class="partnerships" id="partnerships">
+        <div class="partnerships-inner">
+
+            <!-- Header -->
+            <div class="partnerships-header reveal">
+                <h2 class="partnerships-title">PARTNER WITH PASTED</h2>
+                <p class="partnerships-text">ALIGN YOUR BRAND WITH THE CULTURAL AUTHORITY IN DENTISTRY. STRATEGIC
+                    PARTNERSHIPS FOR COMPANIES WHO UNDERSTAND THE VALUE OF PREMIUM POSITIONING.</p>
+            </div>
+
+            <!-- Divider -->
+            <div class="partnerships-divider"></div>
+
+            <!-- Three columns -->
+            <div class="partnerships-grid">
+                <div class="partnership-col reveal">
+                    <h3 class="partnership-name">BRAND INTEGRATION</h3>
+                    <p class="partnership-desc">SEAMLESS PRODUCT PLACEMENT WITHIN OUR DOCUMENTARY CONTENT</p>
+                </div>
+                <div class="partnership-col reveal">
+                    <h3 class="partnership-name">EVENT SPONSORSHIP</h3>
+                    <p class="partnership-desc">EXCLUSIVE ACCESS TO PASTED PRESENTS AND PRIVATE SCREENINGS</p>
+                </div>
+                <div class="partnership-col reveal">
+                    <h3 class="partnership-name">CO-PRODUCTION</h3>
+                    <p class="partnership-desc">JOINT CONTENT CREATION WITH THE PASTED STUDIO TEAM</p>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="partnerships-divider"></div>
+
+            <!-- CTA -->
+            <div class="partnerships-cta reveal">
+                <a href="#" class="partnerships-cta-btn" data-modal="partnerships">DISCUSS PARTNERSHIP</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCROLL TICKER
+    ═══════════════════════════════════════════ -->
+    <section class="scroll-ticker" id="scroll-ticker" aria-hidden="true">
+        <div class="scroll-ticker-track">
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+            <span class="scroll-ticker-phrase">NOT EVERYONE GETS <em>DOCUMENTED</em></span>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-inner">
+
+            <div class="footer-brand footer-credit" data-delay="0">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmcxIgogICB3aWR0aD0iMTAzMi42ODAxIgogICBoZWlnaHQ9Ijk1NC45MzMzNSIKICAgdmlld0JveD0iMCAwIDEwMzIuNjgwMSA5NTQuOTMzMzUiCiAgIHNvZGlwb2RpOmRvY25hbWU9IlBhc3RlZCBMb2dvJ3MgKEVQUyktMDQuZXBzIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzCiAgICAgaWQ9ImRlZnMxIiAvPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MSIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiMwMDAwMDAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMC4yNSIKICAgICBpbmtzY2FwZTpzaG93cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZGVza2NvbG9yPSIjZDFkMWQxIj4KICAgIDxpbmtzY2FwZTpwYWdlCiAgICAgICB4PSIwIgogICAgICAgeT0iMCIKICAgICAgIGlua3NjYXBlOmxhYmVsPSIxIgogICAgICAgaWQ9InBhZ2UxIgogICAgICAgd2lkdGg9IjEwMzIuNjgwMSIKICAgICAgIGhlaWdodD0iOTU0LjkzMzM1IgogICAgICAgbWFyZ2luPSIwIgogICAgICAgYmxlZWQ9IjAiIC8+CiAgPC9zb2RpcG9kaTpuYW1lZHZpZXc+CiAgPGcKICAgICBpZD0iZzEiCiAgICAgaW5rc2NhcGU6Z3JvdXBtb2RlPSJsYXllciIKICAgICBpbmtzY2FwZTpsYWJlbD0iMSI+CiAgICA8ZwogICAgICAgaWQ9Imdyb3VwLVI1Ij4KICAgICAgPHBhdGgKICAgICAgICAgaWQ9InBhdGgyIgogICAgICAgICBkPSJtIDM4NzEuMDQsMzczNi44MSBoIC0zNjcuNjcgdiA4NTkuOTQgaCAzNjcuNjcgYyAzNDcuMDgsMCA1MjYuNTQsLTE0OCA1MjYuNTQsLTQzMy4xMSAwLC0yNzUuMTIgLTE4NC40NSwtNDI2LjgzIC01MjYuNTQsLTQyNi44MyB6IG0gNzQuNzgsOTQ3LjE4IGggLTgxMC4xMSB2IC00MC41IGMgMzEuMTUsMCAxNTUuNzksMCAxNTUuNzksLTE5MC4wNyBWIDI3MDguNTYgYyAwLC0xOTAuMDcgLTEyNC42NCwtMTkwLjA3IC0xNTUuNzksLTE5MC4wNyB2IC00MC41IGggNjE2LjkzIHYgNDAuNSBoIC05My40OCBjIC0zMS4xNSwwIC0xNTUuNzksMCAtMTU1Ljc5LDE5MC4wNyB2IDk0MC45OCBoIDQ0Mi40NSBjIDM0Mi40LDAgNjYzLjYzLDE1NC4yNCA2NjMuNjMsNTE0LjEgMCwzNjYuMTIgLTMyMS4yMyw1MjAuMzUgLTY2My42Myw1MjAuMzUiCiAgICAgICAgIHN0eWxlPSJmaWxsOiNmN2Y0ZjA7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOm5vbnplcm87c3Ryb2tlOm5vbmUiCiAgICAgICAgIHRyYW5zZm9ybT0ibWF0cml4KDAuMTMzMzMzMzMsMCwwLC0wLjEzMzMzMzMzLDAsOTU0LjkzMzMzKSIgLz4KICAgICAgPHBhdGgKICAgICAgICAgaWQ9InBhdGgzIgogICAgICAgICBkPSJtIDM4NzIuNTcsMTE2Mi4zNiBjIC05ODkuMjksMCAtMTc5NC4xLDEwODQuOTcgLTE3OTQuMSwyNDE4LjY2IDAsMTMzMy42MSA4MDQuODEsMjQxOC41OCAxNzk0LjEsMjQxOC41OCA5ODkuMywwIDE3OTQuMSwtMTA4NC45NyAxNzk0LjEsLTI0MTguNTggMCwtMTMzMy42OSAtODA0LjgsLTI0MTguNjYgLTE3OTQuMSwtMjQxOC42NiB6IG0gMCw0OTcyLjU3IGMgLTEwNjMuODksMCAtMTkyOS40MiwtMTE0NS43IC0xOTI5LjQyLC0yNTUzLjkxIDAsLTE0MDguMjkgODY1LjUzLC0yNTUzLjk4IDE5MjkuNDIsLTI1NTMuOTggMTA2My45LDAgMTkyOS40MywxMTQ1LjY5IDE5MjkuNDMsMjU1My45OCAwLDE0MDguMjEgLTg2NS41MywyNTUzLjkxIC0xOTI5LjQzLDI1NTMuOTEiCiAgICAgICAgIHN0eWxlPSJmaWxsOiNmN2Y0ZjA7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOm5vbnplcm87c3Ryb2tlOm5vbmUiCiAgICAgICAgIHRyYW5zZm9ybT0ibWF0cml4KDAuMTMzMzMzMzMsMCwwLC0wLjEzMzMzMzMzLDAsOTU0LjkzMzMzKSIgLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPgo=" alt="Pasted Studio" class="footer-logo" loading="lazy" decoding="async">
+                <p class="footer-tagline">A PRODUCTION STUDIO DOCUMENTING THE FUTURE OF DENTISTRY.</p>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-col footer-credit" data-delay="200">
+                    <h4 class="footer-col-label">PLATFORM</h4>
+                    <ul>
+                        <li><a href="#films">Films</a></li>
+                        <li><a href="#membership">Membership</a></li>
+                        <li><a href="#contact">Work With Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-credit" data-delay="450">
+                    <h4 class="footer-col-label">STUDIO</h4>
+                    <ul>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-credit" data-delay="700">
+                    <h4 class="footer-col-label">CONTACT</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank"
+                                rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener noreferrer">YouTube</a>
+                        </li>
+                        <li><a href="mailto:alan@getpasted.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-divider footer-credit" data-delay="900"></div>
+
+        <div class="footer-bottom footer-credit" data-delay="1050">
+            <p class="footer-legal">© 2026. All rights reserved.</p>
+            <span class="footer-coords">54°35'N &nbsp;&nbsp; 5°56'W</span>
+        </div>
+
+    </footer>
+
+    <!-- ═══════════════════════════════════════════
+         FULL VIDEO PLAYER OVERLAY
+    ═══════════════════════════════════════════ -->
+    <div class="hero-player-overlay" id="heroPlayerOverlay" role="dialog" aria-label="Video player" aria-hidden="true">
+        <button class="hero-player-close" id="heroPlayerClose" aria-label="Close player">&#x2715;</button>
+        <div class="hero-player-letterbox"></div>
+        <div class="hero-player-inner" id="heroPlayerInner">
+            <div class="hero-player-meta">
+                <span class="hero-player-meta-label">Now Playing</span>
+                <span class="hero-player-meta-title">Pasted Studio Series</span>
+            </div>
+        </div>
+        <div class="hero-player-letterbox"></div>
+    </div>
+
+    <!-- Films video player overlay -->
+    <div class="hero-player-overlay" id="filmsPlayerOverlay" role="dialog" aria-label="Video player" aria-hidden="true">
+        <button class="hero-player-close" id="filmsPlayerClose" aria-label="Close player">&#x2715;</button>
+        <div class="hero-player-letterbox"></div>
+        <div class="hero-player-inner" id="filmsPlayerInner"></div>
+        <div class="hero-player-letterbox"></div>
+    </div>
+
+    <!-- Shorts video player overlay -->
+    <div class="hero-player-overlay" id="shortsPlayerOverlay" role="dialog" aria-label="Video player" aria-hidden="true">
+        <button class="hero-player-close" id="shortsPlayerClose" aria-label="Close player">&#x2715;</button>
+        <div class="hero-player-letterbox"></div>
+        <div class="hero-player-inner" id="shortsPlayerInner"></div>
+        <div class="hero-player-letterbox"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT FORM MODAL (Library + Partnerships)
+    ═══════════════════════════════════════════ -->
+    <div class="modal" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-hidden="true">
+        <button class="modal-close" id="contact-modal-close" aria-label="Close modal">×</button>
+        <div class="modal-content contact-form-content">
+            <h3 id="contact-modal-title">GET IN TOUCH</h3>
+            <p id="contact-modal-sub">THE PASTED LIBRARY IS A CURATED ENVIRONMENT FOR THE PROFESSION'S MOST AMBITIOUS VOICES. TO MAINTAIN THE CALIBER OF OUR COMMUNITY, WE PROCESS NEW MEMBER INTAKES IN LIMITED MONTHLY COHORTS.</p>
+            <form id="contact-form" autocomplete="off">
+                <label class="sr-only" for="cf-first">First Name</label>
+                <input type="text" id="cf-first" placeholder="First Name" autocomplete="given-name" required>
+                <label class="sr-only" for="cf-last">Last Name</label>
+                <input type="text" id="cf-last" placeholder="Last Name" autocomplete="family-name" required>
+                <label class="sr-only" for="cf-email">Email</label>
+                <input type="email" id="cf-email" placeholder="Email" autocomplete="email" required>
+                <label class="sr-only" for="cf-mobile">Mobile Number</label>
+                <input type="tel" id="cf-mobile" placeholder="Mobile Number" autocomplete="tel">
+
+                <div class="cf-select-wrap">
+                    <label class="sr-only" for="cf-country">Country</label>
+                    <select id="cf-country">
+                        <option value="" disabled selected>Country</option>
+                        <option>United States</option>
+                        <option>United Kingdom</option>
+                        <option>Canada</option>
+                        <option>Australia</option>
+                        <option>Germany</option>
+                        <option>France</option>
+                        <option>Netherlands</option>
+                        <option>United Arab Emirates</option>
+                        <option>Saudi Arabia</option>
+                        <option>Singapore</option>
+                        <option>India</option>
+                        <option>Ireland</option>
+                        <option>New Zealand</option>
+                        <option>South Africa</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="cf-select-wrap">
+                    <label class="sr-only" for="cf-role">Profession / Role</label>
+                    <select id="cf-role">
+                        <option value="" disabled selected>Profession / Role</option>
+                        <option>Associate Dentist</option>
+                        <option>Practice Owner</option>
+                        <option>Brand</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="cf-select-wrap">
+                    <label class="sr-only" for="cf-intent">Intent</label>
+                    <select id="cf-intent">
+                        <option value="" disabled selected>Intent</option>
+                        <option value="Get better cases">Get Better Cases</option>
+                        <option value="Build a personal brand">Build a Personal Brand</option>
+                        <option value="Grow my practice">Grow My Practice</option>
+                        <option value="Just exploring">Just Exploring</option>
+                    </select>
+                </div>
+
+                <label class="sr-only" for="cf-instagram">Instagram or Company</label>
+                <input type="text" id="cf-instagram" placeholder="Instagram / Company" autocomplete="organization">
+                <input type="hidden" id="cf-source" value="">
+
+                <button type="submit" id="cf-submit">SUBMIT</button>
+
+                <!-- ── Inline error message (shown on API failure) ── -->
+                <p id="cf-error-msg" class="cf-error-msg" hidden>Something went wrong. Please try again.</p>
+            </form>
+
+            <!-- ── Success state (shown after successful submission) ── -->
+            <div id="cf-success" class="cf-success" hidden>
+                <h3>ACCESS UNLOCKED</h3>
+                <p>THANK YOU. WE'LL BE IN TOUCH SHORTLY.</p>
+            </div>
+        </div>
+    </div>
+
+    <noscript>
+        <style>.preloader{display:none!important}</style>
+        <p style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#141212;color:#FAF8F5;font-family:Arial,sans-serif;font-size:0.9rem;letter-spacing:0.1em;text-align:center;padding:2rem;z-index:9999">
+            This site requires JavaScript to run. Please enable it in your browser.
+        </p>
+    </noscript>
+</body>
+
+</html>
