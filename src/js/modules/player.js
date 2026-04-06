@@ -93,10 +93,8 @@ export function initTrailerPlayer() {
 
 // ── Trigger Wistia fullscreen inside a specific overlay container.
 //    Targets innerEl directly to avoid matching decorative card players.
-//    Tries three methods in order:
-//    1. Click the Wistia fullscreen button (desktop + Android)
-//    2. Dispatch TouchEvent on the button (mobile Safari click quirks)
-//    3. video.webkitEnterFullscreen() — iOS Safari native path
+//    iOS path is completely separate — WebKit only supports fullscreen
+//    via video.webkitEnterFullscreen(), all other methods are silently ignored.
 function wistiaFullscreen(innerEl) {
     function getShadow(el) {
         return el.__shadow || el.shadowRoot || null;
@@ -112,9 +110,57 @@ function wistiaFullscreen(innerEl) {
         return null;
     }
 
-    // Wistia marks the fullscreen control with data-handle and aria-label
-    const BTN_SEL   = 'button[aria-label="Fullscreen"], [data-handle="fullscreenControl"] button';
-    const VIDEO_SEL = 'video';
+    // ── iOS-only path ─────────────────────────────────────────────────────
+    // iOS Safari and iOS Chrome (both WebKit) ignore requestFullscreen() on
+    // divs/custom elements. Only video.webkitEnterFullscreen() works.
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+
+    if (isIOS) {
+        const wp = innerEl.querySelector('wistia-player');
+        if (!wp) return;
+
+        function tryEnterFullscreen(video) {
+            if (typeof video.webkitEnterFullscreen !== 'function') return;
+            // Primary: call immediately (gesture context may still be valid)
+            video.webkitEnterFullscreen();
+            // Fallback: if gesture context expired, retry inside the play event
+            // iOS sometimes permits fullscreen from within a play callback
+            video.addEventListener('play', function handler() {
+                video.removeEventListener('play', handler);
+                if (typeof video.webkitEnterFullscreen === 'function') {
+                    try { video.webkitEnterFullscreen(); } catch (_) {}
+                }
+            }, { once: true });
+        }
+
+        // Check Wistia API directly first (cleanest path)
+        if (wp.api && typeof wp.api.video === 'function') {
+            const v = wp.api.video();
+            if (v) { tryEnterFullscreen(v); return; }
+        }
+
+        // Watch the shadow root for the <video> element via MutationObserver.
+        // MutationObserver callbacks fired immediately after a click still
+        // retain gesture context on most iOS versions.
+        const shadow = getShadow(wp);
+        if (!shadow) return;
+
+        const existing = findInRoot(shadow, 'video');
+        if (existing) { tryEnterFullscreen(existing); return; }
+
+        const obs = new MutationObserver(() => {
+            const video = findInRoot(shadow, 'video');
+            if (!video) return;
+            obs.disconnect();
+            tryEnterFullscreen(video);
+        });
+        obs.observe(shadow, { childList: true, subtree: true });
+        return; // iOS handled — do NOT fall through to rAF path
+    }
+
+    // ── Desktop + Android path (DO NOT CHANGE — both work correctly) ──────
+    const BTN_SEL = 'button[aria-label="Fullscreen"], [data-handle="fullscreenControl"] button';
 
     let ticks = 0;
     function poll() {
@@ -127,25 +173,10 @@ function wistiaFullscreen(innerEl) {
 
         const btn = findInRoot(shadow, BTN_SEL);
         if (btn) {
-            // Method 1: standard click (desktop / Android Chrome)
             btn.click();
-            // Method 2: touch events (mobile Safari)
             try {
                 btn.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, cancelable: true }));
                 btn.dispatchEvent(new TouchEvent('touchend',   { bubbles: true, cancelable: true }));
-            } catch (_) {}
-            return;
-        }
-
-        // Method 3: iOS native video fullscreen via webkitEnterFullscreen
-        const video = findInRoot(shadow, VIDEO_SEL);
-        if (video) {
-            try {
-                if (typeof video.webkitEnterFullscreen === 'function') {
-                    video.webkitEnterFullscreen();
-                } else if (typeof video.requestFullscreen === 'function') {
-                    video.requestFullscreen().catch(() => {});
-                }
             } catch (_) {}
             return;
         }
