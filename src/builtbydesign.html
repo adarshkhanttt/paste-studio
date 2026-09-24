@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
+    <title>Built by Design — Dr. Jon Marashi | Pasted Studio</title>
+    <meta name="description" content="Built by Design — a Pasted Studio documentary on Dr. Jon Marashi. Watch the film, see behind-the-scenes photography, and read the director's note.">
+    <link rel="canonical" href="https://pastedseries.com/builtbydesign">
+    <meta property="og:type" content="video.other">
+    <meta property="og:url" content="https://pastedseries.com/builtbydesign">
+    <meta property="og:site_name" content="Pasted Studio">
+    <meta property="og:title" content="Built by Design — Dr. Jon Marashi">
+    <meta property="og:description" content="A Pasted Studio documentary on Dr. Jon Marashi. Watch the film, see behind-the-scenes photography, and read the director's note.">
+    <meta property="og:image" content="https://adarshkhanttt.github.io/paste-studio/opengraph.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Built by Design — Dr. Jon Marashi">
+    <meta name="twitter:description" content="A Pasted Studio documentary on Dr. Jon Marashi. Watch the film, see behind-the-scenes photography, and read the director's note.">
+    <meta name="twitter:image" content="https://adarshkhanttt.github.io/paste-studio/opengraph.jpg">
+    <link rel="preload" as="image" href="./assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Archivo:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./scss/main.scss">
+    <!-- Intercept Wistia shadow roots BEFORE Wistia scripts run -->
+    <script>
+    (function(){
+        var CSS='img[alt="Logo"],img.w-css-reset[alt="Logo"],img[src*="437d34ac1d176786a595e87008ce5a0e"]{display:none!important;visibility:hidden!important;opacity:0!important}';
+        var SEL='img[alt="Logo"][src*="wistia"],img.w-css-reset[alt="Logo"],img[src*="437d34ac1d176786a595e87008ce5a0e"]';
+        var sheet=null;try{sheet=new CSSStyleSheet();sheet.replaceSync(CSS);}catch(_){}
+        function hide(el){el.style.setProperty('display','none','important');el.style.setProperty('visibility','hidden','important');el.style.setProperty('opacity','0','important');}
+        function purge(root){try{root.querySelectorAll(SEL).forEach(hide);}catch(_){}}
+        function nuke(shadow){
+            if(sheet)try{if(!shadow.adoptedStyleSheets.includes(sheet))shadow.adoptedStyleSheets=[...shadow.adoptedStyleSheets,sheet];}catch(_){}
+            try{if(!shadow.querySelector('style[data-ps-nuke]')){var s=document.createElement('style');s.setAttribute('data-ps-nuke','');s.textContent=CSS;shadow.prepend(s);}}catch(_){}
+            purge(shadow);
+            new MutationObserver(function(mm){purge(shadow);mm.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.shadowRoot)nuke(n.shadowRoot);});});}).observe(shadow,{childList:true,subtree:true});
+        }
+        var _as=Element.prototype.attachShadow;
+        Element.prototype.attachShadow=function(i){var s=_as.call(this,i);this.__shadow=s;nuke(s);return s;};
+        window._wq=window._wq||[];
+        window._wq.push({id:'_all',options:{plugin:{logoBug:{on:false},customLogo:{on:false}}}});
+    })();
+    </script>
+    <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+    <script src="https://fast.wistia.com/player.js" async></script>
+</head>
+
+<body>
+    <a class="skip-nav" href="#main-content">Skip to main content</a>
+
+    <!-- ═══════════════════════════════════════════
+         PRELOADER
+    ═══════════════════════════════════════════ -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+        <div class="preloader-content">
+            <div class="preloader-rule"></div>
+            <p class="preloader-label">A PASTED STUDIO PRODUCTION</p>
+            <h2 class="preloader-title">PASTED STUDIO</h2>
+            <p class="preloader-presents">PRESENTS</p>
+            <div class="preloader-rule"></div>
+        </div>
+    </div>
+
+    <!-- Film Grain -->
+    <div class="grain"></div>
+
+    <!-- ═══════════════════════════════════════════
+         NAVIGATION
+    ═══════════════════════════════════════════ -->
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <img src="./assets/images/logo.png" alt="Pasted" class="nav-logo-img" width="120" height="32" loading="eager" fetchpriority="high" decoding="async">
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html#films">Films</a></li>
+            <li><a href="index.html#shorts">Shorts</a></li>
+            <li><a href="index.html#studio">Studio</a></li>
+            <li><a href="index.html#founders">Founders</a></li>
+            <li><a href="index.html#membership">Membership</a></li>
+        </ul>
+        <a href="index.html#partnerships" class="nav-contact">EXPLORE PARTNERSHIPS</a>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+        <button class="nav-mobile-close" aria-label="Close menu">
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-mobile-menu">
+            <li><a href="index.html#films">Films</a></li>
+            <li><a href="index.html#shorts">Shorts</a></li>
+            <li><a href="index.html#studio">Studio</a></li>
+            <li><a href="index.html#founders">Founders</a></li>
+            <li><a href="index.html#membership">Membership</a></li>
+            <li><a href="index.html#partnerships">Explore Partnerships</a></li>
+        </ul>
+    </div>
+
+    <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════
+         FILM — full-bleed hero (trailer)
+    ═══════════════════════════════════════════ -->
+    <section class="hero film-detail-hero" data-media-id="o6oncnfzlu">
+        <div class="hero-video-wrap">
+            <div class="wistia_embed wistia_async_o6oncnfzlu fitStrategy=cover videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false plugin[logoBug][on]=false plugin[customLogo][on]=false"
+                style="height:100%;width:100%;"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-film-content">
+            <h1 class="hero-film-title">BUILT BY DESIGN: DR. JON MARASHI</h1>
+            <div class="hero-film-btns">
+                <a href="#watchFilm" class="btn-film btn-film-filled">WATCH THE FILM</a>
+            </div>
+            <p class="hero-film-meta">DOCUMENTARY &mdash; 22 MIN</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         DIRECTOR'S NOTE
+    ═══════════════════════════════════════════ -->
+    <section class="film-detail-notes">
+        <div class="film-detail-notes-inner">
+            <div class="film-detail-notes-photo reveal">
+                <img src="./assets/images/films-thumbnail/built-by-design.jpg"
+                    alt="Built by Design — official film artwork" loading="lazy" decoding="async">
+            </div>
+            <div class="film-detail-notes-content reveal">
+                <span class="film-detail-notes-quote-mark" aria-hidden="true">&#8220;</span>
+                <span class="section-label">A Letter From The Director</span>
+                <h2 class="film-detail-notes-title">BUILT BY DESIGN</h2>
+                <div class="film-detail-notes-body">
+                <p>I didn't want to make another film about a successful dentist. And I definitely didn't want to make one about celebrity dentistry.</p>
+                <p>Jon Marashi has treated some of the most recognisable people in the world. That's part of his story, but it's probably the least interesting thing about him. What held my attention was a simpler question: how did Jon become Jon?</p>
+                <p>Look at his life now and it all seems incredibly intentional. The practice. The people around him. Los Angeles. The way he works, the way he dresses. Skateboarding, design, business, his family. Even the way he thinks about a smile. There's a point of view running through all of it.</p>
+                <p>I've always been fascinated by people who have developed their own taste. Not people with the best or most expensive things, but people where you can look at something they've made and somehow know it belongs to them. Jon has that.</p>
+                <p>And yet when you pull his story apart, there was no master plan. There were people he met, things that went wrong, opportunities, risks, mentors, obsessions. Things that probably didn't feel connected while they were happening. Only looking backwards can you see the thread.</p>
+                <p>Skateboarding explains him better than any list of achievements could. You try something. You fall. You do it again. Eventually you can do it, but being able to technically do it stops being enough. You start wanting to do it your way.</p>
+                <p>That's taste.</p>
+                <p>It's also what makes his dentistry interesting. He works in a strange world where we can make things almost endlessly perfect. Straighter, whiter, more symmetrical. We can keep going. So at what point do you remove the person?</p>
+                <p>That question became much bigger than dentistry while we were making the film. We're all doing versions of it to ourselves. Deciding what to change, what to keep, what we want people to see, and ultimately who we want to become.</p>
+                <p>Los Angeles felt like the place to ask it. It's a city obsessed with reinvention, where everyone is building something: a career, a company, a body, an identity. Jon has built an extraordinary world inside that. But I didn't want the film to say, look at everything this person has achieved. I wanted to get underneath it. To the kid who skateboarded before any of this existed. To the dentist, the entrepreneur, the friend, the husband, the father. The person who still has doubts, and ideas, and things he hasn't figured out yet.</p>
+                <p>Success does something strange when we look back at it. It makes everything look inevitable. We connect the dots and suddenly a life looks like it was always heading towards this exact place.</p>
+                <p>Nobody actually lives like that. We're just making decisions. A few enormous, most incredibly small.</p>
+                <p>You meet someone. You take an opportunity. You say no to something else. You get something badly wrong. You learn. You change your mind. You find something you're obsessed with. You keep going.</p>
+                <p>And eventually you look back and realise you've built something.</p>
+                <p>Built by Design isn't a film about how Jon Marashi became successful. It's a film about how Jon Marashi became Jon Marashi.</p>
+                <p>I think we're all doing the same thing, whether we realise it or not. Slowly, we're building ourselves.</p>
+                </div>
+                <div class="film-detail-notes-signoff">
+                    <p class="film-detail-notes-name">Dr. Alan Clarke</p>
+                    <p class="film-detail-notes-role">Director, Pasted Studio</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         FULL MOVIE CARD PLAYER
+    ═══════════════════════════════════════════ -->
+    <section class="film-detail-movie" id="watchFilm">
+        <div class="film-detail-movie-inner">
+            <span class="section-label film-detail-movie-label reveal">Watch The Full Film</span>
+            <div class="film-detail-movie-player reveal" data-media-id="o6oncnfzlu">
+                <div class="wistia_embed wistia_async_o6oncnfzlu fitStrategy=contain videoFoam=false autoPlay=true muted=true silentAutoPlay=true controlsVisibleOnLoad=false playbar=false volumeControl=false fullscreenButton=false playButton=false settingsControl=false smallPlayButton=false plugin[logoBug][on]=false plugin[customLogo][on]=false"
+                    style="height:100%;width:100%;"></div>
+                <button type="button" class="film-detail-movie-play" aria-label="Play full film">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+                </button>
+            </div>
+            <p class="film-detail-movie-credit reveal">A FILM BY <strong>PASTED STUDIO</strong></p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         BEHIND THE SCENES
+    ═══════════════════════════════════════════ -->
+    <section class="film-detail-bts">
+        <div class="film-detail-bts-inner">
+            <span class="section-label reveal">Behind The Scenes</span>
+        </div>
+        <div class="film-detail-bts-ticker-wrap">
+            <div class="film-detail-bts-ticker" id="btsTicker">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-01.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-02.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-03.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-04.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-05.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-06.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-07.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-08.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-09.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-10.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-11.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-12.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-13.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-14.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-15.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+                <img src="./assets/images/bts/built-by-desing-bts/builtbydesign-bts-16.jpeg" alt="Built by Design — behind the scenes" class="film-detail-bts-img" loading="lazy" decoding="async">
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Full film player overlay -->
+    <div class="hero-player-overlay" id="filmDetailPlayerOverlay" role="dialog" aria-label="Video player" aria-hidden="true">
+        <button class="hero-player-close" id="filmDetailPlayerClose" aria-label="Close player">&#x2715;</button>
+        <div class="hero-player-letterbox"></div>
+        <div class="hero-player-inner" id="filmDetailPlayerInner"></div>
+        <div class="hero-player-letterbox"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-inner">
+
+            <div class="footer-brand footer-credit" data-delay="0">
+                <img src="./assets/images/pasted-footer-logo.svg" alt="Pasted Studio" class="footer-logo" loading="lazy" decoding="async">
+                <p class="footer-tagline">A PRODUCTION STUDIO DOCUMENTING THE FUTURE OF DENTISTRY.</p>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-col footer-credit" data-delay="200">
+                    <h4 class="footer-col-label">PLATFORM</h4>
+                    <ul>
+                        <li><a href="index.html#films">Films</a></li>
+                        <li><a href="index.html#membership">Membership</a></li>
+                        <li><a href="index.html#partnerships">Work With Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-credit" data-delay="450">
+                    <h4 class="footer-col-label">STUDIO</h4>
+                    <ul>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer-credit" data-delay="700">
+                    <h4 class="footer-col-label">CONTACT</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/pasted.studio/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@Pasted.studio" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                        <li><a href="mailto:alan@getpasted.com">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-divider footer-credit" data-delay="900"></div>
+
+        <div class="footer-bottom footer-credit" data-delay="1050">
+            <p class="footer-legal">© 2026. All rights reserved.</p>
+            <span class="footer-coords">54°35'N &nbsp;&nbsp; 5°56'W</span>
+        </div>
+
+    </footer>
+
+    <!-- ═══════════════════════════════════════════
+         SCRIPTS
+    ═══════════════════════════════════════════ -->
+
+    <script type="module" src="./js/main.js"></script>
+    <noscript>
+        <style>.preloader{display:none!important}</style>
+        <p style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#141212;color:#FAF8F5;font-family:Arial,sans-serif;font-size:0.9rem;letter-spacing:0.1em;text-align:center;padding:2rem;z-index:9999">
+            This site requires JavaScript to run. Please enable it in your browser.
+        </p>
+    </noscript>
+</body>
+
+</html>

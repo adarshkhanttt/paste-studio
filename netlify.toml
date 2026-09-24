@@ -1,3 +1,13 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "/theartofrestraint"
+  to = "/theartofrestraint.html"
+  status = 200
+
+[[redirects]]
+  from = "/builtbydesign"
+  to = "/builtbydesign.html"
+  status = 200

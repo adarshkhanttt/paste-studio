@@ -37,9 +37,11 @@ export default defineConfig({
     chunkSizeWarningLimit: 200,
     rollupOptions: {
       input: {
-        main:   resolve(__dirname, 'src/index.html'),
-        film:   resolve(__dirname, 'src/film.html'),
-        shorts: resolve(__dirname, 'src/shorts.html'),
+        main:              resolve(__dirname, 'src/index.html'),
+        film:              resolve(__dirname, 'src/film.html'),
+        shorts:            resolve(__dirname, 'src/shorts.html'),
+        theartofrestraint: resolve(__dirname, 'src/theartofrestraint.html'),
+        builtbydesign:     resolve(__dirname, 'src/builtbydesign.html'),
       },
       output: {
         manualChunks(id) {

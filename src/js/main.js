@@ -16,6 +16,7 @@ import { initCarousel }        from './modules/carousel.js';
 import { initStudio }          from './modules/studio.js';
 import {
     initHeroTicker,
+    initImageTicker,
     initHeroCursor,
     initScrollTicker,
     initShortsColumns,
@@ -24,6 +25,7 @@ import {
 } from './modules/animations.js';
 import {
     initHeroPlayer,
+    initFilmDetailPlayers,
     initFilmsPlayer,
     initTrailerPlayer,
     initShortsPlayer,
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Player overlays ──────────────────────
     initHeroPlayer();
+    initFilmDetailPlayers();
     initFilmsPlayer();
     initTrailerPlayer();
     initShortsPlayer('shortsTrack');
@@ -69,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── GSAP (runs after load event) ─────────
     window.addEventListener('load', () => {
         initHeroTicker();
+        initImageTicker('btsTicker');
         initHeroCursor();
         initScrollTicker();
         initShortsColumns();

@@ -36,6 +36,32 @@ export function initHeroTicker() {
     });
 }
 
+// ── Generic image ticker (film detail pages) ─
+export function initImageTicker(id, pxPerSecond = 50) {
+    const ticker = document.getElementById(id);
+    if (!ticker) return;
+
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+        ticker.innerHTML += ticker.innerHTML;
+        gsap.set(ticker, { x: 0 });
+
+        const halfWidth = ticker.scrollWidth / 2;
+
+        const tween = gsap.fromTo(ticker,
+            { x: 0 },
+            { x: -halfWidth, duration: halfWidth / pxPerSecond, ease: 'linear', repeat: -1 }
+        );
+
+        ticker.parentElement?.addEventListener('mouseenter', () =>
+            gsap.to(tween, { timeScale: 0.35, duration: 0.8, ease: 'power2.out' })
+        );
+        ticker.parentElement?.addEventListener('mouseleave', () =>
+            gsap.to(tween, { timeScale: 1, duration: 0.8, ease: 'power2.out' })
+        );
+    });
+}
+
 // ── Custom cursor (index.html) ───────────────
 export function initHeroCursor() {
     const cursor = document.getElementById('heroCursor');

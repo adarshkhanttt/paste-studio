@@ -1,0 +1,248 @@
+// ─────────────────────────────────────────────
+// FILM DETAIL — standalone single-film pages
+// (theartofrestraint.html, builtbydesign.html)
+// ─────────────────────────────────────────────
+
+// ── 1. Full-bleed hero (trailer loop) ────────
+// Reuses .hero / .hero-video-wrap / .hero-overlay /
+// .hero-film-content / .hero-film-title / .hero-film-meta
+.film-detail-hero {
+    cursor: pointer;
+}
+
+// ── 2. Director's letter (poster + text card) ─
+.film-detail-notes {
+    padding: var(--space-section-md) var(--gutter) var(--space-section);
+    background: var(--void);
+
+    &-inner {
+        position: relative;
+        max-width: var(--max-w);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: var(--space-gap-lg);
+        align-items: start;
+        padding: 3.5rem;
+        border: 1px solid var(--color-border-light);
+
+        // Second, inset border — the "double frame" look
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 12px;
+            border: 1px solid var(--color-border-light);
+            pointer-events: none;
+        }
+    }
+
+    &-photo img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 2 / 3;
+        object-fit: cover;
+        background: var(--charcoal);
+    }
+
+    &-content {
+        max-width: 42rem;
+    }
+}
+
+.film-detail-notes-quote-mark {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--color-border-mid);
+    margin-bottom: 0.5rem;
+}
+
+.film-detail-notes-inner .section-label { margin-bottom: 0.9rem; }
+
+.film-detail-notes-title {
+    font-family: var(--display);
+    font-size: var(--text-display-xl);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0 0 var(--space-gap-xs);
+}
+
+.film-detail-notes-body {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--cream);
+
+    p {
+        margin-bottom: 1.3em;
+
+        &:last-child { margin-bottom: 0; }
+    }
+}
+
+.film-detail-notes-signoff {
+    margin-top: var(--space-gap-xs);
+    padding-top: var(--space-gap-xs);
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.film-detail-notes-name {
+    font-family: var(--sans);
+    font-size: var(--text-body-lg);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.film-detail-notes-role {
+    font-size: var(--text-body-xxs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ash);
+    margin-top: 0.4rem;
+}
+
+// ── 3. Full movie card player (standalone) ───
+.film-detail-movie {
+    padding: var(--space-section-md) var(--gutter);
+    background: var(--void);
+
+    &-inner {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &-label {
+        display: block;
+        margin-bottom: var(--space-gap-xs);
+    }
+}
+
+.film-detail-movie-player {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--void);
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--color-border-subtle);
+    text-align: left;
+
+    .wistia_embed {
+        position: absolute;
+        inset: 0;
+        width: 100% !important;   // required: Wistia shadow DOM override
+        height: 100% !important;  // required: Wistia shadow DOM override
+
+        img { display: none !important; }
+    }
+}
+
+.film-detail-movie-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(5, 5, 5, 0.55);
+    border: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+
+    svg { width: 20px; height: 20px; margin-left: 2px; }
+
+    &:hover {
+        background: rgba(5, 5, 5, 0.8);
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}
+
+.film-detail-movie-credit {
+    margin-top: 1rem;
+    font-size: var(--text-body-xxs);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ash);
+
+    strong {
+        color: var(--white);
+        font-weight: 600;
+    }
+}
+
+// ── 4. Behind the scenes ticker ──────────────
+.film-detail-bts {
+    padding: var(--space-section-md) 0;
+    background: var(--void);
+
+    &-inner {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+        margin-bottom: var(--space-gap-md);
+    }
+
+    &-ticker-wrap {
+        width: 100%;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    }
+
+    &-ticker {
+        display: flex;
+        gap: var(--space-gap-xxs);
+        width: max-content;
+        will-change: transform;
+    }
+
+    &-img {
+        display: block;
+        flex-shrink: 0;
+        width: 340px;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        background: var(--charcoal);
+    }
+}
+
+// ── Responsive ───────────────────────────────
+@media (max-width: 968px) {
+    .film-detail-notes { padding: var(--space-section-md) 2rem; }
+
+    .film-detail-notes-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-gap-xs);
+        padding: 2rem;
+
+        &::before { inset: 8px; }
+    }
+
+    .film-detail-notes-photo img { max-width: 260px; margin: 0 auto; }
+
+    .film-detail-movie { padding: var(--space-section-md) 2rem; }
+
+    .film-detail-bts    { padding: var(--space-section-md) 0; }
+    .film-detail-bts-inner { padding: 0 2rem; }
+}
+
+@media (max-width: 640px) {
+    .film-detail-notes-title { font-size: clamp(2rem, 8vw, 3rem); }
+
+    .film-detail-notes-body { font-size: 0.95rem; }
+
+    .film-detail-movie-play { width: 52px; height: 52px; }
+
+    .film-detail-bts-img { width: 240px; }
+}

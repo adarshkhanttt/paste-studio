@@ -66,6 +66,19 @@ export function initHeroPlayer() {
     if (hero) hero.addEventListener('click', () => player.open('8kirf86p7j'));
 }
 
+// ── Film detail pages: hero + full movie card ─
+export function initFilmDetailPlayers() {
+    const triggers = document.querySelectorAll('.film-detail-hero[data-media-id], .film-detail-movie-player[data-media-id]');
+    if (!triggers.length) return;
+
+    const player = createOverlayPlayer('filmDetailPlayerOverlay', 'filmDetailPlayerInner', 'filmDetailPlayerClose');
+    if (!player) return;
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', () => player.open(trigger.dataset.mediaId));
+    });
+}
+
 // ── Index.html films section overlay ─────────
 export function initFilmsPlayer() {
     const player = createOverlayPlayer('filmsPlayerOverlay', 'filmsPlayerInner', 'filmsPlayerClose');
